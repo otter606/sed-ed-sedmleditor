@@ -7,7 +7,9 @@ The SED-ED editor is an application and Eclipse plugin for viewing and editing [
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+The features of the editor will be:
+
+  * Show a graphical view of SEDML components
+  * Allow editing of fields
+  * Assistance with generation of XPath expressions for targetting XML models
+  *

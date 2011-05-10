@@ -1,0 +1,39 @@
+<contexts>
+   <context id="simulationHelp">
+      <description>Help for the simulation configuration dialog</description>
+      <topic href="help/SEDML_editor.html#create_sim" label="Run simulations" />
+   </context>
+    <context id="notes">
+      <description>Help for the Add Notes dialog</description>
+      <topic href="help/SEDML_editor.html#notes" label="Add notes" />
+   </context>
+   <context id="change">
+      <description>Help for the Change configuration dialog</description>
+      <topic href="help/SEDML_editor.html#create_change" label="Add Change" />
+   </context>
+   <context id="model">
+      <description>Help for the Model configuration dialog</description>
+      <topic href="help/SEDML_editor.html#create_model" label="Add Model" />
+   </context>
+   <context id="task">
+      <description>Help for the Task configuration dialog</description>
+      <topic href="help/SEDML_editor.html#create_task" label="Add Task" />
+   </context>
+   <context id="output">
+      <description>Help for the Change configuration dialog</description>
+      <topic href="help/SEDML_editor.html#create_output" label="Add output" />
+   </context>
+    <context id="dg">
+      <description>Help for the Change configuration dialog</description>
+      <topic href="help/SEDML_editor.html#create_dg" label="Add DataGenerator" />
+   </context>
+   <context id="var">
+      <description>Help for the Change configuration dialog</description>
+      <topic href="help/SEDML_editor.html#create_var" label="Add Variable" />
+   </context>
+    <context id="layout">
+      <description>Help for the Layout configuration dialog</description>
+      <topic href="help/SEDML_editor.html#layout" label="Layout the diagram" />
+   </context>
+   
+   </contexts>

@@ -14,7 +14,9 @@ import org.jdom.input.SAXBuilder;
 import org.sedml.IModelContent;
 import org.sedml.Model;
 import org.sedml.SEDMLTags;
+import org.sedml.execution.ArchiveModelResolver;
 import org.sedml.execution.FileModelResolver;
+import org.sedml.execution.ModelResolver;
 
 public class GModel extends GElement {
 	
@@ -111,22 +113,15 @@ public class GModel extends GElement {
 		
 	String rc=null;
 	if(getSource()!=null){
-		String src = getSource();
-		FileModelResolver fmr = new FileModelResolver();
-		try {
-			rc = fmr.getModelXMLFor(new URI(src));
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			
+		
+		
+		if(  canGetSedML() && getParent()!=null){
+			ModelResolver mr = new ModelResolver(getParent().buildSEDML());
+			mr.add(new FileModelResolver());
+			if(getParent().isSedxArchive()){
+				mr.add(new ArchiveModelResolver(getParent().getArchiveComponents()));
 		}
-		if(rc == null && getParent().isSedxArchive()){
-			List<IModelContent> children = getParent().getSEDXModels();
-			for (IModelContent imc: children) {
-				if(imc.getName().equals(src)){
-					rc= imc.getContents();
-				}
-			}
+			rc =mr.getModelString(getSEDMLObject());
 		}
 	}
 	return rc;

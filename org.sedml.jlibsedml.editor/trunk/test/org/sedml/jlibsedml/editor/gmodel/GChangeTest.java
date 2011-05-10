@@ -78,6 +78,8 @@ public class GChangeTest {
 	public final void testCanGetModelIfIsAddedToModelWhichHasAccessibleSrc() {
 		GModel gm = TestUtils.createValidGModel("id");
 		gm.addChange(change);
+		GSedML sedml = new GSedML();
+		sedml.addChild(gm);
 		assertTrue(change.canGetModel());
 		assertNotNull(change.getModelDocument());
 	}

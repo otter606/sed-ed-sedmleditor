@@ -148,7 +148,7 @@ public class VariableConfigDialog extends BaseConfigDialog {
 			ViewModelButton.setEnabled(false);
 		}else {
 			target.setEnabled(true);
-			ViewModelButton.setEnabled(true);
+			ViewModelButton.setEnabled(gvar.canGetModel());
 		}
 		verifyAll(createVerifyObjects());
 	}

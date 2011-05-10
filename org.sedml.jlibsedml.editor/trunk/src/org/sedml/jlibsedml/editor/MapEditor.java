@@ -137,7 +137,7 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 			gsedml = createGModel(doc);
 			gsedml.setIsSEDX(isSedxArchive);
 			if(isSedxArchive){
-				gsedml.setSEDXModels(ac.getModelFiles());
+				gsedml.setArchiveComponents(ac);
 			}
 			
 			

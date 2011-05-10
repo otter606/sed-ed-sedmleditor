@@ -1,0 +1,161 @@
+{toc}
+
+h1. SEDML editor help
+
+This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files. 
+
+
+h2(#license). Licence
+
+This editor is available under an MIT open source  license:
+
+
+
+h2(#start). Creating a new SED-ML file:
+
+From the  <span style="color:red"> File ->New  </span> menu. choose the option <span style="color:red"> SED-ML->SED-ML editor  </span>:
+
+!{width:50%}images/createDoc.png!
+
+ In the following dialog choose a parent folder in which the new file will be placed, and give it a name:
+
+!{width:50%}images/createDoc2.png!
+
+h3(#from_scratch). Creating a SED-ML document from scratch.
+
+This section describes the use of the graphical editor to create components of a SED-ML document. 
+* Top-level elements are added from the palette and can be laid out in the editor window by dragging.
+* Double-clicking on an object will open a dialog to configure it.
+* Elements that are not yet correctly configured will be highlighted in red. This means that insufficient information is included for the element to be saved, and it will be omitted from the saved SED-ML file.
+* The diagram can be saved at any time as a regular SED-ML file; graphical information is persisted as annotations to the elements and layout will be restored when the diagram is re-opened.
+* For elements that use identifiers, these should be globally unique in the document, and are added automatically by the software. Human-readable names for elements can be added, which is highly recommended as an aid to understanding the document. 
+* Cross references can be made by drawing a *Connection* between two elements. See section "Cross references":#cross_refs
+
+h3(#notes). Adding Notes to an element.
+
+Any element can have an HTML  note added by selecting an element and choosing <span style="color:red">Add Note  </span> from the context menu.  The HTML should be contained in  a single container element such as a _div_ or _body_ element. A preview of the HTML is displayed on the right-hand panel, and error messages inform if the HTML is badly formed.
+
+h3(#create_sim). Creating a simulation element
+
+p. From the editor palette, choose  'Simulation'  and then click on the canvas to add a Simulation object.
+ A dialog will pop up for you to configure the simulation. SED-ML  level 1 version 1 is restricted to uniform time courses. By default, a simulation will defined as running  for 10 time units, using a general ODE solver, with 100 output time points.
+ 
+h3(#create_model). Creating a Model element.
+
+p.   From the editor palette, choose  'Model'  and then click on the canvas to add a Model object.
+ Choose the modelling language  of your model, and its source. This can be a location on the file-system chosen from the file browser or you can enter a stable URN such as a MIRIAM identifier
+ 
+!{width:50%}images/createModel.png!
+
+h4(#create_change). Defining changes to a model.
+
+p. In SED-ML, there are several method to apply changes to an XML based model:
+
+* Changing  the value of an  individual  attribute.
+* Adding new XML
+* Removing an XML element
+* Changing an XML element ( replacing one XML element with another ).
+
+p. In this editor, you can add a change to a model by choosing the <span style="color:red">Add Change  </span> context menu item when you have a model element selected:
+
+!{width:50%}(inline)images/addChange.png!
+
+This opens a dialog:
+
+!{width:50%}images/changeDialog1.png!
+
+p. The *Change type* drop-down menu enables you to choose what sort of change you want to apply. 
+The *Replacement Value* text field is where you insert the changes to make.
+
+p. If you choose to *change an attribute*, the replacement value should be a numerical value. If you choose to *Add XML* or *Change XML*, then the replacement value should be some well formed XML.
+
+p. The *TargetXPath field* is where you specifiy the XML to be changed, using an XPath expression. This can be added manually, or by using the  *Get XPath from Model* feature.  If  this is  enabled, it  helps to  create the XPath expressions  from an XML view of your model.  The button is enabled if the editor can get hold of the actual model, specifed in the *source* attribute of the Model element to which this change is being added.
+
+p. Currently, two operations are supported by *Get XPath from Model*. Firstly, if you wish to change an attribute:
+# Expand the XML view to the element whose attribute you want to change. 
+# Select two attributes of that element.  The first selected attribute will be used to identify that element. For SBML elements, for example,  the 'id' attribute would be an ideal choice.  The second selected element is the attribute whose value you want to change. E.g., 
+
+!{width:75%}images/chAttributeXML.png!
+
+In the above example. the _id_ attribute was selected first, then the _initialConcentration_ attribute, which is what we want to change. The XPath expression is previewed in the bottom text field.
+
+p. Secondly, if you choose to add/remove/change XML, choose an identifying attribute of  the element which is to be the target of   the modification, and an XPath expression will be generated. If the element you iwsh to target has no attributes, then the element is chosen with no identifiers inserted into the XPath expression, which should be sufficient if an element is unique within its parent element.
+
+
+!{width:75%}images/elementXPath.png!
+
+In the above example, we might have chosen this element to be removed. 
+
+p(xpath_prefixes). XPath expressions must always be prefixed, in such a way that they can be mapped to a namespace when  they are evaluated. In this editor,  XPath prefixes are generated according to the following rules.
+# If the  namespace declaration in the model specifies a prefix, then that prefix is used for XPath components in that namespace.
+# If the namespace declaration in the mode does *NOT* specifiy a prefix,  then the name of the element containing the _xmlns_  attribute declaring the namespace is used as an XPath prefix.
+
+ 
+h3(#create_task). Creating a Task
+
+p. *Task* elements connect a *Model* to a *Simulation*. From the editor palette, choose  'Task'  and then click on the canvas to add a Task object. Task elements need no mandatory configuration from a dialog, but must be connected to a *Model* and a *Simulation* to be valid.
+E.g., 
+!{width:50%}images/taskNotOK.png! 
+
+is invalid as the task is not connected. But in
+!{width:50%}images/taskOK.png! 
+
+the task is no longer highlighted in red, as it is connected correctly.
+
+h3(#create_dg). Creating a Data generator
+
+*DataGenerator* elements define one  output of a  simulation. To create a DataGenerator,  from the editor palette, choose  'DataGenerator'  and then click on the canvas to add a DataGenerator object. 
+
+p. In the dialog, you need to enter a mathematical expression for a column of data from the simulation. For example, to just specify unchanged output, enter the ID of the variable you want to display. 
+
+h3(#create_var). Creating a Variable
+
+p. To define variable, select a *DataGenerator* element and choose *Add Variable* from the context menu.
+ A *Variable* is the only SED-ML data type in this editor whose ID is editable - this gives you the chance to use a meaningful ID ( so long as it is alphanumeric and unique in the SED-ML document ). The reason for this is that the variable and parameter names  occurring in the _maths_  section of a DataGenerator must be the IDs of *Variable* and *Parameter* elements.  Variables can also refer to symbols. In SEDML L1V1, 'Time' is the only symbol. If 'No symbol' is chosen, you need to specify an XPath expression to locate the variable in the model whose value you want to display. As with "Changes":#create_change, if your model is accessible, the *Get XPath From Model* button will be enabled, which 
+ helps generate the XPath for you.
+ 
+ !{width:75%}images/VariableConfig.png!
+ 
+ In the above diagram, we would use the id 'B' in mathematical expressions in the DataGenerator referring to this variable.
+
+h3(#create_output). Creating an Output
+
+p. *Output* elements define how the simulation results will be presented. To create a Output,  from the editor palette, choose  either 'Plot2D	' or 'Report'   and then click on the canvas to add it. 
+
+p. If you create a *Plot2d* you will need to add *Curve* elements using the   <span style="color:red"> Add Curve </span> menu item. When you create a Curve, it will first appear highlighted in red. You now need to connect the Curve to 2 *DataGenerators*, one for the X axis and one for the Y axis. 
+
+p. If you create a *Report* you will need to add *Dataset* elements using the   <span style="color:red"> Add Dataset </span> menu item. When you create a Dataset, it will first appear highlighted in red. You now need to connect the Dataset to a  *DataGenerator* element.
+
+h2(#edit). Editing existing elements
+
+To edit an existing element, just double-click on  the element to obtain the configuration dialog. You can undo /redo edits by clicking Ctrl-Z  and Ctrl- Y, respectively.
+
+h2(#opening_existing_sedml). Working with existing SED-ML documents
+
+To open an existing SED-ML document, select it in the System View, and from the context menu, choose 
+
+<span style="color:red"> Open->Open With->SED-ML editor </span>
+
+If the SED-ML document has been imported from another source, or not yet edited in the SED-ML Editor, you'll be prompted for some "layout":#layout options.
+# Manually layout. All elements with no Location/Size information will be positioned at (0,0)
+# Layout all. All elements will be laid out afresh, ignoring previous layout information
+# Layout some. This option fixes the location of elements with existing positions but lays out all others. 
+
+
+h2(#layout). Graphical layout of elements.
+
+To automatically layout some or all elements, click on the drawing canvas, and from the context menu, choose <span style="color:red"> Layout </span>. This will layout all un-selected elements. So, to layout all elements, make sure no elements are selected in the editor. 
+
+Layout runs in a background thread and can be stopped at any time by clicking cancel in the progress monitor ( in the bottom right-hand corner of the screen-shot below).
+
+ !{width:75%}images/layoutprogress.png!
+
+
+
+
+
+
+
+
+
+ 

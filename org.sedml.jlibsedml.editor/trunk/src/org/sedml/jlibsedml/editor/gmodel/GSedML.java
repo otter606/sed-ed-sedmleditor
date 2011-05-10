@@ -34,7 +34,7 @@ public class GSedML implements IPropertyChangeSupport {
 	private long idStart=0;
 	private boolean isSedx;
 	
-	private List<IModelContent> content;
+	private ArchiveComponents content;
 	
 	
 	
@@ -157,11 +157,11 @@ public class GSedML implements IPropertyChangeSupport {
      * 
      * @return an {@link ArchiveComponents} if this element has been read in from a SEDX archive (i.e., isSedxArchive()===true).
      */
-    public List<IModelContent> getSEDXModels(){
+    public ArchiveComponents getArchiveComponents(){
     	return content;
     }
     
-    public void setSEDXModels(List<IModelContent> content) {
+    public void setArchiveComponents(ArchiveComponents content) {
     	 this.content=content;
     }
 

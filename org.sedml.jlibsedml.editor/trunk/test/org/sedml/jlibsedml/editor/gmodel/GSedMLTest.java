@@ -111,6 +111,15 @@ public class GSedMLTest {
 		}
 		
 	}
+	
+	@Test
+	public void testSetIsSEDX(){
+		assertFalse(gsedml.isSedxArchive()); // false by default
+		gsedml.setIsSEDX(true);
+		assertTrue(gsedml.isSedxArchive());
+		gsedml.setIsSEDX(false);
+		assertFalse(gsedml.isSedxArchive());
+;	}
 
 	private ElementStub createELementStub(String id) {
 		ElementStub s = new ElementStub();

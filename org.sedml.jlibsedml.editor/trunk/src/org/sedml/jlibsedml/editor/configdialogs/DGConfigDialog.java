@@ -129,7 +129,7 @@ public class DGConfigDialog extends BaseConfigDialog {
 	
 	protected void okPressed() {
 		final String mathsText = maths.getText();
-		if(!mathsText.equals(new FormulaFormatter().formulaToString(oldMaths))){
+		if(oldMaths == null || !mathsText.equals(new FormulaFormatter().formulaToString(oldMaths))){
 			execute( new ICommand() {	
 				public void undo() {
 					resetOldValues();	

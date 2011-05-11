@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.sedml.ArchiveComponents;
-import org.sedml.IModelContent;
 import org.sedml.SedML;
 
 /**
@@ -150,17 +149,22 @@ public class GSedML implements IPropertyChangeSupport {
     }
     
     public void setIsSEDX(boolean isSedxArchive){
-    	this.isSedx=true;
+    	this.isSedx=isSedxArchive;
     }
     
     /**
      * 
      * @return an {@link ArchiveComponents} if this element has been read in from a SEDX archive (i.e., isSedxArchive()===true).
+     *   or <code> null</code> otherwise.
      */
     public ArchiveComponents getArchiveComponents(){
     	return content;
     }
     
+    /**
+     * Setter for {@link ArchiveComponents} which should be called along with setSedxArchive(true);
+     * @param content
+     */
     public void setArchiveComponents(ArchiveComponents content) {
     	 this.content=content;
     }

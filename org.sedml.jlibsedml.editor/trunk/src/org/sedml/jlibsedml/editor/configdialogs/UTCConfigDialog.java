@@ -167,7 +167,9 @@ public class UTCConfigDialog extends BaseConfigDialog {
 		final double outStartd = Double.parseDouble(outStart.getText());
 		final double outEndd = Double.parseDouble(end.getText());
 		final int numpointss = Integer.parseInt(numPoints.getText());
-		if( hasChanged(simStartd, outStartd, outEndd, numpointss)){
+		final Algorithm alg = sim.getAlgorithm();
+		if( hasChanged(simStartd, outStartd, outEndd, numpointss )
+				|| !sim.getAlgorithm().equals(oldUTC.getAlgorithm())){
 			execute( new ICommand() {
 				
 				public void undo() {
@@ -179,6 +181,7 @@ public class UTCConfigDialog extends BaseConfigDialog {
 					sim.setOutStart(outStartd);
 					sim.setOutEnd(outEndd);
 					sim.setNumPoints(numpointss);
+					sim.setAlgorithm(alg);
 				}
 				
 				public void execute() {
@@ -199,9 +202,12 @@ public class UTCConfigDialog extends BaseConfigDialog {
 
 	private boolean hasChanged(double simStartd, double outStartd,
 			double outEndd, int numpointss) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		double TOLERANCE = 0.000001;
+		return numpointss != oldUTC.getNumberOfPoints() ||
+		Math.abs( simStartd - oldUTC.getInitialTime()) >TOLERANCE ||
+		Math.abs(outStartd-oldUTC.getOutputStartTime()) > TOLERANCE ||
+		Math.abs(outEndd-oldUTC.getOutputEndTime()) > TOLERANCE; 
+		}
 
 	private void createEnd(Composite child) {
 		new Label(child, SWT.NULL).setText("Simulation end: ");

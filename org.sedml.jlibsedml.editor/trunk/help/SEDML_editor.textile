@@ -149,6 +149,47 @@ To automatically layout some or all elements, click on the drawing canvas, and f
 Layout runs in a background thread and can be stopped at any time by clicking cancel in the progress monitor ( in the bottom right-hand corner of the screen-shot below).
 
  !{width:75%}images/layoutprogress.png!
+ 
+h2(#connections_ref). Connections reference
+
+Two sorts of relationships are represented by edges (connections ) in the SED-ED editor. Firstly, the reference relations specified in section 2.3.5 of the level1 version1 specification, namely:
+
+* Variable ->Task
+* Task->Model
+* Task ->Simulation
+* Output -> Datagenerators
+* Variable->Model ( in *ComputeChange* elements, not yet supported).
+
+Secondly, containment or aggregation relations, such as:
+
+* Model->Changes
+* DataGenerator->Variables
+* DataGenerator->Parameters
+* Report->Datasets
+* Plot2d -> Curves
+
+The reference relations need to be drawn explicitly using the *Connection* tool in the palette, whereas the aggregation relations are automatically added when a child element is added.
+
+h2(#validation). Levels of validation - syntax vs semantics
+
+Any editor needs to provide freedom to enter data in a non-specified order, to be usable, while at the same time ensuring persisted data is not corrupt or meaningless. This section explains some of the levels of validity checking in a SED-ML document.
+
+h3. Syntax validation
+  
+The editor allows for the creation of SED-ML data structures in memory that lack essential information, but any aberrant elements will not be persisted. For example, a *Task* icon that is not connected to a *Model* and a *Simulation* will not be saved to file. 
+
+These elements are highlighted in red in the editor. 
+
+h3. Semantic validation
+
+A document may be syntactically valid but still useless - for example if XPath expressions don't refer elements in a model properly, or if a model cannot be found from the information  in a SED-ML *Model* element. If a model can be retrieved, feedback will be given if an XPath expression does not identify any model element. Other errors are reported in the 'Problems' view or in the expanded tree view of a SED-ML document in the _System View_. E.g., 
+
+!{width=75%}images/Sedmltreeview.png!
+
+h3. Validation for execution
+
+This is the highest level of validation, and this is not checked in SED-ED. Such validation would include, for example, that a simulation algorithm is available which  supports the modelling language specified in the SED-ML document.
+
 
 
 

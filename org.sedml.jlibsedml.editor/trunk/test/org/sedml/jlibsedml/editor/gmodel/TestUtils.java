@@ -1,5 +1,8 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Collections;
 
 import javax.xml.bind.JAXBContext;
@@ -7,16 +10,22 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.jdom.Document;
+import org.jdom.JDOMException;
 import org.sedml.Algorithm;
 import org.sedml.Libsedml;
 import org.sedml.NewXML;
+import org.sedml.Notes;
 import org.sedml.SEDMLTags;
 import org.sedml.XPathTarget;
+import org.sedml.jlibsedml.xmlutils.XMLUtils;
 import org.sedml.modelsupport.KisaoOntology;
 import org.sedml.modelsupport.SUPPORTED_LANGUAGE;
 
 public class TestUtils {
 	
+public static final double EXPECTED_DG_MATH = 26;
+
 public static Marshaller createMarshaller(Class clazz) throws JAXBException{
 	
 	JAXBContext jc = JAXBContext.newInstance(clazz);
@@ -80,11 +89,16 @@ public static GPlot2D createValidPlot2d(String id){
 	return gmod;
 }
  
+ /**
+  * MAths evaluates to 26
+  * @param id
+  * @return
+  */
  public static GDataGenerator createValidDGWithVars(String id){
 	 
 	 GDataGenerator gdg = new GDataGenerator();
 	 gdg.setId(id);
-	 gdg.setMath(Libsedml.parseFormulaString("x + y"));
+	 gdg.setMath(Libsedml.parseFormulaString("9 + 17"));
 	 GVariable gv = new GVariable();
 	 gv.setId("var1");
 	 gv.setTask(TestUtils.createInValidGTask("t"));
@@ -130,6 +144,12 @@ public static GPlot2D createValidPlot2d(String id){
 	gc.setNewxml(new NewXML(Collections.EMPTY_LIST));
 	m.addChange(gc);
 	return m;
+}
+
+public static Notes createNote() throws JDOMException, IOException {
+	String html = "<div> <p> Hello </p> </div>";
+	Document d = new XMLUtils().readDoc(new ByteArrayInputStream(html.getBytes()));
+	return new Notes(d.detachRootElement());
 }
 
 }

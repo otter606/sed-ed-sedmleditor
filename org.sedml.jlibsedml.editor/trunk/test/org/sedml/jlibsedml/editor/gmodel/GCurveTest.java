@@ -49,5 +49,15 @@ public class GCurveTest {
 		c1.setUpRefs(orig_y);
 		assertEquals(orig_y,c1.getY());
 	}
+	
+	@Test
+	public void testCopy(){
+		c1.setLogx(true);
+		c1.setLogy(true);
+		GCurve copy = c1.getCopy();
+		assertTrue(copy.isLogx());
+		assertTrue(copy.isLogy());
+		assertTrue(copy.isCurve());
+	}
 
 }

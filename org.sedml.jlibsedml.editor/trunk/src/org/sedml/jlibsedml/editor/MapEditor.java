@@ -237,12 +237,6 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 
 	 void doSpecificInit(IEditorInput input) {
 		setPartName(input.getName());
-	//	getModel().getParentMap().addPropertyChangeListener(this);
-
-		// now we can populate the palette with context specific items
-		
-	//	EditorPaletteFactory.populatePalette(getPaletteRoot(),
-		//		getContextAdapter());
 	}
 
 	/**
@@ -253,7 +247,6 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
 		GraphicalViewer viewer = getGraphicalViewer();
-	//	viewer.setRootEditPart(new EPERootEditPart());
 		viewer.setEditPartFactory(new SEDMLEditPartFactory());
 		viewer.setContents(getModel()); // set the contents of this editor
 		

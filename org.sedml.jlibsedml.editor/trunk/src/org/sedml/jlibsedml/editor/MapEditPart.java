@@ -141,8 +141,9 @@ public class MapEditPart extends AbstractGraphicalEditPart implements EditPart,P
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
 
-		if (prop.equals(PropertyChangeNames.CHILD_ADD_EVENT)
-				|| prop.equals(PropertyChangeNames.CHILD_REMOVE_EVENT)) {
+		if ((PropertyChangeNames.CHILD_ADD_EVENT.equals(prop) ||
+				PropertyChangeNames.CHILD_PASTE_EVENT.equals(prop) |
+				PropertyChangeNames.CHILD_REMOVE_EVENT.equals(prop))) {
 			refreshChildren();
 		}
 	//	} 

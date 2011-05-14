@@ -32,6 +32,7 @@ public abstract class GElement implements IPropertyChangeSupport {
 	
 	private String id,name;
 	private Notes notes;
+	static final int LOCATION_OFFSET=5;
 	
 	/**
 	 * Default constructor sets size to default size but does not 
@@ -51,7 +52,7 @@ public abstract class GElement implements IPropertyChangeSupport {
 			Notes clonedN = new Notes(cloned);
 			setNotes(clonedN);
 		}
-		setLocation( new Location (toCopy.getLocation().getX() + 5,toCopy.getLocation().getY() + 5) );
+		setLocation( new Location (toCopy.getLocation().getX() + LOCATION_OFFSET,toCopy.getLocation().getY() + LOCATION_OFFSET) );
 		setSize(toCopy.getSize());
 		setName(toCopy.getName());
 		

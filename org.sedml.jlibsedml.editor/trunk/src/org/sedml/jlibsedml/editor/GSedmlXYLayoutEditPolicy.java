@@ -64,7 +64,7 @@ public class GSedmlXYLayoutEditPolicy extends XYLayoutEditPolicy {
 			// return a command that can add a Shape to a ShapesDiagram
 			return new ShapeCreateCommand((GElement) request.getNewObject(),
 					(GSedML) getHost().getModel(),
-					(Rectangle) getConstraintFor(request));
+					(Rectangle) getConstraintFor(request),false);
 		}
 		return null;
 	}

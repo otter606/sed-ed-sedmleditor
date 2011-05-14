@@ -47,7 +47,7 @@ public abstract class AddChildElementAction extends SelectionAction {
 		CompoundCommand cc = new CompoundCommand("Add Parameter");
 		GElement gvar = createModelElement();
 		ShapeCreateCommand scc = new ShapeCreateCommand(gvar, (GSedML)selected.getParent().getModel(),
-				  new Rectangle(currLoc.getX()+60, currLoc.getY()+60, 60, 30));
+				  new Rectangle(currLoc.getX()+60, currLoc.getY()+60, 60, 30),false);
 		ConnectionCreateCommand ccc = new ConnectionCreateCommand(getModel(), SWT.LINE_SOLID);
 		ccc.setTarget(gvar);
 		cc.add(ccc);

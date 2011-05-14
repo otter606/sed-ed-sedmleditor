@@ -29,4 +29,6 @@ public class PropertyChangeNames {
 
 	public static final String PROPERTY_EVENT = "PROPERTY_EVENT";
 
+	public static final String CHILD_PASTE_EVENT = "CHILD_PASTE_EVENT";
+
 }

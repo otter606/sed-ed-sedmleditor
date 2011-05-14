@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.sedml.jlibsedml.editor.product.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="SED-ED Perspective"
+            class="org.sedml.jlibsedml.editor.product.Perspective"
+            id="org.sedml.jlibsedml.editor.product.perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.sedml.jlibsedml.editor.product.application"
+            name="SED-ED">
+         <property
+               name="windowImages"
+               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+         </property>
+         <property
+               name="appName"
+               value="SED-ED">
+         </property>
+         <property
+               name="aboutText"
+               value="This is the SED-ED SED-ML editor, May 2011">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="5,275,445,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="help"
+               label="Help"
+               tooltip="Show Help and information">
+            <menu
+                  commandId="org.eclipse.ui.help.aboutAction"
+                  id="help.helpAbout"
+                  label="About SED-ED">
+            </menu>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.sedml.jlibsedml.editor.product.sedcategory"
+            class="org.sedml.jlibsedml.editor.product.ProjectView"
+            id="org.sedml.seded.projectview2"
+            name="SED-ED project view"
+            restorable="true">
+      </view>
+      <category
+            id="org.sedml.jlibsedml.editor.product.sedcategory"
+            name="SEDML">
+      </category>
+   </extension>
+   
+    <extension
+         point="org.eclipse.ui.navigator.viewer">
+      <viewerActionBinding
+            viewerId="org.sedml.seded.projectview2">
+         <includes>
+            <actionExtension
+                  pattern="org.eclipse.ui.navigator.resources.*">
+            </actionExtension>
+         </includes>
+      </viewerActionBinding>
+      <viewerContentBinding
+            viewerId="org.sedml.seded.projectview2">
+         <includes>
+            <contentExtension
+                  isRoot="false"
+                  pattern="org.eclipse.ui.navigator.resourceContent">
+            </contentExtension>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resources.filters.*">
+            </contentExtension>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resources.linkHelper">
+            </contentExtension>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resources.workingSets">
+            </contentExtension>
+             <contentExtension
+                  pattern="org.sedml.jlibsedml.plugin.sedmlContent">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
+      <viewerContentBinding
+            viewerId="org.sedml.seded.projectview2">
+         <includes>
+            <contentExtension
+                  pattern="org.sedml.jlibsedml.plugin.sedxContent">
+            </contentExtension>
+         </includes>
+         
+      
+      </viewerContentBinding>
+
+      
+      
+   </extension>
+
+</plugin>

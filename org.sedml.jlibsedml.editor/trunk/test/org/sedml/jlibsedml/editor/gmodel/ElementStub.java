@@ -22,4 +22,10 @@ public class ElementStub extends GElement {
 		return "";
 	}
 
+	@Override
+	public GElement getCopy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

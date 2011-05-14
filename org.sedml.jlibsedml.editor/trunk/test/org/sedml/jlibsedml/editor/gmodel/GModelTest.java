@@ -13,6 +13,7 @@ import org.sedml.ArchiveComponents;
 import org.sedml.Libsedml;
 import org.sedml.SEDMLDocument;
 import org.sedml.XMLException;
+import org.sedml.modelsupport.SUPPORTED_LANGUAGE;
 
 public class GModelTest {
 
@@ -39,7 +40,19 @@ public class GModelTest {
 			}
 		}
 	}
-
+	
+	@Test
+	public final void testGetCopy() {
+		GModel orig = new GModel();
+		orig.setLanguage(SUPPORTED_LANGUAGE.CELLML_1_0_ID);
+		orig.setSource("a/b/c.xml");
+		orig.setLocation(new Location(12,34));
+		GModel copy = orig.getCopy();
+		assertEquals(SUPPORTED_LANGUAGE.CELLML_1_0_ID,copy.getLanguage());
+		assertEquals("a/b/c.xml",copy.getSource());
+		assertEquals(new Location(12,34), copy.getLocation());
+	}
+ 
 
 
 }

@@ -2,8 +2,6 @@ package org.sedml.jlibsedml.editor.gmodel;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.List;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import org.sedml.IModelContent;
 import org.sedml.Model;
 import org.sedml.SEDMLTags;
 import org.sedml.execution.ArchiveModelResolver;
@@ -34,9 +31,16 @@ public class GModel extends GElement {
 	}
 
 	public GModel() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
+
+	 GModel(GModel tocopy) {
+		super(tocopy);
+		setSource(tocopy.getSource());
+		setLanguage(tocopy.getLanguage());
+		
+	}
 
 	public boolean addChange(GChange c){
 		c.setModel(this);
@@ -147,6 +151,11 @@ public class GModel extends GElement {
 		}
 		return rc;
 		
+	}
+
+	@Override
+	public GModel getCopy() {
+		return new GModel(this);
 	}
 	
 	

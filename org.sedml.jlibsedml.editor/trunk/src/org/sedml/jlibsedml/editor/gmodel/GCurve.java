@@ -16,6 +16,12 @@ public class GCurve extends GElement {
 		logy=c.getLogY();
 		
 	}
+	
+	GCurve (GCurve toCopy) {
+		super(toCopy);
+		setLogx(toCopy.isLogx());
+		setLogy(toCopy.isLogy());
+	}
 	public GCurve() {
 		// TODO Auto-generated constructor stub
 	}
@@ -107,6 +113,10 @@ public class GCurve extends GElement {
 	@Override
 	public String getType() {
 		return SEDMLTags.OUTPUT_CURVE;
+	}
+	@Override
+	public GCurve getCopy() {
+		return new GCurve(this);
 	}
 	
 

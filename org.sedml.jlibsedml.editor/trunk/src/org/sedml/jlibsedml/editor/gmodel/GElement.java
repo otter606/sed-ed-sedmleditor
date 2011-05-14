@@ -38,10 +38,27 @@ public abstract class GElement implements IPropertyChangeSupport {
 	 *  initialize any fields.
 	 */
 	public GElement () {
+		
 		propChSupport = new PropertyChangeSupport(this);
 		setSize(DEFAULT_SIZE);
 		
 	}
+	
+	public GElement (GElement toCopy) {
+		this();
+		if (toCopy.getNotes()!=null){
+			Element cloned = (Element)toCopy.getNotes().getNotesElement().clone();
+			Notes clonedN = new Notes(cloned);
+			setNotes(clonedN);
+		}
+		setLocation( new Location (toCopy.getLocation().getX() + 5,toCopy.getLocation().getY() + 5) );
+		setSize(toCopy.getSize());
+		setName(toCopy.getName());
+		
+		
+	}
+	
+	public abstract GElement getCopy();
 	
 	
 
@@ -336,7 +353,7 @@ public abstract class GElement implements IPropertyChangeSupport {
 	
 	public boolean isModifyXMLChange() {
 		return isChange() && (
-				((GChange)this).getChType().equals(SEDMLTags.CHANGE_XML) ||
+				((GChange)this).getChType().equals(SEDMLTags.CHANGE_XML_KIND) ||
 				((GChange)this).getChType().equals(SEDMLTags.ADD_XML_KIND));
 	}
 	public boolean isChange() {
@@ -403,6 +420,11 @@ public abstract class GElement implements IPropertyChangeSupport {
 	public String getDisplay2(){
 		return "Name: " + getName();
 	}
+
+
+
+
+	
 
 
 

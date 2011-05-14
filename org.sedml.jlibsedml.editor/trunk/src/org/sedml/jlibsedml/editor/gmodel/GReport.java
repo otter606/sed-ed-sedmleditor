@@ -23,6 +23,10 @@ public class GReport extends GOutput {
 		super();
 	}
 
+	 GReport(GReport toCopy) {
+		super(toCopy);
+	}
+
 	Report getSEDMLObject() {
 		assert(canGetSedML());
 		Report r= new Report(getId(),getName());
@@ -62,5 +66,10 @@ public class GReport extends GOutput {
 		 } 
 			
 		}
+
+	@Override
+	public GReport getCopy() {
+		return new GReport(this);
+	}
 
 }

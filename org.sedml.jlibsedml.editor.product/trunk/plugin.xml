@@ -62,6 +62,15 @@
             </menu>
          </menu>
       </menuContribution>
+        <menuContribution
+            locationURI="menu:file">
+         <command
+               commandId="org.sedml.jlibsedml.editor.product.switchworkspace"
+               label="Switch workspace"
+               style="push"
+               tooltip="Change workspace to another folder">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.views">
@@ -123,5 +132,14 @@
       
       
    </extension>
+    <extension
+           point="org.eclipse.ui.commands">
+        <command
+              defaultHandler="org.sedml.jlibsedml.editor.product.SwitchWorkspaceHandler"
+              id="org.sedml.jlibsedml.editor.product.switchworkspace"
+              name="switchworkspace command">
+        </command>
+     </extension>
+    
 
 </plugin>

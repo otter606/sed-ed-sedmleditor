@@ -39,7 +39,7 @@ import org.sedml.jlibsedml.editor.gmodelcommands.ConnectionDeleteCommand;
  * 
  * @author Elias Volanakis
  */
-class ConnectionEditPart extends AbstractConnectionEditPart implements
+public class ConnectionEditPart extends AbstractConnectionEditPart implements
 		PropertyChangeListener {
 
 	/**

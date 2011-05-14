@@ -57,7 +57,8 @@ public class ZOrderCommand extends Command {
 		}else if(type.equals(OrderType.BACKWARD) && toOrderIsntAlreadyAtBack()) {
 			parent.setChildIndex(toOrder, oldIndex - 1);
 		}
-		parent.firePropertyChange(PropertyChangeNames.CHILD_ADD_EVENT, null, toOrder);
+		// this is a paste as it's just a rearrangement rather than a new addition
+		parent.firePropertyChange(PropertyChangeNames.CHILD_PASTE_EVENT, null, toOrder);
 		
 		
 	}

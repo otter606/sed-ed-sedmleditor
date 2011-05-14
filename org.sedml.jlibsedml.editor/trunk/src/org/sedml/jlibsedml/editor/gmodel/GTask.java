@@ -15,6 +15,9 @@ public class GTask extends GElement{
 	public GTask() {
 		// TODO Auto-generated constructor stub
 	}
+	 GTask(GTask gTask) {
+		super(gTask);
+	}
 	public GModel getModel() {
 		return model;
 	}
@@ -60,6 +63,10 @@ public class GTask extends GElement{
 	@Override
 	public String getType() {
 		return SEDMLTags.TASK_TAG;
+	}
+	@Override
+	public GTask getCopy() {
+		return new GTask(this);
 	}
 
 	

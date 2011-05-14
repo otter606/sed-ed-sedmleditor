@@ -11,6 +11,10 @@ public abstract class GOutput extends GElement {
 		// TODO Auto-generated constructor stub
 	}
 
+	 GOutput(GOutput toCopy) {
+		super(toCopy);
+	}
+
 	@Override
 	public boolean canGetSedML() {
 		return getId()!=null;

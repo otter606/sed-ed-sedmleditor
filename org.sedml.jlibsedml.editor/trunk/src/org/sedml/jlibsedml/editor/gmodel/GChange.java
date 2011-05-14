@@ -5,7 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jdom.Document;
+import org.jdom.Element;
 import org.jmathml.ASTNode;
+import org.jmathml.ASTToXMLElementVisitor;
+import org.jmathml.MathMLReader;
 import org.sedml.AddXML;
 import org.sedml.Change;
 import org.sedml.ChangeAttribute;
@@ -30,6 +33,43 @@ public  class GChange extends GElement {
 		return owner;
 	}
 
+	 GChange (GChange toCopy) {
+		super(toCopy);
+		setChType(toCopy.getChType());
+		if(toCopy.getMath()!=null){
+			ASTNode copied = copyMath(toCopy);
+			setMath(copied);
+		}
+		setNewValue(toCopy.getNewValue());
+		if(toCopy.getNewxml()!=null) {
+			setNewxml(copyNewXML(toCopy.getNewxml()));
+		}
+		
+		setTarget(toCopy.getTarget());
+		
+	}
+
+	public GChange getCopy() {
+		GChange copy = new GChange(this);
+		return copy;
+	}
+	private NewXML copyNewXML(NewXML newxml2) {
+		
+			List<Element> newels = new ArrayList<Element>();
+			for (Element el: newxml2.getXml()){
+				newels.add((Element)el.clone());
+			}
+			return new NewXML(newels);
+		
+	}
+
+	private ASTNode copyMath(GChange toCopy) {
+		ASTToXMLElementVisitor astElementVisitor= new ASTToXMLElementVisitor();
+		toCopy.getMath().accept(astElementVisitor);
+		Element el =astElementVisitor.getElement();
+		ASTNode copied = new MathMLReader().parseMathML(el);
+		return copied;
+	}
 	public void setOwner(GModel owner) {
 		this.owner = owner;
 	}
@@ -144,7 +184,7 @@ public  class GChange extends GElement {
 	@Override
 	public boolean canGetSedML() {
 		boolean rc= getTarget() != null;
-		if(getChType().equals(SEDMLTags.REMOVE_XML_KIND)){
+		if(rc == false || getChType().equals(SEDMLTags.REMOVE_XML_KIND)){
 			return rc;
 		}else rc=getNewValue() != null || getNewxml() != null || getMath()!=null;
 		return rc;

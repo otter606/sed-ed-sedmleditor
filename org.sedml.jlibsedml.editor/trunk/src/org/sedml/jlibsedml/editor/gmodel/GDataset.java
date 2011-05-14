@@ -19,6 +19,11 @@ private String label;
 
 	
 
+	 GDataset(GDataset toCopy) {
+		super(toCopy);
+		setLabel(toCopy.getLabel());
+	}
+
 	public String getLabel() {
 	return label;
 }
@@ -70,5 +75,10 @@ public void setLabel(String label) {
 	@Override
 	public String getType() {
 		return SEDMLTags.OUTPUT_DATASET;
+	}
+
+	@Override
+	public GDataset getCopy() {
+		return new GDataset(this);
 	}
 }

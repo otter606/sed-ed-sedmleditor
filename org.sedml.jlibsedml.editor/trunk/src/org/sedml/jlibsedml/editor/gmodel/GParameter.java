@@ -18,6 +18,11 @@ public GParameter() {
 	// TODO Auto-generated constructor stub
 }
 
+ GParameter(GParameter toCopy) {
+	super(toCopy);
+	setValue(toCopy.getValue());
+}
+
 public double getValue() {
 	return value;
 }
@@ -42,6 +47,11 @@ Parameter getSEDMLObject() {
 @Override
 public String getType() {
 	return SEDMLTags.DATAGEN_ATTR_PARAMETER;
+}
+
+@Override
+public GParameter getCopy() {
+	return new GParameter(this);
 }
 	
 

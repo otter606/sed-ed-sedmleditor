@@ -31,6 +31,15 @@ public class GSimulation extends GElement {
 		// TODO Auto-generated constructor stub
 	}
 
+	 GSimulation(GSimulation toCopy) {
+		super(toCopy);
+		setStart(toCopy.getStart());
+		setOutStart(toCopy.getOutStart());
+		setOutEnd(toCopy.getOutEnd());
+		setNumPoints(toCopy.getNumPoints());
+		setAlgorithm(new Algorithm(toCopy.getAlgorithm().getKisaoID()));
+	}
+
 	public double getStart() {
 		return start;
 	}
@@ -88,6 +97,11 @@ public class GSimulation extends GElement {
 	@Override
 	public String getType() {
 		return SEDMLTags.SIM_UTC;
+	}
+
+	@Override
+	public GSimulation getCopy() {
+		return new GSimulation(this);
 	}
 
 }

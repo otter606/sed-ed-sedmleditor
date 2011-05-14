@@ -21,6 +21,10 @@ public class GPlot2D extends GOutput {
 		// TODO Auto-generated constructor stub
 	}
 
+	 GPlot2D(GPlot2D toCopy) {
+		super(toCopy);
+	}
+
 	Plot2D getSEDMLObject() {
 		assert(canGetSedML());
 		Plot2D rc = new Plot2D(getId(), getName());
@@ -60,6 +64,11 @@ public class GPlot2D extends GOutput {
 		 } 
 			
 		}
+
+	@Override
+	public GPlot2D getCopy() {
+		return new GPlot2D(this);
+	}
 	
 
 }

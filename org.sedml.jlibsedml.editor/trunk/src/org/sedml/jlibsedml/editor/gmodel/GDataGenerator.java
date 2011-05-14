@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.jdom.Element;
 import org.jmathml.ASTNode;
+import org.jmathml.ASTToXMLElementVisitor;
+import org.jmathml.MathMLReader;
 import org.sedml.DataGenerator;
 import org.sedml.SEDMLTags;
 
@@ -13,15 +16,40 @@ public class GDataGenerator extends GElement {
 	private List<GVariable> vars=new ArrayList<GVariable>();
 	private List<GParameter> params = new ArrayList<GParameter>();
 	private ASTNode math=null;
+	/**
+	 * Used when reading from document
+	 * @param dg
+	 */
 	public GDataGenerator(DataGenerator dg) {
 		super(dg);
 		setId(dg.getId());
 		setName(dg.getName());
 		setMath(dg.getMath());
 	}
+	/**
+	 * For de novo creation on palette.
+	 */
 	public GDataGenerator() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	/**
+	 * Copy constructor
+	 * @param gDataGenerator
+	 */
+	 GDataGenerator(GDataGenerator toCopy) {
+		super(toCopy);
+		if(toCopy.getMath()!=null)
+			setMath(copyMath(toCopy));
+	}
+	 
+	 private ASTNode copyMath(GDataGenerator toCopy) {
+			ASTToXMLElementVisitor astElementVisitor= new ASTToXMLElementVisitor();
+			toCopy.getMath().accept(astElementVisitor);
+			Element el =astElementVisitor.getElement();
+			ASTNode copied = new MathMLReader().parseMathML(el);
+			return copied;
+		}
 	public ASTNode getMath() {
 		return math;
 	}
@@ -101,5 +129,9 @@ public class GDataGenerator extends GElement {
 	@Override
 	public String getType() {
 		return SEDMLTags.DATAGENERATOR_TAG;
+	}
+	@Override
+	public GDataGenerator getCopy() {
+		return new GDataGenerator(this);
 	}
 }

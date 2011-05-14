@@ -22,6 +22,11 @@ public class GVariable  extends GElement{
 	public GVariable() {
 		// TODO Auto-generated constructor stub
 	}
+	public GVariable(GVariable gVariable) {
+		super(gVariable);
+		setTargetXPath(gVariable.getTargetXPath());
+		setSymbol(gVariable.getSymbol());
+	}
 	public GModel getModel() {
 		return model;
 	}
@@ -120,6 +125,10 @@ public class GVariable  extends GElement{
 			
 
 		return rc;
+	}
+	@Override
+	public GElement getCopy() {
+		return new GVariable(this);
 	}
 	
 

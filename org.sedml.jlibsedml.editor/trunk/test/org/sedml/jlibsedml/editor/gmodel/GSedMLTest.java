@@ -32,6 +32,12 @@ public class GSedMLTest {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public GElement getCopy() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 		
 	}
 

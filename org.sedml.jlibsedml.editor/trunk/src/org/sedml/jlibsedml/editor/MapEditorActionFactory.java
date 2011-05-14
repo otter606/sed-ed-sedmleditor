@@ -18,7 +18,9 @@ import org.sedml.jlibsedml.editor.actions.AddDatasetAction;
 import org.sedml.jlibsedml.editor.actions.AddNotesAction;
 import org.sedml.jlibsedml.editor.actions.AddParameterAction;
 import org.sedml.jlibsedml.editor.actions.AddVariableAction;
+import org.sedml.jlibsedml.editor.actions.CopyObjectsAction;
 import org.sedml.jlibsedml.editor.actions.LayoutAction;
+import org.sedml.jlibsedml.editor.actions.PasteAction;
 import org.sedml.jlibsedml.editor.actions.PushOneBackZOrderAction;
 import org.sedml.jlibsedml.editor.actions.PushOneForwardZOrderAction;
 import org.sedml.jlibsedml.editor.actions.PushToBackZOrderAction;
@@ -100,21 +102,18 @@ class MapEditorActionFactory {
 	selectionActions.add(action.getId());
 
 
-//	action = new CopyObjectsAction( mapEditor);
-//	registry.registerAction(action);
-//	selectionActions.add(action.getId());
-//
-//	action = new CutObjectsAction(mapEditor, Clipboard.getDefault());
-//	registry.registerAction(action);
-//	selectionActions.add(action.getId());
+	action = new CopyObjectsAction( mapEditor);
+	registry.registerAction(action);
+	selectionActions.add(action.getId());
 
+	
 	action = new SelectAllAction(mapEditor);
 	registry.registerAction(action);
 	selectionActions.add(action.getId());
 
-//	action = new PasteAction(mapEditor);
-//	registry.registerAction(action);
-//	selectionActions.add(action.getId());
+	action = new PasteAction(mapEditor);
+	registry.registerAction(action);
+	selectionActions.add(action.getId());
 
 	// action = new ShowGridAction ( (IWorkbenchPart)mapEditor , mapEditor ) ;
 	// registry.registerAction(action) ;

@@ -33,6 +33,7 @@ public class ShapeCreateCommand extends Command {
 	private final GSedML parent;
 	/** The bounds of the new Shape. */
 	private Rectangle bounds;
+	private boolean isPaste;
 
 	/**
 	 * Create a command that will add a new Shape to a ShapesDiagram.
@@ -44,15 +45,18 @@ public class ShapeCreateCommand extends Command {
 	 * @param bounds
 	 *            the bounds of the new shape; the size can be (-1, -1) if not
 	 *            known
+	 * @paste <code>boolean</code> if command is a paste operation rather than
+	 *   a new creation operation
 	 * @throws IllegalArgumentException
 	 *             if any parameter is null, or the request does not provide a
 	 *             new Shape instance
 	 */
 	public ShapeCreateCommand(GElement newShape, GSedML parent,
-			Rectangle bounds) {
+			Rectangle bounds, boolean isPaste) {
 		this.newShape = newShape;
 		this.parent = parent;
 		this.bounds = bounds;
+		this.isPaste=isPaste;
 		setLabel("shape creation");
 	}
 
@@ -66,6 +70,8 @@ public class ShapeCreateCommand extends Command {
 	}
 
 	/*
+	 * Adds child and sets location. Fires either a CHILD_PASTE_EVENT or a CHILD_ADD_EVENT
+	 *  depending on the boolean passed to the constructor.
 	 * (non-Javadoc)
 	 * 
 	 * @see org.eclipse.gef.commands.Command#execute()
@@ -78,8 +84,11 @@ public class ShapeCreateCommand extends Command {
 		parent.firePropertyChange(PropertyChangeNames.LOCATION_EVENT, null, size);
 		parent.firePropertyChange(PropertyChangeNames.SIZE_EVENT, null, size);
 		redo();
-		// this will trigger dialog 
-		parent.firePropertyChange(PropertyChangeNames.CHILD_ADD_EVENT, null, newShape);
+		if(!isPaste)
+		 parent.firePropertyChange(PropertyChangeNames.CHILD_ADD_EVENT, null, newShape);
+		else
+		 parent.firePropertyChange(PropertyChangeNames.CHILD_PASTE_EVENT, null, newShape);
+			
 	}
 
 	/*

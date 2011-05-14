@@ -45,20 +45,22 @@ public class PasteAction extends SelectionAction {
 	}
 	
 	public void run() {
-		GSedML root =  (GSedML)((MapEditPart) getSelectedObjects().get(0)).getModel();
+		MapEditPart selected = ((MapEditPart) getSelectedObjects().get(0));
+		GSedML root =  (GSedML)(selected.getModel());
 		List<GElement> toAdd = new ArrayList<GElement>();
 		List<GElement>  clipboard =(List) Clipboard.getDefault().getContents();
 		for (GElement cpbord: clipboard) {
 			toAdd.add(cpbord.getCopy());
 			}
 		CompoundCommand cc = new CompoundCommand();
-		
+	 	SelectObjectsInViewerHelper <GElement>helper = new SelectObjectsInViewerHelper<GElement>(selected);
 		for (GElement ge:toAdd){
 			ShapeCreateCommand scc = new ShapeCreateCommand(ge, root, new Rectangle(ge.getLocation().getX(), 
-					ge.getLocation().getY(), ge.getSize().getWidth(), ge.getSize().getHeight()));
+					ge.getLocation().getY(), ge.getSize().getWidth(), ge.getSize().getHeight()),true);
 			cc.add(scc);
 		}
 		execute(cc);
+		helper.selectObjectsInViewer(toAdd);
 	}
 
 }

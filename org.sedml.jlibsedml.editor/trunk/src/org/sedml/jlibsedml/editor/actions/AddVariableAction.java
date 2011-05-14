@@ -58,7 +58,7 @@ public  class AddVariableAction extends AddChildElementAction{
 		GVariable gvar = new GVariable();
 		ShapeCreateCommand scc = new ShapeCreateCommand(gvar, (GSedML)selected.getParent().getModel(),
 				  new Rectangle(currLoc.getX()+40, currLoc.getY()+40, GElement.DEFAULT_SIZE.getWidth(), 
-						    GElement.DEFAULT_SIZE.getHeight()));
+						    GElement.DEFAULT_SIZE.getHeight()),false);
 		ConnectionCreateCommand ccc = new ConnectionCreateCommand(getModel(), SWT.LINE_SOLID);
 		ccc.setTarget(gvar);
 		

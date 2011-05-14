@@ -50,7 +50,7 @@ public class GModelTest {
 		GModel copy = orig.getCopy();
 		assertEquals(SUPPORTED_LANGUAGE.CELLML_1_0_ID,copy.getLanguage());
 		assertEquals("a/b/c.xml",copy.getSource());
-		assertEquals(new Location(12,34), copy.getLocation());
+		assertEquals(new Location(12+GElement.LOCATION_OFFSET,34+GElement.LOCATION_OFFSET), copy.getLocation());
 	}
  
 

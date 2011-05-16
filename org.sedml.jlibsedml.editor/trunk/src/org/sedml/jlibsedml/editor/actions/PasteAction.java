@@ -27,10 +27,14 @@ public class PasteAction extends SelectionAction {
 		setId(ActionFactory.PASTE.getId());
 		setText("Paste");
 		setToolTipText("Paste");
+		setIcons();
+		setEnabled(false);
+	}
+
+	 void setIcons() {
 		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
 		setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE));
 		setDisabledImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE_DISABLED));
-		setEnabled(false);
 	}
 
 	@Override
@@ -38,7 +42,7 @@ public class PasteAction extends SelectionAction {
 		if (Clipboard.getDefault().getContents() == null)
 			return false;
 		Object  contents = Clipboard.getDefault().getContents();
-		if(contents instanceof List && ((List)contents).get(0) instanceof GElement ) {
+		if(contents instanceof List &&!((List)contents).isEmpty() && ((List)contents).get(0) instanceof GElement ) {
 			return true;
 		}
 		return false;

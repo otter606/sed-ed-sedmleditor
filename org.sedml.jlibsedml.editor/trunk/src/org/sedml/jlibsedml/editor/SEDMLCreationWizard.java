@@ -101,7 +101,7 @@ public class SEDMLCreationWizard extends Wizard implements INewWizard {
 		 */
 		public void createControl(Composite parent) {
 			super.createControl(parent);
-			setFileName("shapesExample" + fileCount + DEFAULT_EXTENSION);
+			setFileName("ExampleSedML" + fileCount + DEFAULT_EXTENSION);
 			setPageComplete(validatePage());
 		}
 

@@ -19,13 +19,18 @@
    <windowImages i16="icons/alt_window_16.gif" i32="icons/alt_window_32.gif"/>
 
    <splash
-      startupProgressRect="5,275,445,15" />
+      location="org.sedml.jlibsedml.editor.product"
+      startupProgressRect="105,275,200,15"
+      startupMessageRect="85,252,200,20"
+      startupForegroundColor="000000" />
    <launcher name="SED-ED">
+      <macosx icon="/org.sedml.jlibsedml.editor.product/icons/splash.icns"/>
       <solaris/>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>

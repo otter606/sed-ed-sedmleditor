@@ -2,7 +2,7 @@
 <feature
       id="org.sedml.jlibsedml.editor.feature"
       label="SEDED SedML editor feature"
-      version="0.8.5"
+      version="0.8.1"
       provider-name="Richard Adams, University of Edinburgh"
       plugin="org.sedml.jlibsedml.editor">
 

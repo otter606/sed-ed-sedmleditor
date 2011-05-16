@@ -1,0 +1,151 @@
+<!--
+	This program and the accompanying materials are made available
+	under the terms of the Eclipse Public License v1.0 which
+	accompanies this distribution, and is available at
+  	http://www.eclipse.org/legal/epl-v10.html
+	
+	This build script creates a build directory containing the plugins
+	and features to be built, and then kicks off the PDE build process.
+	You could just as easily do this from a shell script or cron job.
+	
+	Also, the script can be run inside the Eclipse IDE by choosing 
+	Run As -> Ant Build from the context menu. It could obviously be
+	run outside of the IDE if you have ANT installed on your path.
+	
+	If you have any questions about this build, feel free to contact me
+	at patrick@rcpquickstart.com.
+-->
+<project name="org.sedml.jlibsedml.editor.build" basedir="." default="build">
+	<property file="${user.name}.properties" />
+	<property file="common.properties" />
+	<!--
+		PDE Build expects that the build directory contains a "plugins" 
+		directory and a "features" directory. These directories should contain
+		the various plug-ins and features to be built.
+		
+		It's possible to use the CVS checkout process that is built into 
+		PDE Build. This is done with map files and is beyond the scope of 
+		this tutorial. 
+		
+		This tutorial simply copies the projects directly from your workspace
+		into the appropriate build directory folders.
+	-->
+	<target name="init" depends="config">
+		<mkdir dir="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}/plugins" />
+		<mkdir dir="${buildDirectory}/features" />
+		<copy todir="${buildDirectory}/plugins/" overwrite="true" failOnError="true">
+			<fileset dir="../" includes="org.sedml.jlibsedml.plugin**/**,org.sedml.jlibsedml.editor**/**,org.sedml.jlibsedml.editor.product**/**,JungLibs**/**, uk.ac.ed.csbe.javaxws.libs**/**" excludes="uk.ac.ed.csbe.sbsivisual.feature**/**, uk.ac.ed.csbe.sbsivisual.base.feature**/**, **build**, **update**, **test**" />
+		</copy>
+		<copy  todir="${buildDirectory}/features">
+			<fileset dir="../" includes="org.sedml.jlibsedml.feature**/**,org.sedml.jlibsedml.editor.product.feature**/**,org.sedml.jlibsedml.editor.feature**/**,uk.ac.ed.csbe.sbsivisual.base.feature**/**"/>
+		</copy>
+		<!-- now do perm change of feature files -->
+		<chmod file="${buildDirectory}/features/**" perm="755" type="both">
+					
+		</chmod>
+		
+	</target>
+
+	<!--
+		This target actually executes the PDE Build process by launching the 
+		Eclipse antRunner application.
+		
+		NOTE: If you are using Eclipse 3.2, switch out the pathelement below
+		with the one that is commented out.
+	-->
+	<target name="pde-build" depends="config">
+		<echo>${ANT_OPTS}</echo>
+		<echo>Using ${baseLocation} as target</echo>
+		<!--<echo>${baseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml</echo>
+		<echo>${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar</echo>-->
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+			<!-- replace with following for Eclipse 3.2 -->
+			<!--<java classname="org.eclipse.core.launcher.Main" fork="true" failonerror="true">-->
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="${baseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<classpath>
+				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+
+			</classpath>
+		</java>
+	</target>
+
+	<target name="clean" depends="config">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${buildDirectory}/" />
+		</delete>
+	</target>
+
+	<target name="config">
+		<!--we need to write properties from ${user.name}.properties and common.properties to the build.properties file as it seems pde is
+	 hardcoded to ignore other property files-->
+		<echoproperties destfile="build.properties" />
+	</target>
+
+	<!-- This is just to set permissions on launch.command script; their ought to be a better way but custom build of the feature
+	project failed, sadly :-(  -->
+	<target name="chmod" depends="config">
+		<condition property="macBuild">
+			<contains string="${configs}" substring="macosx" />
+		</condition>
+		<condition property="linux64Build">
+			<contains string="${configs}" substring="linux,gtk,x86_64" />
+		</condition>
+		<condition property="linux32Build">
+			<contains string="${configs}" substring="linux,gtk,x86" />
+		</condition>
+		<antcall target="chmodMac" />
+		<antcall target="chmodLinux" />
+		<antcall target="chmodLinux32" />
+
+	</target>
+
+	<target name="chmodMac" if="macBuild">
+		<echo message="Altering Mac permissions -${configs}" />
+		<antcall target="genericPermissionChange">
+			<param name="UnzipDir" value="MACUNZIP" />
+			<param name="os.ws.arch" value="macosx.cocoa.x86" />
+		</antcall>
+	</target>
+
+	<target name="chmodLinux" if="linux64Build">
+		<echo message="Altering Linux64 permissions" />
+		<antcall target="genericPermissionChange">
+			<param name="UnzipDir" value="LINUX_UNZIP" />
+			<param name="os.ws.arch" value="linux.gtk.x86_64" />
+		</antcall>
+	</target>
+	
+	<target name="chmodLinux32" if="linux32Build">
+		<echo message="Altering Linux32 permissions" />
+		<antcall target="genericPermissionChange">
+			<param name="UnzipDir" value="LINUX_32UNZIP" />
+			<param name="os.ws.arch" value="linux.gtk.x86" />
+		</antcall>
+	</target>
+
+	<!-- takes 2 params: UnzipDir and os.ws.arch which specifies config name. -->
+	<target name="genericPermissionChange">
+		<mkdir dir="${buildDirectory}/${UnzipDir}" />
+		<unzip src="${buildDirectory}/${buildType}.${buildId}/${buildId}-${os.ws.arch}.zip" dest="${buildDirectory}/${UnzipDir}">
+		</unzip>
+		<chmod perm="755">
+			<fileset dir="${buildDirectory}/${UnzipDir}" />
+		</chmod>
+		<delete file="${buildDirectory}/${buildType}.${buildId}/${buildId}-${os.ws.arch}.zip" />
+		<zip destfile="${buildDirectory}/${buildType}.${buildId}/${buildId}-${os.ws.arch}.zip">
+			<zipfileset filemode="755" dir="${buildDirectory}/${UnzipDir}" />
+		</zip>
+	
+		
+	</target>
+
+
+
+	<target name="build" depends="config,clean,init, pde-build, chmod" />
+</project>

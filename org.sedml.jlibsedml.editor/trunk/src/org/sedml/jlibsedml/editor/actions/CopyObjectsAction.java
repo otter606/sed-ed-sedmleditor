@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.eclipse.gef.ui.actions.Clipboard;
 import org.eclipse.gef.ui.actions.SelectionAction;
+import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.sedml.jlibsedml.editor.GElementEditPart;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
@@ -24,7 +26,14 @@ public class CopyObjectsAction extends SelectionAction {
 		setText("Copy");
 		setToolTipText("Copy");
 		setEnabled(true);
+		setIcons();
 	}
+	
+	 void setIcons() {
+			ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
+			setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_COPY));
+			setDisabledImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_COPY_DISABLED));
+		}
 
 	/**
 	 * Is enabled if >= 1 GElementEditPart is selected. 

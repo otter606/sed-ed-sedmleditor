@@ -27,18 +27,18 @@ import org.sedml.jlibsedml.editor.gmodel.GModel;
 import org.sedml.jlibsedml.editor.gmodel.TestUtils;
 
 @RunWith(JMock.class)
-public class CopyObjectsActionTest {
+public class PasteObjectsActionTest {
 
 	Mockery mockery = new JUnit4Mockery();
 	IWorkbenchPart mockPart =mockery.mock(IWorkbenchPart.class);
-	private CopyObjectsAction action;
-	private CopyObjectsActionStub actionTSS;
+	private PasteAction action;
+	private PasteActionStub actionTSS;
 	GElementEditPart ep ;
 	GElementEditPart ep2 ;
 	
-	class CopyObjectsActionStub extends CopyObjectsAction{
+	class PasteActionStub extends PasteAction{
 
-		public CopyObjectsActionStub(IWorkbenchPart part) {
+		public PasteActionStub(IWorkbenchPart part) {
 			super(part);
 			// TODO Auto-generated constructor stub
 		}
@@ -65,7 +65,7 @@ public class CopyObjectsActionTest {
 	}
 	@Before
 	public void setUp() throws Exception {
-		actionTSS=new CopyObjectsActionStub(mockPart);
+		actionTSS=new PasteActionStub(mockPart);
 		action=actionTSS;
 		 ep = new GElementEditPart();
 		 ep2 = new GElementEditPart();
@@ -73,48 +73,35 @@ public class CopyObjectsActionTest {
 
 	@After
 	public void tearDown() throws Exception {
+		Clipboard.getDefault().setContents(new Object());
 	}
 
-	@Test
-	public final void testRun() {
-		assertNull(Clipboard.getDefault().getContents());
-		GModel gm = TestUtils.createValidGModel("id");
-		ep.setModel(gm);
-		actionTSS.setSelectedObjects(Arrays.asList(new GElementEditPart []{ep}));
-		actionTSS.run();
-		List<GElement> cp = (List<GElement>)Clipboard.getDefault().getContents();
-		assertNotNull(cp);
-		assertEquals(1,cp.size());
-		assertEquals(gm.getName(), cp.get(0).getName());
-		
-		//check is copy
-		gm.setName("new name");
-		assertFalse(gm.getName().equals(cp.get(0).getName()));
-		assertTrue(actionTSS.isIconSet);
-		
-		
-		
-	}
+	
 	
 	@Test
 	public void testIDIsStandardID(){
-		assertEquals(action.getId(),ActionFactory.COPY.getId()); // to hook into menus
+		assertEquals(action.getId(),ActionFactory.PASTE.getId()); 
+		assertTrue(actionTSS.isIconSet);// to hook into menus
 	}
 
 	@Test
-	public final void testCalculateEnabledFalseForEmptyList() {
-		actionTSS.setSelectedObjects(Collections.EMPTY_LIST);
+	public final void testCalculateEnabledFalseForEmptyClipboard() {
+		
 		assertFalse(action.isEnabled());
 	}
 	
 	@Test
 	public final void testCalculateEnabledForGElementt() {
-		actionTSS.setSelectedObjects(Arrays.asList(new GElementEditPart []{ep}));
+		GModel model = TestUtils.createValidGModel("id");
+		List<GElement> el = Arrays.asList(new GElement[]{model});
+		Clipboard.getDefault().setContents(el);
 		assertTrue(action.isEnabled());
+		Clipboard.getDefault().setContents(Collections.EMPTY_LIST);
+		assertFalse(action.isEnabled());
 	}
 	
 	@Test
-	public final void testCalculateEnabledFalseForConnection() {
+	public final void testCalculateEnabledFalseForWrongObject() {
 		actionTSS.setSelectedObjects(Arrays.asList(new ConnectionEditPart []{new ConnectionEditPart()}));
 		assertFalse(action.isEnabled());
 	}

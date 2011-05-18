@@ -47,6 +47,8 @@ p.   From the editor palette, choose  'Model'  and then click on the canvas to a
  
 !{width:50%}images/createModel.png!
 
+p. You can preview a model by clicking on the _Preview Model_ button. This will be enbaled if the model itself can be retrieved based on the 'source' attribute of the SED-ML model element. _Preview Model_ will apply all changes and show the model as an XML tree for you to browse to check that the changes are as you expect.  You can also access this from within the 'Edit Change' dialog when you double click on a *Change* element.
+
 h4(#create_change). Defining changes to a model.
 
 p. In SED-ML, there are several method to apply changes to an XML based model:

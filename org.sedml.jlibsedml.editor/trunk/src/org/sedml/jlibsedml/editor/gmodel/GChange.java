@@ -100,6 +100,7 @@ public  class GChange extends GElement {
 
 	public void setMath(ASTNode math) {
 		this.math = math;
+		firePropertyChange(PropertyChangeNames.PROPERTY_EVENT, null, math);
 	}
 
 	private String chType = SEDMLTags.CHANGE_ATTRIBUTE_KIND;// default
@@ -120,6 +121,7 @@ public  class GChange extends GElement {
 	 * */
 	public void setChType(String chType) {
 		this.chType = chType;
+		firePropertyChange(PropertyChangeNames.PROPERTY_EVENT, null, math);
 	}
 
 	public NewXML getNewxml() {
@@ -138,6 +140,7 @@ public  class GChange extends GElement {
 	public void setNewValue(String newValue) {
 		this.newValue = newValue;
 		this.newxml = null;
+		firePropertyChange(PropertyChangeNames.PROPERTY_EVENT, null, math);
 	}
 
 	public XPathTarget getTarget() {
@@ -146,6 +149,7 @@ public  class GChange extends GElement {
 
 	public void setTarget(XPathTarget target) {
 		this.target = target;
+		firePropertyChange(PropertyChangeNames.PROPERTY_EVENT, null, math);
 	}
 	
 	

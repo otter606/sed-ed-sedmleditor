@@ -9,10 +9,12 @@ import java.util.List;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -33,6 +35,8 @@ import org.sedml.jlibsedml.xmlUI.BaseXMLDialog;
 import org.sedml.jlibsedml.xmlUI.ViewModelButton;
 import org.sedml.jlibsedml.xmlUI.XMLAttributeXPathGeneratorDialog;
 import org.sedml.jlibsedml.xmlUI.XMLElementXPathGeneratorDialog;
+import org.sedml.jlibsedml.xmlUI.XMLPreviewer;
+import org.sedml.jlibsedml.xmlUI.XMLViewer;
 import org.sedml.jlibsedml.xmlutils.XMLHandler;
 import org.sedml.jlibsedml.xmlutils.XMLUtils;
 
@@ -44,6 +48,8 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 	private String oldType;
 	private XPathTarget oldTarget;
 	private Combo chTypeCombo;
+	private Button previewModel;
+	private ViewModelButton viewModelButt;
 	private Text target;
 	private Text replacement;
 	private String[] comboItems = new String[] { SEDMLTags.CHANGE_ATTRIBUTE_KIND,
@@ -105,7 +111,14 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.horizontalSpan = 2;
 		replacement.setLayoutData(gd);
-		replacement.addModifyListener(new VerifyingModifyListener());
+		replacement.addModifyListener(new VerifyingModifyListener() {
+			public void modifyText(ModifyEvent e) {
+				super.modifyText(e);
+			//	boolean enablePreview = 
+				previewModel.setEnabled(calculateEnabled());
+				
+			}
+		});
 		replacement.addFocusListener(new VerifyingFocusListener());
 		if(gc.getNewxml()!=null){
 			for (Element el : gc.getNewxml().getXml()){
@@ -131,8 +144,11 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.minimumWidth=100;
 		target.setLayoutData(gd);
-		ViewModelButton viewModelButt = new ViewModelButton(gc);
-		viewModelButt.create(child, target);
+		Composite modelViewButtons = new Composite(child,SWT.NONE);
+		GridLayout gl2 = new GridLayout(1, true);
+		modelViewButtons.setLayout(gl2);
+		 viewModelButt = new ViewModelButton(gc);
+		viewModelButt.create(modelViewButtons, target);
 		viewModelButt.addSelectionListener(new SelectionListener() {
 			final String ERROR_TITLE="Error reading model file";
 			final String ERROR_MESSAGE="There was an error reading the model file - please check it is valid XML. \n";
@@ -153,6 +169,7 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 					}
 					if(xmlDialog.open()==Window.OK){
 						target.setText(xmlDialog.getSelectedXPathFromViewer());
+						previewModel.setEnabled(calculateEnabled());
 					}
 				} catch (JDOMException e1) {
 					MessageDialog.openError(activeShell,ERROR_TITLE ,
@@ -162,16 +179,56 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 							ERROR_MESSAGE  +e1.getMessage());
 					e1.printStackTrace();
 				}
-				
+			
 				
 			}
 			
 			public void widgetDefaultSelected(SelectionEvent e) {}
 		});
+		previewModel = new Button(modelViewButtons, SWT.PUSH);
+		previewModel.setText("Preview model");
+		previewModel.setEnabled(calculateEnabled());
+		
+		// should only be active if calculateEnabled() is true
+		previewModel.addSelectionListener(new SelectionListener() {
+			
+			public void widgetSelected(SelectionEvent e) {
+				if(gc.canGetModel()){
+					//GChange tm = gc.getCopy();
+					updateModel(gc, chTypeCombo.getText(), target.getText(), replacement.getText());
+				//	tm.setOwner(gc.getOwner());
+					Document model = gc.getModelDocument();
+					XMLPreviewer viewer = new XMLPreviewer(getShell(), model);
+					viewer.open();
+				}
+				
+			}
+			
+			public void widgetDefaultSelected(SelectionEvent e) {}
+		});
+		
+		
 		target.addModifyListener(new VerifyingModifyListener());
 		target.addFocusListener(new VerifyingFocusListener());
 
 	}
+
+	private boolean calculateEnabled() {
+		if(! viewModelButt.isEnabled() ||  target== null || target.getText().length() ==0) {
+			return false;
+		}
+		if(chTypeCombo==null){
+			return false;
+		}
+		if(!chTypeCombo.getText().equals(SEDMLTags.REMOVE_XML_KIND)){
+			if (replacement==null || replacement.getText().length()==0){
+				return false;
+			}
+		}
+		return true;
+	}
+
+
 
 	private void createChType(Composite child) {
 		new Label(child, SWT.NULL).setText("Change type:");
@@ -229,16 +286,10 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 			}
 			
 			public void redo() {
-				gc.setChType(chType);
-				gc.setTarget(new XPathTarget(targ));
-				if(gc.isChangeAttribute()){
-					gc.setNewValue(replace);
-				}else if (gc.isModifyXMLChange()){
-					List<Element> xmlEls= xmlValidator.getXMLElements(replace);
-					
-					gc.setNewxml(new NewXML(xmlEls));
-				}
+				updateModel(gc,chType, targ, replace);
 			}
+
+			
 			
 			public void execute() {
 				redo();	
@@ -252,6 +303,19 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 		super.okPressed();
 	
 
+	}
+	
+	private void updateModel( GChange change, final String chType, final String targ,
+			final String replace) {
+		change.setChType(chType);
+		change.setTarget(new XPathTarget(targ));
+		if(change.isChangeAttribute()){
+			change.setNewValue(replace);
+		}else if (change.isModifyXMLChange()){
+			List<Element> xmlEls= xmlValidator.getXMLElements(replace);
+			
+			change.setNewxml(new NewXML(xmlEls));
+		}
 	}
 
 	// execute only if has changed

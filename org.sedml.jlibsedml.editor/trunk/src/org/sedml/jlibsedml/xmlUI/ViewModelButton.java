@@ -43,4 +43,9 @@ public class ViewModelButton {
 		ViewModelButton.setEnabled(enabled);
 	}
 
+	public boolean isEnabled() {
+		return ViewModelButton.isEnabled();
+		
+	}
+
 }

@@ -38,6 +38,7 @@ public abstract class BaseXMLDialog extends TrayDialog {
 		 Tree createTree(Composite child, int style) {
 			Tree tree = new Tree(child, style);
 			GridData gd = new GridData(SWT.FILL, SWT.FILL, true, true);
+			gd.heightHint=200;
 			tree.setLayoutData(gd);
 			return tree;
 		}

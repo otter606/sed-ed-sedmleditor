@@ -94,12 +94,15 @@ public class ModelConfigDialog extends BaseConfigDialog {
 
 	private void calculatePreviewButtonEnabled() {
 		if (previewButton == null || previewButton.isDisposed()) {
+		
 			return;
 		}
 		if (srcText != null && lCombo != null && lCombo.getText() != null) {
 			updateModel(srcText.getText(), lCombo.getText());
 			if (m.canGetModel())
 				previewButton.setEnabled(true);
+			else 
+				previewButton.setEnabled(false);
 			return;
 
 		}

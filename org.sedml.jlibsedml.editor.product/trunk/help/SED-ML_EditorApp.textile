@@ -1,0 +1,42 @@
+{toc}
+
+h1. SED-ED editor application
+
+This help file gets you started with the SED-ML editor application, a demonstrator application for the SED-ML editor plugin for Eclipse and SBSI.
+
+h2. Getting started
+
+h3. Launching the application
+
+Download the application, unzip it, and double-click the launch icon in the unzipped folder. E.g., 
+
+!{width=50%}icons/unzipfolder.png!
+
+When the app launches you'll be asked to choose a folder to be your workspace.
+ This should just be a regular folder on your file-system. 
+ 
+ When the app reopens, you'll be presented with a somewhat empty application window.
+
+!{width:70%}icons/startscreen.png!
+
+h3. Creating a project
+
+To start off with we'll create a project. From the *File->New->Other* menu choose *General->Project* and give it a name, and click OK. You'll see a new project folder created in the 'SED-ED project view' on the left hand panel.
+
+h3. Example SED-ML files
+
+You can now just drag and drop the 'examples'  folder into the project folder you just created into your workspace.
+
+h3. Looking at the examples:
+
+To investigate and explore the examples and find out how to use the SED-ML editor, please look at the 
+  SEDML_editor plugin help. You can open different sorts of editors on the files: a regular text editor, an XML editor, or 
+   for the SED-ML files, the SED-ED editor. To choose an editor, select a file then right-click and choose the *Open->Open With* menu item from the context menu.
+  
+  
+h3. General Help
+
+The *Problems* view shows any SED-ML validation errors. Double clicking on a problem in this view will open a text editor with that problem highlighted.
+
+
+

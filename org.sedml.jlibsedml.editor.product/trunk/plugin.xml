@@ -148,6 +148,13 @@
               name="switchworkspace command">
         </command>
      </extension>
+    <extension
+          point="org.eclipse.help.toc">
+       <toc
+             file="help/SED-ML_EditorApp-toc.xml"
+             primary="true">
+       </toc>
+    </extension>
    
    
     

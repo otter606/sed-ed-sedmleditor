@@ -144,7 +144,7 @@ public class GSedML implements IPropertyChangeSupport {
 		return getChildrenWithGraphicalInfo().size() < getChildren().size();
 	}
 	
-    boolean isSedxArchive(){
+   public  boolean isSedxArchive(){
     	return isSedx;
     }
     

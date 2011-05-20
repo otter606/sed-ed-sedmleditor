@@ -132,6 +132,18 @@ h2(#edit). Editing existing elements
 
 To edit an existing element, just double-click on  the element to obtain the configuration dialog. You can undo /redo edits by clicking Ctrl-Z  and Ctrl- Y, respectively.
 
+h2(#sedx). Working with SED-ML archive files
+
+SED-ED supports the proposed SED-ML archive format (SEDX) , described in appendix D of the SED-ML level 1 version 1 specification. This format bundles the SED-ML files and the models it needs in a single archive format.
+
+Features include:
+
+* You can export your SED-ML file to SEDX if the model files can be retrieved based on the value of the source references in the *Model* elements in SED-ML. At present it just supports file paths but in future we hope to support access from  online repositories such as BioModels. To do this, click the blue  button here at the top-left corner of  the toolbar, which will be active when you are when you have a SED-ML editor pane active:
+!./images/sedxport.png!
+* You can inspect the contents of a SED-ML archive by expanding it in the resource viewer ( if it has the *.sedx* extension).
+*  You can open, edit and save an archive format in the same way as a regular file ( if it has the *.sedx* extension).
+* You can expand  a SEDX file by selecting it, then right-clicking and choosing *'Expand SED-ML archive*' from the file menu. This will write files into the same folder  as the archive, and the archive will be preserved ( if it has the *.sedx* extension).
+
 h2(#opening_existing_sedml). Working with existing SED-ML documents
 
 To open an existing SED-ML document, select it in the System View, and from the context menu, choose 
@@ -146,9 +158,9 @@ If the SED-ML document has been imported from another source, or not yet edited 
 
 h2(#layout). Graphical layout of elements.
 
-To automatically layout some or all elements, click on the drawing canvas, and from the context menu, choose <span style="color:red"> Layout </span>. This will layout all un-selected elements. So, to layout all elements, make sure no elements are selected in the editor. 
+To automatically layout some or all elements, click on the drawing canvas, and from the context menu, choose <span style="color:red"> Layout </span>. This will layout all un-selected elements. So, to layout all elements, make sure no elements are selected in the editor.  *Be warned that auto-layout is not undoable, so only do it if you really want to!*.
 
-Layout runs in a background thread and can be stopped at any time by clicking cancel in the progress monitor ( in the bottom right-hand corner of the screen-shot below).
+Layout runs in a background thread and can be stopped at any time by clicking cancel in the progress monitor ( the red square in the bottom right-hand corner of the screen-shot below).
 
  !{width:75%}images/layoutprogress.png!
  

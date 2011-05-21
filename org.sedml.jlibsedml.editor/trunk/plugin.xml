@@ -72,7 +72,7 @@
           <extension
                 point="org.eclipse.ui.handlers">
              <handler
-                   class="org.sedml.jlibsedml.editor.handlers.SampleHandler"
+                   class="org.sedml.jlibsedml.editor.handlers.SaveAsSedxArchiveHandler"
                    commandId="org.sedml.jlibsedml.editor.commands.sampleCommand">
              </handler>
           </extension>

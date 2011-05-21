@@ -10,10 +10,11 @@ public class Perspective implements IPerspectiveFactory {
 		layout.setEditorAreaVisible(true);
 		layout.setFixed(false); // can't close workspace
 		
-		layout.addView(ProjectView.ID, IPageLayout.LEFT, 0.2f, editorArea);
+		layout.addView(ProjectView.ID, IPageLayout.LEFT, 0.3f, editorArea);
 		layout.addShowViewShortcut("org.eclipse.help.ui.HelpView");
 	
-		layout.addView(IPageLayout.ID_PROBLEM_VIEW,  IPageLayout.BOTTOM, 0.8f, editorArea);
+		layout.addView(IPageLayout.ID_PROBLEM_VIEW,  IPageLayout.BOTTOM, 0.5f, editorArea);
+		
 	
 	
 	}

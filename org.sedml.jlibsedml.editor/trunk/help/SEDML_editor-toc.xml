@@ -4,6 +4,7 @@
 		<topic href="help/SEDML_editor.html#license" label="Licence"></topic>
 		<topic href="help/SEDML_editor.html#start" label="Creating a new SED-ML file:">
 			<topic href="help/SEDML_editor.html#from_scratch" label="Creating a SED-ML document from scratch."></topic>
+			<topic href="help/SEDML_editor.html#editor_ops" label="Basic editor operations"></topic>
 			<topic href="help/SEDML_editor.html#notes" label="Adding Notes to an element."></topic>
 			<topic href="help/SEDML_editor.html#create_sim" label="Creating a simulation element"></topic>
 			<topic href="help/SEDML_editor.html#create_model" label="Creating a Model element.">
@@ -15,6 +16,7 @@
 			<topic href="help/SEDML_editor.html#create_output" label="Creating an Output"></topic>
 		</topic>
 		<topic href="help/SEDML_editor.html#edit" label="Editing existing elements"></topic>
+		<topic href="help/SEDML_editor.html#sedx" label="Working with SED-ML archive files"></topic>
 		<topic href="help/SEDML_editor.html#opening_existing_sedml" label="Working with existing SED-ML documents"></topic>
 		<topic href="help/SEDML_editor.html#layout" label="Graphical layout of elements."></topic>
 		<topic href="help/SEDML_editor.html#connections_ref" label="Connections reference"></topic>

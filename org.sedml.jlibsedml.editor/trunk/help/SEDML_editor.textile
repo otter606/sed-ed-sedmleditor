@@ -28,8 +28,16 @@ This section describes the use of the graphical editor to create components of a
 * Double-clicking on an object will open a dialog to configure it.
 * Elements that are not yet correctly configured will be highlighted in red. This means that insufficient information is included for the element to be saved, and it will be omitted from the saved SED-ML file.
 * The diagram can be saved at any time as a regular SED-ML file; graphical information is persisted as annotations to the elements and layout will be restored when the diagram is re-opened.
-* For elements that use identifiers, these should be globally unique in the document, and are added automatically by the software. Human-readable names for elements can be added, which is highly recommended as an aid to understanding the document. 
+* For elements that use identifiers, these should be globally unique in the document, and are added automatically by the software. Human-readable *names* for elements can be added, which is highly recommended as an aid to understanding the document. 
 * Cross references can be made by drawing a *Connection* between two elements. See section "Cross references":#cross_refs
+
+h3(#editor_ops). Basic editor operations
+
+Standard editing operations are enabled in the editor such as :
+* Copy/paste/delete of selected items using Ctrl-C /Ctrl-V/Delete, or  via the *Edit* menu. To paste  from the clipboard, click on an empty region of the diagram, or make sure no element on the diagram is selected.
+* Undo /redo  using Ctr-Z/Y, or via the *Edit* menu.
+* Select-All using Ctrl-A or via the *Edit menu*.
+* The view can be panned while holding the spacebar down to get a 'hand' icon then dragging with the mouse.
 
 h3(#notes). Adding Notes to an element.
 
@@ -69,7 +77,7 @@ This opens a dialog:
 p. The *Change type* drop-down menu enables you to choose what sort of change you want to apply. 
 The *Replacement Value* text field is where you insert the changes to make.
 
-p. If you choose to *change an attribute*, the replacement value should be a numerical value. If you choose to *Add XML* or *Change XML*, then the replacement value should be some well formed XML.
+p. If you choose to *change an attribute*, the replacement value should be a numerical value. If you choose to *Add XML* or *Change XML*, then the replacement value should be some well formed XML. If you choose *Remove XML* the content of the replacement value is irrelevant and is ignored.
 
 p. The *TargetXPath field* is where you specifiy the XML to be changed, using an XPath expression. This can be added manually, or by using the  *Get XPath from Model* feature.  If  this is  enabled, it  helps to  create the XPath expressions  from an XML view of your model.  The button is enabled if the editor can get hold of the actual model, specifed in the *source* attribute of the Model element to which this change is being added.
 
@@ -114,7 +122,7 @@ h3(#create_var). Creating a Variable
 
 p. To define variable, select a *DataGenerator* element and choose *Add Variable* from the context menu.
  A *Variable* is the only SED-ML data type in this editor whose ID is editable - this gives you the chance to use a meaningful ID ( so long as it is alphanumeric and unique in the SED-ML document ). The reason for this is that the variable and parameter names  occurring in the _maths_  section of a DataGenerator must be the IDs of *Variable* and *Parameter* elements.  Variables can also refer to symbols. In SEDML L1V1, 'Time' is the only symbol. If 'No symbol' is chosen, you need to specify an XPath expression to locate the variable in the model whose value you want to display. As with "Changes":#create_change, if your model is accessible, the *Get XPath From Model* button will be enabled, which 
- helps generate the XPath for you.
+ helps generate the XPath expression  for you.
  
  !{width:75%}images/VariableConfig.png!
  
@@ -146,7 +154,7 @@ Features include:
 
 h2(#opening_existing_sedml). Working with existing SED-ML documents
 
-To open an existing SED-ML document, select it in the System View, and from the context menu, choose 
+To open an existing SED-ML document using this editor, select it in the Resource View, and from the context menu, choose 
 
 <span style="color:red"> Open->Open With->SED-ML editor </span>
 

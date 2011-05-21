@@ -1,8 +1,10 @@
 package org.sedml.jlibsedml.editor.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.gef.ui.actions.Clipboard;
 import org.eclipse.gef.ui.actions.SelectionAction;
@@ -11,6 +13,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.sedml.jlibsedml.editor.GElementEditPart;
+import org.sedml.jlibsedml.editor.gmodel.Connection;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
 
 public class CopyObjectsAction extends SelectionAction {
@@ -57,12 +60,27 @@ public class CopyObjectsAction extends SelectionAction {
 				toCopy.add(((GElementEditPart)o).getCastedModel());
 			}
 		}
+		
+		
 	
-
+		Map<GElement, GElement> orig2Copy = new HashMap<GElement, GElement>();
 		List<GElement> copied = new ArrayList<GElement>();
 		for (GElement el: toCopy){
-			copied.add(el.getCopy());
+			GElement copy = el.getCopy();
+			copied.add(copy);
+			orig2Copy.put(el, copy);
 		}
+		
+		for (GElement el: toCopy){
+			List<Connection> srces = el.getSrcConnections();
+			for (Connection c: srces){
+				if(toCopy.contains(c.getTarget())){
+					new Connection(orig2Copy.get(c.getSource()),orig2Copy.get(c.getTarget()) );	
+				}
+			}
+		}
+		
+	
 		
 
 		Clipboard.getDefault().setContents(copied);

@@ -1,19 +1,28 @@
 package org.sedml.jlibsedml.editor.actions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.ui.actions.Clipboard;
 import org.eclipse.gef.ui.actions.SelectionAction;
+import org.eclipse.swt.SWT;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
+import org.sedml.jlibsedml.editor.ConnectionEditPart;
+import org.sedml.jlibsedml.editor.GElementEditPart;
 import org.sedml.jlibsedml.editor.MapEditPart;
+import org.sedml.jlibsedml.editor.gmodel.Connection;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
 import org.sedml.jlibsedml.editor.gmodel.GSedML;
+import org.sedml.jlibsedml.editor.gmodelcommands.ConnectionCreateCommand;
 import org.sedml.jlibsedml.editor.gmodelcommands.ShapeCreateCommand;
 
 public class PasteAction extends SelectionAction {
@@ -41,6 +50,15 @@ public class PasteAction extends SelectionAction {
 	protected boolean calculateEnabled() {
 		if (Clipboard.getDefault().getContents() == null)
 			return false;
+		
+		if(getSelectedObjects().size() > 0) {
+			for (Iterator<EditPart> it = getSelectedObjects().iterator(); it.hasNext();){
+				EditPart ep = it.next();
+				if(ep instanceof ConnectionEditPart || ep instanceof GElementEditPart){
+					return false;
+				}
+			}
+		}
 		Object  contents = Clipboard.getDefault().getContents();
 		if(contents instanceof List &&!((List)contents).isEmpty() && ((List)contents).get(0) instanceof GElement ) {
 			return true;
@@ -53,15 +71,29 @@ public class PasteAction extends SelectionAction {
 		GSedML root =  (GSedML)(selected.getModel());
 		List<GElement> toAdd = new ArrayList<GElement>();
 		List<GElement>  clipboard =(List) Clipboard.getDefault().getContents();
+		Map<GElement, GElement> clipBrd2Copy = new HashMap<GElement, GElement>();
 		for (GElement cpbord: clipboard) {
-			toAdd.add(cpbord.getCopy());
+			GElement gep = cpbord.getCopy();
+			toAdd.add(gep);
+			clipBrd2Copy.put(cpbord, gep);
 			}
+		
 		CompoundCommand cc = new CompoundCommand();
 	 	SelectObjectsInViewerHelper <GElement>helper = new SelectObjectsInViewerHelper<GElement>(selected);
 		for (GElement ge:toAdd){
 			ShapeCreateCommand scc = new ShapeCreateCommand(ge, root, new Rectangle(ge.getLocation().getX(), 
 					ge.getLocation().getY(), ge.getSize().getWidth(), ge.getSize().getHeight()),true);
 			cc.add(scc);
+		}
+		for (GElement el: clipboard){
+			List<Connection> srces = el.getSrcConnections();
+			for (Connection c: srces){
+				if(clipboard.contains(c.getTarget())){
+					ConnectionCreateCommand ccc= new ConnectionCreateCommand(clipBrd2Copy.get(c.getSource()), SWT.LINE_SOLID);
+					ccc.setTarget(clipBrd2Copy.get(c.getTarget()) );
+					cc.add(ccc);
+				}
+			}
 		}
 		execute(cc);
 		helper.selectObjectsInViewer(toAdd);

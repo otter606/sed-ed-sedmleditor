@@ -87,7 +87,6 @@ public class DGConfigDialog extends BaseConfigDialog {
 				if(event.getSelection()!=null) {
 					GVariable gv = (GVariable)((IStructuredSelection)event.getSelection()).getFirstElement();
 					int caret = maths.getCaretPosition();
-					System.err.println("Caret at " + caret);
 					maths.setText(maths.getText().substring(0, caret) + " "+ gv.getId() + " "+
 							maths.getText().substring(caret, maths.getText().length()) );
 				}

@@ -44,11 +44,11 @@ import org.sedml.jlibsedml.editor.gmodel.SEDMLBuilder;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class SampleHandler extends AbstractHandler {
+public class SaveAsSedxArchiveHandler extends AbstractHandler {
 	
 	public final static String ALREADY_IS_SEDX_TITLE="Edited file is alraeady SEDX archive";
 	public final static String ALREADY_IS_SEDX_MSG=" The file you're trying to save is already " +
-			" a SEDX file, which can be saved by";
+			" a SEDX file, which can be saved by the standard Ctrl-S or File->Save mechanism.";
 	private static final String MODEL_NOT_FOUND_TITLE = "Model not found";
 	private static final String MODEL_NOT_FOUND_MSG1 = "The model contents referenced by [";
 	private static final String MODEL_NOT_FOUND_MSG2 = "] could not be retrieved. Please check its 'source' attribute to " +
@@ -57,7 +57,7 @@ public class SampleHandler extends AbstractHandler {
 	/**
 	 * The constructor.
 	 */
-	public SampleHandler() {
+	public SaveAsSedxArchiveHandler() {
 	}
 
 	/**
@@ -143,7 +143,8 @@ public class SampleHandler extends AbstractHandler {
 		// Show a SaveAs dialog
 		
 		SaveAsDialog dialog = new SaveAsDialog(shell);
-		dialog.setOriginalFile(input.getFile());
+		IPath origpath = input.getFile().getProjectRelativePath().removeFileExtension().addFileExtension("sedx");
+		dialog.setOriginalFile(input.getFile().getParent().getFile(origpath));
 		dialog.setTitle ("Save as SEDX archive");
 		
 		dialog.open();

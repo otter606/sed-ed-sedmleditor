@@ -1,7 +1,8 @@
 package org.sedml.jlibsedml.editor.actions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -22,8 +23,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sedml.jlibsedml.editor.ConnectionEditPart;
 import org.sedml.jlibsedml.editor.GElementEditPart;
+import org.sedml.jlibsedml.editor.gmodel.Connection;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
 import org.sedml.jlibsedml.editor.gmodel.GModel;
+import org.sedml.jlibsedml.editor.gmodel.GTask;
 import org.sedml.jlibsedml.editor.gmodel.TestUtils;
 
 @RunWith(JMock.class)
@@ -73,11 +76,32 @@ public class CopyObjectsActionTest {
 
 	@After
 	public void tearDown() throws Exception {
+		Clipboard.getDefault().setContents("");
 	}
 
 	@Test
 	public final void testRun() {
-		assertNull(Clipboard.getDefault().getContents());
+	
+		GModel gm = TestUtils.createValidGModel("id");
+		ep.setModel(gm);
+		GTask gt = TestUtils.createValidGTask("tid");
+		ep2.setModel(gt);
+		new Connection(gm,gt);
+		actionTSS.setSelectedObjects(Arrays.asList(new GElementEditPart []{ep,ep2}));
+		actionTSS.run();
+		List<GElement> cp = (List<GElement>)Clipboard.getDefault().getContents();
+		assertNotNull(cp);
+		assertEquals(2,cp.size());
+		assertEquals(1, cp.get(0).getSrcConnections().size());
+		assertEquals(1, cp.get(1).getTargetConnections().size());
+		
+
+		
+	}
+	
+	@Test
+	public final void testRunWithConnections() {
+		
 		GModel gm = TestUtils.createValidGModel("id");
 		ep.setModel(gm);
 		actionTSS.setSelectedObjects(Arrays.asList(new GElementEditPart []{ep}));
@@ -91,8 +115,6 @@ public class CopyObjectsActionTest {
 		gm.setName("new name");
 		assertFalse(gm.getName().equals(cp.get(0).getName()));
 		assertTrue(actionTSS.isIconSet);
-		
-		
 		
 	}
 	

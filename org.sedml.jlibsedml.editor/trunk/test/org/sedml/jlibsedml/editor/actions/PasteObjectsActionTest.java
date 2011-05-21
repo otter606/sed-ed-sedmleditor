@@ -13,6 +13,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.ui.actions.Clipboard;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.part.EditorPart;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
 import org.jmock.integration.junit4.JUnit4Mockery;
@@ -86,7 +87,16 @@ public class PasteObjectsActionTest {
 
 	@Test
 	public final void testCalculateEnabledFalseForEmptyClipboard() {
-		
+		actionTSS.setSelectedObjects(Collections.EMPTY_LIST);
+		assertFalse(action.isEnabled());
+	}
+	
+	@Test
+	public final void testCalculateEnabledFalseIfItemSelected() {
+		GModel model = TestUtils.createValidGModel("id");
+		List<GElement> el = Arrays.asList(new GElement[]{model});
+		Clipboard.getDefault().setContents(el);
+		actionTSS.setSelectedObjects(Arrays.asList(new GElementEditPart[]{ep}));
 		assertFalse(action.isEnabled());
 	}
 	
@@ -95,6 +105,7 @@ public class PasteObjectsActionTest {
 		GModel model = TestUtils.createValidGModel("id");
 		List<GElement> el = Arrays.asList(new GElement[]{model});
 		Clipboard.getDefault().setContents(el);
+		actionTSS.setSelectedObjects(Collections.EMPTY_LIST);
 		assertTrue(action.isEnabled());
 		Clipboard.getDefault().setContents(Collections.EMPTY_LIST);
 		assertFalse(action.isEnabled());

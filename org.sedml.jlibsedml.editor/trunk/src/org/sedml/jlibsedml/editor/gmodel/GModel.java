@@ -120,17 +120,28 @@ public class GModel extends GElement {
 		
 		
 		if(  canGetSedML() && getParent()!=null){
+			if(isWindows()) {
+				setSource(getSource().replaceAll("\\\\", "/"));;
+			}
 			ModelResolver mr = new ModelResolver(getParent().buildSEDML());
 			mr.add(new FileModelResolver());
 			if(getParent().isSedxArchive()){
 				mr.add(new ArchiveModelResolver(getParent().getArchiveComponents()));
-		}
+			}
+			if(isWindows())
+				mr.add(new WindowsFileRetriever());
+			
 			rc =mr.getModelString(getSEDMLObject());
 		}
 	}
 	return rc;
 	}
 	
+	private boolean isWindows() {
+		return System.getProperty("os.name").contains("win") || 
+		System.getProperty("os.name").contains("Win");
+	}
+
 	public Document getModelDocument() {
 		Document rc = null;
 		SAXBuilder builder = new SAXBuilder();

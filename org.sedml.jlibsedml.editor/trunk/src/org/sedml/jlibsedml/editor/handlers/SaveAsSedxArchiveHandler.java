@@ -97,7 +97,9 @@ public class SaveAsSedxArchiveHandler extends AbstractHandler {
 			List<IModelContent> models = new ArrayList<IModelContent>();
 			for (String s: seenBases){
 				String src = sed.getModelWithId(s).getSource();
+				
 				File f  = new File(src);
+				sed.getModelWithId(s).setSource(f.getName());
 				models.add(new FileModelContent(f));
 			}
 			ArchiveComponents ac = new ArchiveComponents(models, new SEDMLDocument(sed));

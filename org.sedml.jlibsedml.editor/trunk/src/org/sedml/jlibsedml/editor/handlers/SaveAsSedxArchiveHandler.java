@@ -38,6 +38,7 @@ import org.sedml.execution.ModelResolver;
 import org.sedml.jlibsedml.editor.MapEditor;
 import org.sedml.jlibsedml.editor.gmodel.GSedML;
 import org.sedml.jlibsedml.editor.gmodel.SEDMLBuilder;
+import org.sedml.jlibsedml.editor.gmodel.WindowsFileRetriever;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -81,6 +82,8 @@ public class SaveAsSedxArchiveHandler extends AbstractHandler {
 			for (Model m: sed.getModels()){
 				ModelResolver mr = new ModelResolver(sed);
 				mr.add(new FileModelResolver());
+				if(isWindows())
+					mr.add(new WindowsFileRetriever());
 				String modelAsString = mr.getModelString(m);
 				if(modelAsString==null){
 					showModelNotResolvedError(event, m);
@@ -118,6 +121,10 @@ public class SaveAsSedxArchiveHandler extends AbstractHandler {
 		
 	}
 
+	  private boolean isWindows() {
+			return System.getProperty("os.name").contains("win") || 
+			System.getProperty("os.name").contains("Win");
+		}
 
 
 	private void showAlreadyIsSedxInfoDialog(ExecutionEvent event) {

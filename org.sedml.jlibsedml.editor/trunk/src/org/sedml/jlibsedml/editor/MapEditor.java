@@ -128,9 +128,8 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 			 doc = Libsedml.readDocument(file.getLocation().toFile());
 			}
 			if(doc.hasErrors()){
-				boolean OK =MessageDialog.openQuestion(Display.getCurrent().getActiveShell(), "SED-ML has errors", "This SED-ML file has errors which might prevent the correct" +
-						" operation of this editor - do you want to continue opening?)");
-				if(!OK) {
+				boolean rc  =showPossErrorDialog();
+				if(rc == false){
 					return;
 				}
 			}
@@ -144,23 +143,37 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 			gsedml.addPropertyChangeListener(this);
 			
 			if (gsedml.hasIncompleteLayout()) {
-				LayoutDiagramDialog layoutDialog = new LayoutDiagramDialog(Display.getCurrent().getActiveShell(), gsedml);
-				if (layoutDialog.open() == Window.OK){
-					GraphLayouter louter = new GraphLayouter(gsedml, this);
-					
-					if(layoutDialog.isLayoutAll()){
-						louter.layout();
-					} else if (layoutDialog.isLayoutSome()){
-						// preserve existing layout state
-						List<GElement> GInfoEls= gsedml.getChildrenWithGraphicalInfo();
-						louter.setFixedNodes(GInfoEls);
-						louter.layout();
-					}
-				}
+				showLayoutDialog();
 			}
 			setPartName(file.getName());
 		} catch (XMLException e) {
 			handleLoadException(e);
+		}
+	}
+
+	 boolean showPossErrorDialog() {
+		boolean proceed=true;
+		boolean OK =MessageDialog.openQuestion(Display.getCurrent().getActiveShell(), "SED-ML has errors", "This SED-ML file has errors which might prevent the correct" +
+				" operation of this editor - do you want to continue opening?)");
+		if(!OK) {
+			proceed=false;
+		}
+		return proceed;
+	}
+
+	 void showLayoutDialog() {
+		LayoutDiagramDialog layoutDialog = new LayoutDiagramDialog(Display.getCurrent().getActiveShell(), gsedml);
+		if (layoutDialog.open() == Window.OK){
+			GraphLayouter louter = new GraphLayouter(gsedml, this);
+			
+			if(layoutDialog.isLayoutAll()){
+				louter.layout();
+			} else if (layoutDialog.isLayoutSome()){
+				// preserve existing layout state
+				List<GElement> GInfoEls= gsedml.getChildrenWithGraphicalInfo();
+				louter.setFixedNodes(GInfoEls);
+				louter.layout();
+			}
 		}
 	}
 	

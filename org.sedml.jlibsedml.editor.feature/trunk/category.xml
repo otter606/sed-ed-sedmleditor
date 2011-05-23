@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.sedml.jlibsedml.editor.feature_0.8.1.jar" id="org.sedml.jlibsedml.editor.feature" version="0.8.1">
+      <category name="sedmlTools"/>
+   </feature>
+   <feature url="features/org.sedml.jlibsedml.feature_1.0.2.jar" id="org.sedml.jlibsedml.feature" version="1.0.2">
+      <category name="sedmlTools"/>
+   </feature>
+   <category-def name="sedmlTools" label="SED-ML Tools">
+      <description>
+         Features and plugins for working with SED-ML.
+      </description>
+   </category-def>
+</site>

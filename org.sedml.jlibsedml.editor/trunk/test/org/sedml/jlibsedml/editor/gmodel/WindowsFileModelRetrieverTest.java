@@ -1,5 +1,6 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
@@ -28,14 +29,20 @@ public class WindowsFileModelRetrieverTest {
 	}
 	
 	@Test
-	(expected=URISyntaxException.class)
-	public void testGetModelXMLForTestDataAbsPathDoesnNotFormURI() throws URISyntaxException {
+	
+	public void testGetModelXMLForTestDataAbsPathDoesnNotFormURI()  {
 		if(!WindowsFileRetriever.isWindows()){
 			return;
 		}
 		File f = new File(TEST_DATA_SED_MLBIOM12_XML);
 		// this won't work as has backslashes
-		URI uri = new URI(f.getAbsolutePath());
+		
+		try {
+			URI uri = new URI(f.getAbsolutePath());
+		} catch (URISyntaxException e) {
+			return;
+		}
+		fail("Did not throw URISyntax Exception");
 		
 	}
 	

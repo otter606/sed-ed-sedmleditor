@@ -21,7 +21,10 @@ public class GModel extends GElement {
 
 	private List<GChange> changes = new ArrayList<GChange>();
 
-	
+	/**
+	 * Constructor for generating from SED-ML model.
+	 * @param m A non-null <code>Model</code> element.
+	 */
 	public GModel(Model m) {
 		super(m);
 		setId(m.getId());
@@ -30,11 +33,17 @@ public class GModel extends GElement {
 		setLanguage(m.getLanguage());
 	}
 
+	/**
+	 * Default constructor for de novo creations
+	 */
 	public GModel() {
 		
 	}
 
-
+	/**
+	 * Copy constructor - just copies attributes
+	 * @param tocopy
+	 */
 	 GModel(GModel tocopy) {
 		super(tocopy);
 		setSource(tocopy.getSource());
@@ -120,15 +129,15 @@ public class GModel extends GElement {
 		
 		
 		if(  canGetSedML() && getParent()!=null){
-			if(isWindows()) {
-				setSource(getSource().replaceAll("\\\\", "/"));;
+			if(WindowsFileRetriever.isWindows()) {
+				setSource(WindowsFileRetriever.convertAbsoluteFilePathToURI(getSource()));;
 			}
 			ModelResolver mr = new ModelResolver(getParent().buildSEDML());
 			mr.add(new FileModelResolver());
 			if(getParent().isSedxArchive()){
 				mr.add(new ArchiveModelResolver(getParent().getArchiveComponents()));
 			}
-			if(isWindows())
+			if(WindowsFileRetriever.isWindows())
 				mr.add(new WindowsFileRetriever());
 			
 			rc =mr.getModelString(getSEDMLObject());
@@ -137,10 +146,7 @@ public class GModel extends GElement {
 	return rc;
 	}
 	
-	private boolean isWindows() {
-		return System.getProperty("os.name").contains("win") || 
-		System.getProperty("os.name").contains("Win");
-	}
+	
 
 	public Document getModelDocument() {
 		Document rc = null;

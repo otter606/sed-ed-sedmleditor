@@ -82,7 +82,8 @@ public class SaveAsSedxArchiveHandler extends AbstractHandler {
 			for (Model m: sed.getModels()){
 				ModelResolver mr = new ModelResolver(sed);
 				mr.add(new FileModelResolver());
-				if(isWindows())
+				if(WindowsFileRetriever.isWindows())
+					m.setSource(WindowsFileRetriever.convertAbsoluteFilePathToURI(m.getSource()));
 					mr.add(new WindowsFileRetriever());
 				String modelAsString = mr.getModelString(m);
 				if(modelAsString==null){
@@ -121,10 +122,7 @@ public class SaveAsSedxArchiveHandler extends AbstractHandler {
 		
 	}
 
-	  private boolean isWindows() {
-			return System.getProperty("os.name").contains("win") || 
-			System.getProperty("os.name").contains("Win");
-		}
+	
 
 
 	private void showAlreadyIsSedxInfoDialog(ExecutionEvent event) {

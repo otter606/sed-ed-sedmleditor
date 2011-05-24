@@ -14,15 +14,44 @@ import javax.xml.transform.stream.StreamResult;
 import org.sedml.execution.IModelResolver;
 import org.w3c.dom.Document;
 
+/**
+ * Specific file resolver for handling Windows filepath/URI conversions
+ * 
+ * @author otter606
+ * 
+ */
 public class WindowsFileRetriever implements IModelResolver {
+
+	/**
+	 * Boolean test for whether this OS is windows.
+	 * 
+	 * @return <code>true </code> if the OS running this code is Windows, <code>false</code>otherwise.
+	 */
+	public static boolean isWindows() {
+
+		return System.getProperty("os.name").contains("win")
+				|| System.getProperty("os.name").contains("Win");
+
+	}
+	/**
+	 * <ul>
+	 * <li> Converts spaces to %20
+	 * <li> Converts \ to /
+	 * @param path A Windows absolute filepath
+	 * @return A String of the filepath suitable  for inclusion as a URI object.
+	 */
+	public static String convertAbsoluteFilePathToURI(String path) {
+		String noSpaces = path.replaceAll(" ", "%20");
+		return noSpaces.replaceAll("\\\\", "/");
+	}
 
 	public String getModelXMLFor(URI modelURI) {
 		String asStr = modelURI.toString();
-		if(asStr==null){
+		if (asStr == null) {
 			return null;
 		}
 		File f = new File(asStr.replaceAll("%20", " "));
-		
+
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance()
 					.newDocumentBuilder();
@@ -38,8 +67,7 @@ public class WindowsFileRetriever implements IModelResolver {
 		} catch (Exception e) {
 			return null;
 		}
-		
-		
+
 	}
 
 }

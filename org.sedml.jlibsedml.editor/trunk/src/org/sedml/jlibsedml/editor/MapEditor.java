@@ -110,6 +110,7 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 	 * @see org.eclipse.ui.part.EditorPart#setInput(org.eclipse.ui.IEditorInput)
 	 */
 	protected void setInput(IEditorInput input) {
+		
 		super.setInput(input);
 		try {
 			IFile file = ((IFileEditorInput) input).getFile();

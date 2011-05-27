@@ -35,7 +35,7 @@
 		<mkdir dir="${buildDirectory}/plugins" />
 		<mkdir dir="${buildDirectory}/features" />
 		<copy todir="${buildDirectory}/plugins/" overwrite="true" failOnError="true">
-			<fileset dir="../" includes="org.sedml.jlibsedml.plugin**/**,org.sedml.jlibsedml.editor**/**,org.sedml.jlibsedml.editor.product**/**,JungLibs**/**, uk.ac.ed.csbe.javaxws.libs**/**" excludes="uk.ac.ed.csbe.sbsivisual.feature**/**, uk.ac.ed.csbe.sbsivisual.base.feature**/**, **build**, **update**, **test**" />
+			<fileset dir="../" includes="org.sedml.jlibsedml.core**/**, org.sedml.jlibsedml.plugin**/**,org.sedml.jlibsedml.editor**/**,org.sedml.jlibsedml.editor.product**/**,JungLibs**/**, uk.ac.ed.csbe.javaxws.libs**/**" excludes="uk.ac.ed.csbe.sbsivisual.feature**/**, uk.ac.ed.csbe.sbsivisual.base.feature**/**, **build**, **update**, **test**" />
 		</copy>
 		<copy  todir="${buildDirectory}/features">
 			<fileset dir="../" includes="org.sedml.jlibsedml.feature**/**,org.sedml.jlibsedml.editor.product.feature**/**,org.sedml.jlibsedml.editor.feature**/**,uk.ac.ed.csbe.sbsivisual.base.feature**/**"/>

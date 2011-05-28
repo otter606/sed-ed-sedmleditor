@@ -42,18 +42,19 @@ import org.sedml.jlibsedml.editor.gmodel.WindowsFileRetriever;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
+ * 
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
 public class SaveAsSedxArchiveHandler extends AbstractHandler {
-	
-	public final static String ALREADY_IS_SEDX_TITLE="Edited file is alraeady SEDX archive";
-	public final static String ALREADY_IS_SEDX_MSG=" The file you're trying to save is already " +
-			" a SEDX file, which can be saved by the standard Ctrl-S or File->Save mechanism.";
+
+	public final static String ALREADY_IS_SEDX_TITLE = "Edited file is alraeady SEDX archive";
+	public final static String ALREADY_IS_SEDX_MSG = " The file you're trying to save is already "
+			+ " a SEDX file, which can be saved by the standard Ctrl-S or File->Save mechanism.";
 	private static final String MODEL_NOT_FOUND_TITLE = "Model not found";
 	private static final String MODEL_NOT_FOUND_MSG1 = "The model contents referenced by [";
-	private static final String MODEL_NOT_FOUND_MSG2 = "] could not be retrieved. Please check its 'source' attribute to " +
-			"  ensure that it can be resolved. ";
+	private static final String MODEL_NOT_FOUND_MSG2 = "] could not be retrieved. Please check its 'source' attribute to "
+			+ "  ensure that it can be resolved. ";
 
 	/**
 	 * The constructor.
@@ -66,128 +67,152 @@ public class SaveAsSedxArchiveHandler extends AbstractHandler {
 	 * from the application context.
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-	
-		IEditorPart iep = HandlerUtil.getActiveEditor(event);
-		if(iep instanceof MapEditor){
-			MapEditor mep = (MapEditor)iep;
-			GSedML gsed = mep.getModel();
-			if(gsed.isSedxArchive()){
-				showAlreadyIsSedxInfoDialog(event);
+
+		ISEDMLProvider mep = getEditor(event);
+		if (mep == null) {
+			return null;
+		}
+
+		GSedML gsed = mep.getModel();
+		if (gsed.isSedxArchive()) {
+			showAlreadyIsSedxInfoDialog(event);
+			return null;
+		}
+
+		SEDMLBuilder builder = new SEDMLBuilder();
+		SedML sed = builder.buildSEDML(gsed);
+		Set<String> seenBases = new HashSet<String>();
+		for (Model m : sed.getModels()) {
+			ModelResolver mr = new ModelResolver(sed);
+			mr.add(new FileModelResolver());
+			if (WindowsFileRetriever.isWindows())
+				m.setSource(WindowsFileRetriever.convertAbsoluteFilePathToURI(m
+						.getSource()));
+			mr.add(new WindowsFileRetriever());
+			String modelAsString = mr.getModelString(m);
+			if (modelAsString == null) {
+				showModelNotResolvedError(event, m);
 				return null;
 			}
-			
-			SEDMLBuilder builder = new SEDMLBuilder();
-			SedML sed =builder.buildSEDML(gsed);
-			Set<String>seenBases= new HashSet<String>();
-			for (Model m: sed.getModels()){
-				ModelResolver mr = new ModelResolver(sed);
-				mr.add(new FileModelResolver());
-				if(WindowsFileRetriever.isWindows())
-					m.setSource(WindowsFileRetriever.convertAbsoluteFilePathToURI(m.getSource()));
-					mr.add(new WindowsFileRetriever());
-				String modelAsString = mr.getModelString(m);
-				if(modelAsString==null){
-					showModelNotResolvedError(event, m);
-					return null;
-				}
-				List<String> modelBases = new ArrayList<String>();
-				getModelModificationTree(m, modelBases, sed);
-				String baseModel = modelBases.get(0);
-				if(!seenBases.contains(baseModel)){
-					seenBases.add(baseModel);
-				}
-	
+			List<String> modelBases = new ArrayList<String>();
+			getModelModificationTree(m, modelBases, sed);
+			String baseModel = modelBases.get(0);
+			if (!seenBases.contains(baseModel)) {
+				seenBases.add(baseModel);
 			}
-			List<IModelContent> models = new ArrayList<IModelContent>();
-			for (String s: seenBases){
-				String src = sed.getModelWithId(s).getSource();
-				
-				File f  = new File(src);
-				sed.getModelWithId(s).setSource(f.getName());
-				models.add(new FileModelContent(f));
-			}
-			ArchiveComponents ac = new ArchiveComponents(models, new SEDMLDocument(sed));
-			
-//			
-			doSaveAs(HandlerUtil.getActiveShell(event), (IFileEditorInput)mep.getEditorInput(), ac);
-			
+
 		}
+		List<IModelContent> models = new ArrayList<IModelContent>();
+		for (String s : seenBases) {
+			String src = sed.getModelWithId(s).getSource();
+
+			File f = new File(src);
+			sed.getModelWithId(s).setSource(f.getName());
+			models.add(new FileModelContent(f));
+		}
+		ArchiveComponents ac = new ArchiveComponents(models, new SEDMLDocument(
+				sed));
+
+		//			
+		performSave(event, mep, ac);
+
 		return null;
 	}
-	
-	  private void showModelNotResolvedError(ExecutionEvent event, Model m) {
-		  MessageDialog.openInformation(HandlerUtil.getActiveShell(event),MODEL_NOT_FOUND_TITLE, MODEL_NOT_FOUND_MSG1 + 
-				    ( m.getName()!=null?m.getName():m.getId()) +
-				    		  MODEL_NOT_FOUND_MSG2);
-		
+
+	 void performSave(ExecutionEvent event, ISEDMLProvider mep,
+			ArchiveComponents ac) {
+		doSaveAs(HandlerUtil.getActiveShell(event), (IFileEditorInput) mep
+				.getEditorInput(), ac);
 	}
 
-	
-
-
-	private void showAlreadyIsSedxInfoDialog(ExecutionEvent event) {
-		MessageDialog.openInformation(HandlerUtil.getActiveShell(event),ALREADY_IS_SEDX_TITLE, ALREADY_IS_SEDX_MSG);
+	 ISEDMLProvider getEditor(ExecutionEvent event) {
+		IEditorPart iep = HandlerUtil.getActiveEditor(event);
+		if (iep instanceof ISEDMLProvider) {
+			return (ISEDMLProvider) iep;
+		} else {
+			return null;
+		}
 	}
-	
+
+	 void showModelNotResolvedError(ExecutionEvent event, Model m) {
+		MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
+				MODEL_NOT_FOUND_TITLE, MODEL_NOT_FOUND_MSG1
+						+ (m.getName() != null ? m.getName() : m.getId())
+						+ MODEL_NOT_FOUND_MSG2);
+
+	}
+
+	void showAlreadyIsSedxInfoDialog(ExecutionEvent event) {
+		MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
+				ALREADY_IS_SEDX_TITLE, ALREADY_IS_SEDX_MSG);
+	}
+
 	void getModelModificationTree(Model m, List<String> modelRefs2, SedML sedml) {
 		String modelSrcRef = m.getSource();
-		
+
 		modelRefs2.add(m.getId());
-		if (sedml.getModelWithId(modelSrcRef)!=null){
-			
-			getModelModificationTree(sedml.getModelWithId(modelSrcRef),modelRefs2,sedml);
-		}else {
+		if (sedml.getModelWithId(modelSrcRef) != null) {
+
+			getModelModificationTree(sedml.getModelWithId(modelSrcRef),
+					modelRefs2, sedml);
+		} else {
 			Collections.reverse(modelRefs2);
 		}
 	}
-	
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.ISaveablePart#doSaveAs()
 	 */
-	public void doSaveAs(Shell shell, IFileEditorInput input, final ArchiveComponents ac) {
+	public void doSaveAs(Shell shell, IFileEditorInput input,
+			final ArchiveComponents ac) {
 		// Show a SaveAs dialog
-		
+
 		SaveAsDialog dialog = new SaveAsDialog(shell);
-		IPath origpath = input.getFile().getProjectRelativePath().removeFileExtension().addFileExtension("sedx");
+		IPath origpath = input.getFile().getProjectRelativePath()
+				.removeFileExtension().addFileExtension("sedx");
 		dialog.setOriginalFile(input.getFile().getParent().getFile(origpath));
-		dialog.setTitle ("Save as SEDX archive");
-		
+		dialog.setTitle("Save as SEDX archive");
+
 		dialog.open();
-		
-		IPath path = dialog.getResult();	
+
+		IPath path = dialog.getResult();
 		if (path != null) {
 			// try to save the editor's contents under a different file name
-			final IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+			final IFile file = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(path);
 			try {
-				new ProgressMonitorDialog(shell).run(
-						false, // don't fork
+				new ProgressMonitorDialog(shell).run(false, // don't fork
 						false, // not cancelable
 						new WorkspaceModifyOperation() { // run this operation
 							public void execute(final IProgressMonitor monitor) {
 								try {
-									byte [] archive = Libsedml.writeSEDMLArchive(ac, file.getName());
-									file.create(
-										new ByteArrayInputStream(archive), // contents
-										true, // keep saving, even if IFile is out of sync with the Workspace
-										monitor); // progress monitor
+									byte[] archive = Libsedml
+											.writeSEDMLArchive(ac, file
+													.getName());
+									file.create(new ByteArrayInputStream(
+											archive), // contents
+											true, // keep saving, even if IFile
+													// is out of sync with the
+													// Workspace
+											monitor); // progress monitor
 								} catch (CoreException ce) {
 									ce.printStackTrace();
 								} catch (XMLException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
-								} 
+								}
 							}
 						});
 				// set input to the new file
-		//		input.setInput(new FileEditorInput(file));
-			//	getCommandStack().markSaveLocation();
+				// input.setInput(new FileEditorInput(file));
+				// getCommandStack().markSaveLocation();
 			} catch (InterruptedException ie) {
-	  			// should not happen, since the monitor dialog is not cancelable
-				ie.printStackTrace(); 
-			} catch (InvocationTargetException ite) { 
-				ite.printStackTrace(); 
+				// should not happen, since the monitor dialog is not cancelable
+				ie.printStackTrace();
+			} catch (InvocationTargetException ite) {
+				ite.printStackTrace();
 			}
 		}
 	}

@@ -21,6 +21,10 @@ From the  <span style="color:red"> File ->New  </span> menu. choose the option <
 
 !{width:50%}images/createDoc2.png!
 
+This will create a new SED-ML file and open the editor:
+
+!{width:50%}images/emptyEditor.png!
+
 h3(#from_scratch). Creating a SED-ML document from scratch.
 
 This section describes the use of the graphical editor to create components of a SED-ML document. 

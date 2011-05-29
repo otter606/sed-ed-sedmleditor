@@ -41,9 +41,10 @@ import org.sedml.jlibsedml.editor.gmodel.GElement;
 import org.sedml.jlibsedml.editor.gmodel.GElementBuilder;
 import org.sedml.jlibsedml.editor.gmodel.GSedML;
 import org.sedml.jlibsedml.editor.gmodel.PropertyChangeNames;
+import org.sedml.jlibsedml.editor.handlers.ISEDMLProvider;
 import org.sedml.jlibsedml.editor.layout.GraphLayouter;
 
-public class MapEditor extends GraphicalEditorWithFlyoutPalette implements PropertyChangeListener, IViewChanger {
+public class MapEditor extends GraphicalEditorWithFlyoutPalette implements PropertyChangeListener, IViewChanger, ISEDMLProvider {
 	
 	private GSedML gsedml;
 	MapEditorActionFactory actionCreator;

@@ -29,6 +29,7 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.sedml.NewXML;
 import org.sedml.SEDMLTags;
+import org.sedml.SedML;
 import org.sedml.XPathTarget;
 import org.sedml.jlibsedml.editor.gmodel.GChange;
 import org.sedml.jlibsedml.xmlUI.BaseXMLDialog;
@@ -36,7 +37,6 @@ import org.sedml.jlibsedml.xmlUI.ViewModelButton;
 import org.sedml.jlibsedml.xmlUI.XMLAttributeXPathGeneratorDialog;
 import org.sedml.jlibsedml.xmlUI.XMLElementXPathGeneratorDialog;
 import org.sedml.jlibsedml.xmlUI.XMLPreviewer;
-import org.sedml.jlibsedml.xmlUI.XMLViewer;
 import org.sedml.jlibsedml.xmlutils.XMLHandler;
 import org.sedml.jlibsedml.xmlutils.XMLUtils;
 
@@ -158,7 +158,7 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 				try {
 					
 					doc = new XMLUtils().readDoc(new ByteArrayInputStream(gc.getModelAsString().
-							getBytes()));
+							getBytes("UTF-8")));
 					BaseXMLDialog xmlDialog=null;
 					if(chTypeCombo.getText().equals(SEDMLTags.CHANGE_ATTRIBUTE_KIND)){
 						xmlDialog = new XMLAttributeXPathGeneratorDialog(activeShell,
@@ -332,8 +332,13 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 		gc.setName(oldName);
 		gc.setChType(oldType);
 		gc.setTarget(oldTarget);
-		gc.setNewValue(oldValue);
-		gc.setNewxml(oldNewxml);
+		if(SEDMLTags.CHANGE_ATTRIBUTE_KIND.equals(oldType)){
+			gc.setNewValue(oldValue);
+		}
+		if(SEDMLTags.CHANGE_XML_KIND.equals(oldType) || SEDMLTags.ADD_XML_KIND.equals(oldType)){
+			gc.setNewxml(oldNewxml);
+		}
+		
 
 	}
 

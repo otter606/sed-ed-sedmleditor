@@ -14,6 +14,7 @@ import org.sedml.SEDMLTags;
 import org.sedml.execution.ArchiveModelResolver;
 import org.sedml.execution.FileModelResolver;
 import org.sedml.execution.ModelResolver;
+import org.sedml.modelsupport.BioModelsModelsRetriever;
 
 public class GModel extends GElement {
 	
@@ -137,8 +138,13 @@ public class GModel extends GElement {
 			if(getParent().isSedxArchive()){
 				mr.add(new ArchiveModelResolver(getParent().getArchiveComponents()));
 			}
-			if(WindowsFileRetriever.isWindows())
+			if(WindowsFileRetriever.isWindows()){
 				mr.add(new WindowsFileRetriever());
+			}
+			mr.add(new BioModelsModelsRetriever());
+		
+			
+			
 			
 			rc =mr.getModelString(getSEDMLObject());
 		}
@@ -153,7 +159,7 @@ public class GModel extends GElement {
 		SAXBuilder builder = new SAXBuilder();
 		try {
 			String modelStr= getModelAsString();
-			if(modelStr== null) {
+			if(modelStr== null|| modelStr.equals("")) {
 				return null;
 			}
 			rc = builder.build(new StringReader(modelStr));

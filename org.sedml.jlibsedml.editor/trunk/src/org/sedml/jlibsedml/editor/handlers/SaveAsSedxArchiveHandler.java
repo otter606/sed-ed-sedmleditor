@@ -39,6 +39,7 @@ import org.sedml.jlibsedml.editor.MapEditor;
 import org.sedml.jlibsedml.editor.gmodel.GSedML;
 import org.sedml.jlibsedml.editor.gmodel.SEDMLBuilder;
 import org.sedml.jlibsedml.editor.gmodel.WindowsFileRetriever;
+import org.sedml.modelsupport.BioModelsModelsRetriever;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -89,6 +90,7 @@ public class SaveAsSedxArchiveHandler extends AbstractHandler {
 				m.setSource(WindowsFileRetriever.convertAbsoluteFilePathToURI(m
 						.getSource()));
 			mr.add(new WindowsFileRetriever());
+			mr.add(new BioModelsModelsRetriever());
 			String modelAsString = mr.getModelString(m);
 			if (modelAsString == null) {
 				showModelNotResolvedError(event, m);
@@ -108,7 +110,8 @@ public class SaveAsSedxArchiveHandler extends AbstractHandler {
 
 			File f = new File(src);
 			sed.getModelWithId(s).setSource(f.getName());
-			models.add(new FileModelContent(f));
+			if(!src.startsWith("urn"))
+				models.add(new FileModelContent(f));
 		}
 		ArchiveComponents ac = new ArchiveComponents(models, new SEDMLDocument(
 				sed));

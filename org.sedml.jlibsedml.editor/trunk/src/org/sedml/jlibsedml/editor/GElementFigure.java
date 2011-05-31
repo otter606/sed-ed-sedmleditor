@@ -5,6 +5,7 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.ToolbarLayout;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Color;
 
 /**
@@ -49,6 +50,13 @@ public class GElementFigure extends RoundedRectangle {
 	}
 	void setDisplay1(String idLabelText) {
 		display1.setText(idLabelText);
+		if(ep.getCastedModel().getNotes()!=null){
+			ImageDescriptor id = Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/note.png");
+		
+			display1.setIcon(id.createImage());
+		}else {
+			display1.setIcon(null);
+		}
 	}
 	 void setDisplay2(String nameLabelText) {
 		display2.setText(nameLabelText);

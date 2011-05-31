@@ -13,7 +13,7 @@ public class AddNotesAction extends SelectionAction {
 	protected void init (){
 		setId(ADD_NOTE_ID);
 		setActionDefinitionId("Add Note");
-		setText("Add Note");
+		setText("Add/Edit/View Note");
 		setToolTipText("Annotate this element with HTML");
 		setEnabled(true);
 	}

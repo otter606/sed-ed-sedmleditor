@@ -96,6 +96,7 @@ public abstract class GElement implements IPropertyChangeSupport {
 
 	public void setNotes(Notes notes) {
 		this.notes = notes;
+		firePropertyChange(PropertyChangeNames.PROPERTY_EVENT, null, notes);
 	}
 
 	public String getId() {

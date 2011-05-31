@@ -2,7 +2,7 @@
 
 h1. SEDML editor help
 
-This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files. 
+This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files.  This documentation is valid for version 0.9 
 
 
 h2(#license). Licence
@@ -45,7 +45,17 @@ Standard editing operations are enabled in the editor such as :
 
 h3(#notes). Adding Notes to an element.
 
-Any element can have an HTML  note added by selecting an element and choosing <span style="color:red">Add Note  </span> from the context menu.  The HTML should be contained in  a single container element such as a _div_ or _body_ element. A preview of the HTML is displayed on the right-hand panel, and error messages inform if the HTML is badly formed.
+Any element can have an HTML  note added by selecting an element and choosing <span style="color:red">Add /Edit/View Note  </span> from the context menu.  This will open a dialog like this:
+
+!images/notedlg.png!
+
+The HTML that you add  should be contained in  a single container element such as a _div_ or _body_ element. A preview of the HTML is displayed on the right-hand panel, and error messages inform if the HTML is badly formed.
+
+Once you've added a note to an element, it will show a little icon to indicate this. E.g.,
+
+!images/ElementWithNoteIcon.png!
+
+The <span style="color:red">Remove Note </span> button removes a note from an element.
 
 h3(#create_sim). Creating a simulation element
 

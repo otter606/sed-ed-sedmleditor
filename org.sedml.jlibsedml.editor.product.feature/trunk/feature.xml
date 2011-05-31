@@ -2,7 +2,7 @@
 <feature
       id="org.sedml.jlibsedml.editor.product.feature"
       label="SED-ED product feature"
-      version="0.8.1"
+      version="0.9.1"
       provider-name="Richard Adams">
 
    <description url="http://www.example.com/description">

@@ -115,6 +115,7 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 		super.setInput(input);
 		try {
 			IFile file = ((IFileEditorInput) input).getFile();
+			System.err.println("setting input");
 			SEDMLDocument doc = null;
 			if(file.getFileExtension().equals("sedx")){
 				isSedxArchive=true;

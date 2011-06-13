@@ -187,6 +187,7 @@ public  class GChange extends GElement {
 
 	@Override
 	public boolean canGetSedML() {
+	
 		boolean rc= getTarget() != null;
 		if(rc == false || getChType().equals(SEDMLTags.REMOVE_XML_KIND)){
 			return rc;

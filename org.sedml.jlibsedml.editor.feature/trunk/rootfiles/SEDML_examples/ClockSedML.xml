@@ -12,7 +12,7 @@
     </uniformTimeCourse>
   </listOfSimulations>
   <listOfModels>
-    <model id="model1" name="Circadian Oscillations" language="SBML (Generic)" source="/Users/radams/Documents/SBSIVisualWSspaces/SBSIVisualDemoWS/SEDML_examples/Models/Clock_BIOMD21.xml">
+    <model id="model1" name="Circadian Oscillations" language="urn:sedml:language:sbml" source="/Users/radams/Documents/SBSIVisualWSspaces/SBSIVisualDemoWS/SEDML_examples/Models/Clock_BIOMD21.xml">
       <annotation>
         <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
           <location y="279" x="530" />
@@ -83,12 +83,12 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:apply>
           <math:plus />
           <math:ci>time</math:ci>
         </math:apply>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="tim1" name="tim mRNA (total)">
       <annotation>
@@ -107,9 +107,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>v1</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="tim2" name="tim mRNA (changed parameters)">
       <annotation>
@@ -128,9 +128,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>v2</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
   </listOfDataGenerators>
   <listOfOutputs>

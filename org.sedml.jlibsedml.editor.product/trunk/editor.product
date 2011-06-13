@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="SED-ED" id="org.sedml.jlibsedml.editor.product.product" application="org.sedml.jlibsedml.editor.product.application" version="0.8.1" useFeatures="true" includeLaunchers="true">
+<product name="SED-ED" id="org.sedml.jlibsedml.editor.product.product" application="org.sedml.jlibsedml.editor.product.application" version="0.9.1" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <text>
-         This is the SED-ED SED-ML editor, May 2011
+         This is the SED-ED SED-ML editor v 0.9.1, June 2011
       </text>
    </aboutInfo>
 
@@ -30,6 +30,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>

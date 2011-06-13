@@ -83,9 +83,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>Time</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="LaCI" name="LaCI repressor">
       <annotation>
@@ -104,9 +104,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>v1</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="TetR" name="TetR repressor">
       <annotation>
@@ -125,9 +125,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>v2</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="CI" name="CI repressor">
       <annotation>
@@ -146,9 +146,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>v3</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="timeDG2" name="Time">
       <annotation>
@@ -167,9 +167,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>time</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="LaCIb" name="LaCI repressor">
       <annotation>
@@ -188,9 +188,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>v1b</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="LaCIbNormalized" name=" NormalizedLaCI repressor">
       <annotation>
@@ -209,7 +209,7 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:apply>
           <math:divide />
           <math:ci>v1c</math:ci>
@@ -218,7 +218,7 @@
             <math:ci>v1c</math:ci>
           </math:apply>
         </math:apply>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="TetRb" name="TetR repressor">
       <annotation>
@@ -237,9 +237,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>PY</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="TetRNormalized" name=" Normalized TetR repressor">
       <annotation>
@@ -258,7 +258,7 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:apply>
           <math:divide />
           <math:ci>v2c</math:ci>
@@ -267,7 +267,7 @@
             <math:ci>v2c</math:ci>
           </math:apply>
         </math:apply>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="CIb" name="CI repressor">
       <annotation>
@@ -286,9 +286,9 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:ci>v3b</math:ci>
-      </math>
+      </math:math>
     </dataGenerator>
     <dataGenerator id="CIb_normalized" name=" Normalized CI repressor">
       <annotation>
@@ -307,7 +307,7 @@
           </annotation>
         </variable>
       </listOfVariables>
-      <math>
+      <math:math>
         <math:apply>
           <math:divide />
           <math:ci>v3c</math:ci>
@@ -316,7 +316,7 @@
             <math:ci>v3c</math:ci>
           </math:apply>
         </math:apply>
-      </math>
+      </math:math>
     </dataGenerator>
   </listOfDataGenerators>
   <listOfOutputs>

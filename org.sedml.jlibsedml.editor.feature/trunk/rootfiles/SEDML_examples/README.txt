@@ -14,3 +14,7 @@ Elowitz2000_Repressilator.xml  An SBML file of the Elowitz repressilator model.
 RepressilatorSEDML.xml - A SED-ML file describing simulations on the above model.
 RepressilatorSEDMLArchive.sedx - A Sedx archive file containing both the repressilator model its SED-ML file.
 
+LeloupSBML
+----------
+In this file, the model refers to a MIRIAM URN, so you don't need the model file on your machine ( but you need
+ internet access).

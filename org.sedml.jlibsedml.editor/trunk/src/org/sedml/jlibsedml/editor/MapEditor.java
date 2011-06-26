@@ -52,6 +52,10 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 	private ArchiveComponents ac=null;
 
 	public MapEditor() {
+		init();
+	}
+
+	void init() {
 		setEditDomain(new DefaultEditDomain(this));
 		 actionCreator = new MapEditorActionFactory();
 	}
@@ -91,13 +95,17 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 																			
 					false, // dont keep history
 					monitor); // progress monitor
-			getCommandStack().markSaveLocation();
+			markSaveLocation();
 		} catch (CoreException ce) {
 			ce.printStackTrace();
 		} 
 		}
-		getCommandStack().markSaveLocation();
+		markSaveLocation();
 
+	}
+
+	void markSaveLocation() {
+		getCommandStack().markSaveLocation();
 	}
 	
 	public void commandStackChanged(EventObject event) {

@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.ui.IFileEditorInput;
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JMock;
@@ -40,6 +41,8 @@ public class MapEditorTest {
 			 errorDialogShown=true;
 			 return canProceed;
 		 }
+		 void init() {}
+		 void markSaveLocation(){}
 	}
 	MapEditor mep;
 	MapEditorTSS mepTSS;

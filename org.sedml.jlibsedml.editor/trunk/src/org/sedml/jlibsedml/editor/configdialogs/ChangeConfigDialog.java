@@ -29,7 +29,6 @@ import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.sedml.NewXML;
 import org.sedml.SEDMLTags;
-import org.sedml.SedML;
 import org.sedml.XPathTarget;
 import org.sedml.jlibsedml.editor.gmodel.GChange;
 import org.sedml.jlibsedml.xmlUI.BaseXMLDialog;
@@ -153,7 +152,7 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 			final String ERROR_TITLE="Error reading model file";
 			final String ERROR_MESSAGE="There was an error reading the model file - please check it is valid XML. \n";
 			public void widgetSelected(SelectionEvent e) {
-				Document doc;
+				Document doc = null;
 				final Shell activeShell = Display.getCurrent().getActiveShell();
 				try {
 					

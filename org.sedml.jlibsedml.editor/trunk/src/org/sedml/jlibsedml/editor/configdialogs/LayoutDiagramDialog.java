@@ -21,10 +21,9 @@ import org.sedml.jlibsedml.editor.gmodel.GSedML;
  *
  */
 public class LayoutDiagramDialog extends TrayDialog {
-	private GSedML gsedml;
-	public LayoutDiagramDialog(Shell shell, GSedML gsedml) {
+
+	public LayoutDiagramDialog(Shell shell) {
 		super(shell);
-		this.gsedml=gsedml;
 		// TODO Auto-generated constructor stub
 	}
 	

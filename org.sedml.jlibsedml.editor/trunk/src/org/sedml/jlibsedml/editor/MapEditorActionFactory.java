@@ -25,6 +25,7 @@ import org.sedml.jlibsedml.editor.actions.PushOneBackZOrderAction;
 import org.sedml.jlibsedml.editor.actions.PushOneForwardZOrderAction;
 import org.sedml.jlibsedml.editor.actions.PushToBackZOrderAction;
 import org.sedml.jlibsedml.editor.actions.PushToFrontZOrderAction;
+import org.sedml.jlibsedml.editor.actions.RestrictViewAction;
 
 /**
  * Local helper class for {@link MapEditor} for registering editing actions
@@ -84,6 +85,12 @@ class MapEditorActionFactory {
 	action = new LayoutAction(mapEditor);
 	registry.registerAction(action);
 	selectionActions.add(action.getId());
+	
+	action = new RestrictViewAction(mapEditor);
+	registry.registerAction(action);
+	selectionActions.add(action.getId());
+	
+	
 	
 	
 	

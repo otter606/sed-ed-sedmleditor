@@ -29,6 +29,7 @@ import org.sedml.jlibsedml.editor.actions.PushOneBackZOrderAction;
 import org.sedml.jlibsedml.editor.actions.PushOneForwardZOrderAction;
 import org.sedml.jlibsedml.editor.actions.PushToBackZOrderAction;
 import org.sedml.jlibsedml.editor.actions.PushToFrontZOrderAction;
+import org.sedml.jlibsedml.editor.actions.RestrictViewAction;
 
 
 /**
@@ -138,7 +139,7 @@ public void buildContextMenu(IMenuManager manager) {
 	
 	String [] SEDML_ADD_IDS= new String [] {AddVariableAction.ADD_VARIABLE_ID,
 			AddParameterAction.ADD_PARAMETER_ID,AddCurveAction.ADD_CURVE_ID,
-			AddChangeAction.ADD_CHANGE_ID,AddDatasetAction.ADD_Dataset_ID, AddNotesAction.ADD_NOTE_ID, LayoutAction.LAYOUT_ID};
+			AddChangeAction.ADD_CHANGE_ID,AddDatasetAction.ADD_Dataset_ID, AddNotesAction.ADD_NOTE_ID, LayoutAction.LAYOUT_ID, RestrictViewAction.RestrictView_ID};
 	
 	for(String actionid: SEDML_ADD_IDS){
 		action = getActionRegistry().getAction(actionid);

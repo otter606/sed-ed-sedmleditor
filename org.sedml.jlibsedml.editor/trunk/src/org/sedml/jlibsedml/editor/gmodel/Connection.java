@@ -17,7 +17,7 @@ import org.eclipse.ui.views.properties.IPropertyDescriptor;
 
 /**
  * A connection between two distinct shapes. This is not a SEDML construct
- *  but represents a grphical connection ( a reference between two entities ).
+ *  but represents a graphical connection ( a reference between two entities ).
  * 
  * @author Elias Volanakis
  */
@@ -143,6 +143,16 @@ public class Connection  {
 		this.source = newSource;
 		this.target = newTarget;
 		reconnect();
+	}
+
+	public void hide() {
+		firePropertyChange(PropertyChangeNames.HIDE_ELEMENT_EVENT, null, this);
+		
+	}
+	
+	public void show() {
+		firePropertyChange(PropertyChangeNames.SHOW_ELEMENT_EVENT, null, this);
+		
 	}
 
 	

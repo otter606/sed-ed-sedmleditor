@@ -172,6 +172,11 @@ public class GElementEditPart extends AbstractGraphicalEditPart implements
 			refreshTargetConnections();
 		} else if (PropertyChangeNames.PROPERTY_EVENT.equals(prop)) {
 			refreshVisuals();
+		}else if (PropertyChangeNames.HIDE_ELEMENT_EVENT.equals(prop)) {
+			getFigure().setVisible(false);
+			
+		}else if (PropertyChangeNames.SHOW_ELEMENT_EVENT.equals(prop)) {
+			getFigure().setVisible(true);
 		}
 
 	}
@@ -180,6 +185,7 @@ public class GElementEditPart extends AbstractGraphicalEditPart implements
 		fig.setDisplay1(getCastedModel().getDisplay1());
 		fig.setDisplay2(getCastedModel().getDisplay2());
 		fig.updateColour();
+		
 	}
 
 	public void performRequest(Request req) {

@@ -28,6 +28,7 @@ import org.eclipse.swt.SWT;
 import org.sedml.jlibsedml.editor.gmodel.Connection;
 import org.sedml.jlibsedml.editor.gmodel.GCurve;
 import org.sedml.jlibsedml.editor.gmodel.GDataGenerator;
+import org.sedml.jlibsedml.editor.gmodel.PropertyChangeNames;
 import org.sedml.jlibsedml.editor.gmodelcommands.ConnectionDeleteCommand;
 
 /**
@@ -130,7 +131,11 @@ public class ConnectionEditPart extends AbstractConnectionEditPart implements
 	}
 
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
+		if(PropertyChangeNames.HIDE_ELEMENT_EVENT.equals(evt.getPropertyName())){
+			getFigure().setVisible(false);
+		}else if (PropertyChangeNames.SHOW_ELEMENT_EVENT.equals(evt.getPropertyName())){
+			getFigure().setVisible(true);
+		}
 
 	}
 

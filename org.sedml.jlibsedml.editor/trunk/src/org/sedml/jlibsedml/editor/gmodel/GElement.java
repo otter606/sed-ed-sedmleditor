@@ -89,6 +89,13 @@ public abstract class GElement implements IPropertyChangeSupport {
 	public abstract String getType();
 	
 	
+	public void hide(){
+		firePropertyChange(PropertyChangeNames.HIDE_ELEMENT_EVENT, null, notes);
+	}
+	
+	public void show() {
+		firePropertyChange(PropertyChangeNames.SHOW_ELEMENT_EVENT, null, notes);
+	}
 	
 	public Notes getNotes() {
 		return notes;

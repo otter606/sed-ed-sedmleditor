@@ -30,6 +30,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.sedml.ArchiveComponents;
 import org.sedml.Libsedml;
 import org.sedml.SEDMLDocument;
@@ -46,6 +47,11 @@ import org.sedml.jlibsedml.editor.layout.GraphLayouter;
 
 public class MapEditor extends GraphicalEditorWithFlyoutPalette implements PropertyChangeListener, IViewChanger, ISEDMLProvider {
 	
+	static boolean listenerAdded = false;
+	static {
+		
+		
+	}
 	private GSedML gsedml;
 	MapEditorActionFactory actionCreator;
 	boolean isSedxArchive = false;
@@ -58,6 +64,11 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 	void init() {
 		setEditDomain(new DefaultEditDomain(this));
 		 actionCreator = new MapEditorActionFactory();
+		 if(!listenerAdded) {
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().addSelectionListener(
+						new SEDMLEditorLink());
+				listenerAdded=true;
+		 }
 	}
 
 	@Override
@@ -68,6 +79,10 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 	
 	public GSedML getModel(){
 		return gsedml;
+	}
+	
+	public GraphicalViewer getGraphicalViewer() {
+		return super.getGraphicalViewer();
 	}
 
 	@Override
@@ -173,7 +188,7 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 	}
 
 	 void showLayoutDialog() {
-		LayoutDiagramDialog layoutDialog = new LayoutDiagramDialog(Display.getCurrent().getActiveShell(), gsedml);
+		LayoutDiagramDialog layoutDialog = new LayoutDiagramDialog(Display.getCurrent().getActiveShell());
 		if (layoutDialog.open() == Window.OK){
 			GraphLayouter louter = new GraphLayouter(gsedml, this);
 			
@@ -291,9 +306,16 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 				bcd.open();
 			}
 			
+			
+			
 		
 		}
 	
+	}
+	
+	public void dispose (){
+		
+		super.dispose();
 	}
 	
 

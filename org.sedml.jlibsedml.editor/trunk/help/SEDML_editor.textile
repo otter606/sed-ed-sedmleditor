@@ -13,7 +13,7 @@ This editor is available under an MIT open source  license:
 
 h2(#start). Creating a new SED-ML file:
 
-From the  <span style="color:red"> File ->New  </span> menu. choose the option <span style="color:red"> SED-ML->SED-ML editor  </span>:
+From the  <span style="color:red"> File->New  </span> menu, choose the option <span style="color:red"> SED-ML->SED-ML editor  </span>:
 
 !{width:50%}images/createDoc.png!
 
@@ -65,7 +65,8 @@ p. From the editor palette, choose  'Simulation'  and then click on the canvas t
 h3(#create_model). Creating a Model element.
 
 p.   From the editor palette, choose  'Model'  and then click on the canvas to add a Model object.
- Choose the modelling language  of your model, and its source. This can be a location on the file-system chosen from the file browser or you can enter a stable URN such as a MIRIAM identifier
+ Choose the modelling language  of your model, and its source. This can be a location on the file-system chosen from the file browser or you can enter a stable URN such as a MIRIAM identifier. Currently the editor can retrieve SBML models from Biomodels, if the source is specificed with
+  the appropriate URN (e.g., *urn:miriam:biomodels.db:BIOMD0000000012*).
  
 !{width:50%}images/createModel.png!
 
@@ -138,7 +139,7 @@ p. To define variable, select a *DataGenerator* element and choose *Add Variable
  A *Variable* is the only SED-ML data type in this editor whose ID is editable - this gives you the chance to use a meaningful ID ( so long as it is alphanumeric and unique in the SED-ML document ). The reason for this is that the variable and parameter names  occurring in the _maths_  section of a DataGenerator must be the IDs of *Variable* and *Parameter* elements.  Variables can also refer to symbols. In SEDML L1V1, 'Time' is the only symbol. If 'No symbol' is chosen, you need to specify an XPath expression to locate the variable in the model whose value you want to display. As with "Changes":#create_change, if your model is accessible, the *Get XPath From Model* button will be enabled, which 
  helps generate the XPath expression  for you.
  
- !{width:75%}images/VariableConfig.png!
+!{width:75%}images/VariableConfig.png!
  
  In the above diagram, we would use the id 'B' in mathematical expressions in the DataGenerator referring to this variable.
 
@@ -152,7 +153,42 @@ p. If you create a *Report* you will need to add *Dataset* elements using the   
 
 h2(#edit). Editing existing elements
 
-To edit an existing element, just double-click on  the element to obtain the configuration dialog. You can undo /redo edits by clicking Ctrl-Z  and Ctrl- Y, respectively.
+To edit an existing element, just double-click on  the element to obtain the configuration dialog. You can *undo*  or *redo* edits by clicking Ctrl-Z  and Ctrl-Y, respectively.
+
+h2(#search). Searching for elements.
+
+SEDML documents can be quite long, if there are many output descriptions and many variables are output, so the graph view can be tricky to navigate by itself. SED-ED provides some help, though:
+
+h3. Restricting the view:
+
+From a particular *Output*, it's possible to work out all the simulations and models needed to generate the output. If you select an Output in the editor ( i.e., a Plot or  Report ) and click  
+<span style="color:red"> Toggle Restricted View </span> 
+then only the resources used to generate that output will be shown, all other elements will disappear from view ( although they're *NOT* deleted and remain in the SED-ML model).
+ 
+For example, here's a screenshot of a SED-ML document with two outputs:
+
+!{width:50%}images/beforeReduceView.png!
+Choose the output whose information you want to keep displayed.
+
+!{width:50%}images/reduceViewMenu.png!
+Now, click *Toggle Restricted View*
+
+!{width:50%}images/afterReduceView.png!
+and the elements not needed to reproduce your output are now hidden. To get these restored, repeat the action.
+
+h3. Highlighting elements in the editor using the file view:
+
+If you have the editor open, you can use the content outline in the resource viewer to scroll
+ and highlight the SEDML element in the editor. Simply select the item in the content viewer. For example,
+ 
+ !{width:50%}images/linkFromFileBrowser.png!
+ 
+This feature works with SEDX Archives as well as SEDML files. 
+Currently though, mapping is only made using the element's ID - so if you have multiple editors open on different versions of the SEDML document, you will highlight the element in the currently active editor, which might not edit the same file as that from which you selected the element. To circumvent this,  ensure that the currently active editor refers to the same file as that from which you selected an element. 
+
+
+
+
 
 h2(#sedx). Working with SED-ML archive files
 
@@ -186,7 +222,7 @@ Layout runs in a background thread and can be stopped at any time by clicking ca
 
  !{width:75%}images/layoutprogress.png!
  
-h2(#connections_ref). Connections reference
+h2(#cross_refs). Connections reference
 
 Two sorts of relationships are represented by edges (connections ) in the SED-ED editor. Firstly, the reference relations specified in section 2.3.5 of the level1 version1 specification, namely:
 

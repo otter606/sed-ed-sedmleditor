@@ -126,6 +126,11 @@ public class GSedMLTest {
 		gsedml.setIsSEDX(false);
 		assertFalse(gsedml.isSedxArchive());
 ;	}
+	
+	@Test
+	public void testIsRestrictViewEnableIsFalseByDefault(){
+		assertFalse(gsedml.isRestrictedViewToggle());
+	}
 
 	private ElementStub createELementStub(String id) {
 		ElementStub s = new ElementStub();

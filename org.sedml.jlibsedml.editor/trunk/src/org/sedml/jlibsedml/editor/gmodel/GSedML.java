@@ -32,6 +32,9 @@ public class GSedML implements IPropertyChangeSupport {
 	private List<GElement> children = new ArrayList<GElement>();
 	private long idStart=0;
 	private boolean isSedx;
+	// false = showAll, true= restrict view.
+	private boolean isRestrictedViewToggle=false;
+
 	
 	private ArchiveComponents content;
 	
@@ -168,5 +171,13 @@ public class GSedML implements IPropertyChangeSupport {
     public void setArchiveComponents(ArchiveComponents content) {
     	 this.content=content;
     }
+
+	public boolean isRestrictedViewToggle() {
+		return isRestrictedViewToggle;
+	}
+
+	public void setRestrictedViewToggle(boolean isRestrictedViewToggle) {
+		this.isRestrictedViewToggle = isRestrictedViewToggle;
+	}
 
 }

@@ -18,19 +18,25 @@ import org.sedml.Variable;
 import org.sedml.jlibsedml.editor.GElementEditPart;
 import org.sedml.jlibsedml.editor.MapEditor;
 import org.sedml.jlibsedml.editor.gmodel.Connection;
+import org.sedml.jlibsedml.editor.gmodel.GChange;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
+import org.sedml.jlibsedml.editor.gmodel.GModel;
 import org.sedml.jlibsedml.editor.gmodel.GOutput;
 
 public class RestrictViewAction extends SelectionAction {
+	
+	
 
 	public static final String RestrictView_ID = "RestrictView";
 
-	static int toggle = 2;
 	public RestrictViewAction(IWorkbenchPart part) {
 		super(part);
 
 	}
 
+	/**
+	 * Only active if a single output is selected.
+	 */
 	@Override
 	protected boolean calculateEnabled() {
 		if (getSelectedObjects().size() == 1
@@ -51,6 +57,10 @@ public class RestrictViewAction extends SelectionAction {
 	public void run() {
 		GOutput gout = (GOutput) getModel();
 		SedML sedml = gout.getParent().buildSEDML();
+		// we need an error free document to continue
+		if(sedml==null){
+			return;
+		}
 
 		Set<SEDBase> toHighlight = new HashSet<SEDBase>();
 		if (sedml != null) {
@@ -84,6 +94,12 @@ public class RestrictViewAction extends SelectionAction {
 							&& el.getId().equals(
 									((AbstractIdentifiableElement) toSelect)
 											.getId())) {
+						// changes don't have an ID so need to be treated specially
+						if(el.isModel()) {
+							for (GChange gc: ((GModel)el).getChanges()){
+								toSelectSS.add(gc);
+							}
+						}
 						toSelectSS.add(el);
 						break;
 					}
@@ -95,7 +111,7 @@ public class RestrictViewAction extends SelectionAction {
 					el.show();
 					showConnections(el);
 				}else {
-					if(toggle%2==0) {
+					if(!me.getModel().isRestrictedViewToggle()) {
 						el.hide();
 						hideConnections(el);
 					}
@@ -105,7 +121,7 @@ public class RestrictViewAction extends SelectionAction {
 				}
 			}
 			}
-			toggle++;
+			me.getModel().setRestrictedViewToggle(!me.getModel().isRestrictedViewToggle());
 		   //selectAll(new StructuredSelection(toSelectSS),me);
 
 		}

@@ -21,7 +21,8 @@ public class GModel extends GElement {
 	private String  source, language;
 
 	private List<GChange> changes = new ArrayList<GChange>();
-
+	
+	
 	/**
 	 * Constructor for generating from SED-ML model.
 	 * @param m A non-null <code>Model</code> element.

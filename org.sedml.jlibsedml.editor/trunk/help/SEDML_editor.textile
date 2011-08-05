@@ -2,7 +2,7 @@
 
 h1. SEDML editor help
 
-This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files.  This documentation is valid for version 0.9 
+This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files.  This documentation is valid for version 0.9.1
 
 
 h2(#license). Licence
@@ -70,7 +70,7 @@ p.   From the editor palette, choose  'Model'  and then click on the canvas to a
  
 !{width:50%}images/createModel.png!
 
-p. You can preview a model by clicking on the _Preview Model_ button. This will be enbaled if the model itself can be retrieved based on the 'source' attribute of the SED-ML model element. _Preview Model_ will apply all changes and show the model as an XML tree for you to browse to check that the changes are as you expect.  You can also access this from within the 'Edit Change' dialog when you double click on a *Change* element.
+p. You can preview a model by clicking on the _Preview Model_ button. This will be enabled if the model itself can be retrieved based on the 'source' attribute of the SED-ML model element. _Preview Model_ will apply all changes and show the model as an XML tree for you to browse to check that the changes are as you expect.  You can also access this from within the 'Edit Change' dialog when you double click on a *Change* element.
 
 h4(#create_change). Defining changes to a model.
 
@@ -94,17 +94,17 @@ The *Replacement Value* text field is where you insert the changes to make.
 
 p. If you choose to *change an attribute*, the replacement value should be a numerical value. If you choose to *Add XML* or *Change XML*, then the replacement value should be some well formed XML. If you choose *Remove XML* the content of the replacement value is irrelevant and is ignored.
 
-p. The *TargetXPath field* is where you specifiy the XML to be changed, using an XPath expression. This can be added manually, or by using the  *Get XPath from Model* feature.  If  this is  enabled, it  helps to  create the XPath expressions  from an XML view of your model.  The button is enabled if the editor can get hold of the actual model, specifed in the *source* attribute of the Model element to which this change is being added.
+p. The *TargetXPath field* is where you specify the XML to be changed, using an XPath expression. This can be added manually, or by using the  *Get XPath from Model* feature.  If  this is  enabled, it  helps to  create the XPath expressions  from an XML view of your model.  The button is enabled if the editor can get hold of the actual model, specified in the *source* attribute of the Model element to which this change is being added.
 
 p. Currently, two operations are supported by *Get XPath from Model*. Firstly, if you wish to change an attribute:
 # Expand the XML view to the element whose attribute you want to change. 
-# Select two attributes of that element.  The first selected attribute will be used to identify that element. For SBML elements, for example,  the 'id' attribute would be an ideal choice.  The second selected element is the attribute whose value you want to change. E.g., 
+# Select two attributes of that element.  The first selected attribute is the attribute whose value you want to change.   The second selected element will be used to identify that element. For SBML elements, for example,  the 'id' attribute would be an ideal choice. E.g., 
 
 !{width:75%}images/chAttributeXML.png!
 
-In the above example. the _id_ attribute was selected first, then the _initialConcentration_ attribute, which is what we want to change. The XPath expression is previewed in the bottom text field.
+In the above example. the _initialConcentration_  attribute was selected first,which is what we want to change, then the _id_ attribute, . The XPath expression is previewed in the bottom text field.
 
-p. Secondly, if you choose to add/remove/change XML, choose an identifying attribute of  the element which is to be the target of   the modification, and an XPath expression will be generated. If the element you iwsh to target has no attributes, then the element is chosen with no identifiers inserted into the XPath expression, which should be sufficient if an element is unique within its parent element.
+p. Secondly, if you choose to add/remove/change XML, choose an identifying attribute of  the element which is to be the target of   the modification, and an XPath expression will be generated. If the element you wish to target has no attributes, then the element is chosen with no identifiers inserted into the XPath expression, which should be sufficient if an element is unique within its parent element.
 
 
 !{width:75%}images/elementXPath.png!

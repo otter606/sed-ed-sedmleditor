@@ -16,10 +16,14 @@
 			<topic href="help/SEDML_editor.html#create_output" label="Creating an Output"></topic>
 		</topic>
 		<topic href="help/SEDML_editor.html#edit" label="Editing existing elements"></topic>
+		<topic href="help/SEDML_editor.html#search" label="Searching for elements.">
+			<topic href="help/SEDML_editor.html#Restrictingtheview" label="Restricting the view:"></topic>
+			<topic href="help/SEDML_editor.html#Highlightingelementsintheeditorusingthefileview" label="Highlighting elements in the editor using the file view:"></topic>
+		</topic>
 		<topic href="help/SEDML_editor.html#sedx" label="Working with SED-ML archive files"></topic>
 		<topic href="help/SEDML_editor.html#opening_existing_sedml" label="Working with existing SED-ML documents"></topic>
 		<topic href="help/SEDML_editor.html#layout" label="Graphical layout of elements."></topic>
-		<topic href="help/SEDML_editor.html#connections_ref" label="Connections reference"></topic>
+		<topic href="help/SEDML_editor.html#cross_refs" label="Connections reference"></topic>
 		<topic href="help/SEDML_editor.html#validation" label="Levels of validation - syntax vs semantics">
 			<topic href="help/SEDML_editor.html#Syntaxvalidation" label="Syntax validation"></topic>
 			<topic href="help/SEDML_editor.html#Semanticvalidation" label="Semantic validation"></topic>

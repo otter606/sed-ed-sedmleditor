@@ -13,7 +13,9 @@
    </configIni>
 
    <launcherArgs>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <programArgsMac>-arch x86</programArgsMac>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+-d32</vmArgsMac>
    </launcherArgs>
 
    <windowImages i16="icons/alt_window_16.gif" i32="icons/alt_window_32.gif"/>
@@ -30,7 +32,6 @@
          <bmp/>
       </win>
    </launcher>
-
 
    <vm>
    </vm>
@@ -107,13 +108,12 @@
    </plugins>
 
    <features>
-       <feature id="org.eclipse.rcp" version="3.7.0.v20110216-9DB5Fm1FpBGy_AaVz-mFamgY"/>
-      <feature id="uk.ac.ed.csbe.sbsivisual.base.feature" version="1.3.0"/>
-   	<feature id="org.eclipse.equinox.p2.user.ui" version="2.1.1.v20110526-6-Bg9JXOePwKUTU7X0teV1RtDu-e"/>
-
-      <feature id="org.sedml.jlibsedml.feature" version="1.0.2"/>
+      <feature id="org.eclipse.rcp" version="3.7.0.v20110216-9DB5Fm1FpBGy_AaVz-mFamgY"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="2.1.1.v20110526-6-Bg9JXOePwKUTU7X0teV1RtDu-e"/>
+      <feature id="uk.ac.ed.csbe.sbsivisual.base.feature" version="1.3.1"/>
       <feature id="org.sedml.jlibsedml.editor.feature" version="0.9.1"/>
       <feature id="org.sedml.jlibsedml.editor.product.feature" version="0.9.1"/>
+      <feature id="org.sedml.jlibsedml.feature" version="1.0.3"/>
    </features>
 
 

@@ -80,26 +80,24 @@ public class SEDMLEditorLink implements ISelectionListener {
 					if(iss instanceof AbstractIdentifiableElement){
 						AbstractIdentifiableElement toSearch = (AbstractIdentifiableElement)iss;
 						IFile fileInput = getFileEditorInputIfActiveEditorIsFileBased();
+						boolean isSEDX= fileInput.getLocation().toFile().getName().endsWith("sedx");
+						boolean isSEDML=Libsedml.isSEDML(fileInput.getLocation().toFile());
 						if(fileInput!=null){
-							if (Libsedml.isSEDML(fileInput.getLocation().toFile())){
+							if (isSEDML || isSEDX
+									 ){
 								try {
-								SEDMLDocument doc = Libsedml.readDocument(fileInput.getLocation().toFile());
+								SEDMLDocument doc= null;
+								if(isSEDML)
+									 doc = Libsedml.readDocument(fileInput.getLocation().toFile());
+								else {
+									doc=Libsedml.readSEDMLArchive(fileInput.getContents()).getSedmlDocument();
+								}
 								SedML sed = doc.getSedMLModel();
 								ElementSearchVisitor searcher = new ElementSearchVisitor(toSearch.getId());
 								sed.accept(searcher);
 								if(searcher.getFoundElement()!=null){
 									SEDBase base = searcher.getFoundElement();
-									MapEditor me = (MapEditor)getWorkbenchPage().getActiveEditor();
-									GSedML model = me.getModel();
-									for (GElement el: model.getChildren()){
-										if (el.getId()!=null && el.getId().equals(((AbstractIdentifiableElement)base).getId())){
-											EditPart ep =(EditPart)((EditPartViewer)me.getGraphicalViewer()).getEditPartRegistry().get(el);
-											if(ep!=null){
-												selectTarget(ep, (EditPartViewer)me.getGraphicalViewer());
-											}
-											break;
-										}
-									}
+									selectTarget(base);
 								}
 								
 								}catch (Exception ie) {
@@ -113,6 +111,24 @@ public class SEDMLEditorLink implements ISelectionListener {
 			
 		}
 		
+	}
+
+	void selectTarget(SEDBase base) {
+		IViewChanger me = (IViewChanger)getWorkbenchPage().getActiveEditor();
+		GSedML model = me.getModel();
+		selectTarget(base, me, model);
+	}
+
+	void selectTarget(SEDBase base, IViewChanger me, GSedML model) {
+		for (GElement el: model.getChildren()){
+			if (el.getId()!=null && el.getId().equals(((AbstractIdentifiableElement)base).getId())){
+				EditPart ep =(EditPart)((EditPartViewer)me.getGraphicalViewer()).getEditPartRegistry().get(el);
+				if(ep!=null){
+					selectTarget(ep, (EditPartViewer)me.getGraphicalViewer());
+				}
+				break;
+			}
+		}
 	}
 	
 	private void selectTarget(EditPart target, EditPartViewer viewer) {

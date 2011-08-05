@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="help/SEDML_editor.html" label="SEDML_editor">
+	<topic href="help/SEDML_editor.html" label="SEDML editor help">
+		<topic href="help/SEDML_editor.html#license" label="Licence"></topic>
+		<topic href="help/SEDML_editor.html#start" label="Creating a new SED-ML file:">
+			<topic href="help/SEDML_editor.html#from_scratch" label="Creating a SED-ML document from scratch."></topic>
+			<topic href="help/SEDML_editor.html#editor_ops" label="Basic editor operations"></topic>
+			<topic href="help/SEDML_editor.html#notes" label="Adding Notes to an element."></topic>
+			<topic href="help/SEDML_editor.html#create_sim" label="Creating a simulation element"></topic>
+			<topic href="help/SEDML_editor.html#create_model" label="Creating a Model element.">
+				<topic href="help/SEDML_editor.html#create_change" label="Defining changes to a model."></topic>
+			</topic>
+			<topic href="help/SEDML_editor.html#create_task" label="Creating a Task"></topic>
+			<topic href="help/SEDML_editor.html#create_dg" label="Creating a Data generator"></topic>
+			<topic href="help/SEDML_editor.html#create_var" label="Creating a Variable"></topic>
+			<topic href="help/SEDML_editor.html#create_output" label="Creating an Output"></topic>
+		</topic>
+		<topic href="help/SEDML_editor.html#edit" label="Editing existing elements"></topic>
+		<topic href="help/SEDML_editor.html#search" label="Searching for elements.">
+			<topic href="help/SEDML_editor.html#Restrictingtheview" label="Restricting the view:"></topic>
+			<topic href="help/SEDML_editor.html#Highlightingelementsintheeditorusingthefileview" label="Highlighting elements in the editor using the file view:"></topic>
+		</topic>
+		<topic href="help/SEDML_editor.html#sedx" label="Working with SED-ML archive files"></topic>
+		<topic href="help/SEDML_editor.html#opening_existing_sedml" label="Working with existing SED-ML documents"></topic>
+		<topic href="help/SEDML_editor.html#layout" label="Graphical layout of elements."></topic>
+		<topic href="help/SEDML_editor.html#cross_refs" label="Connections reference"></topic>
+		<topic href="help/SEDML_editor.html#validation" label="Levels of validation - syntax vs semantics">
+			<topic href="help/SEDML_editor.html#Syntaxvalidation" label="Syntax validation"></topic>
+			<topic href="help/SEDML_editor.html#Semanticvalidation" label="Semantic validation"></topic>
+			<topic href="help/SEDML_editor.html#Validationforexecution" label="Validation for execution"></topic>
+		</topic>
+	</topic>
+</toc>

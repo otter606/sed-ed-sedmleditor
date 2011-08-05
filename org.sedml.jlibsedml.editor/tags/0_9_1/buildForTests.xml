@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="org.sedml.jlibsedml.editor" default="buildAll" basedir=".">
+	<property file="../mybuild.properties" />
+	
+	<property name="seded.core" value="../org.sedml.jlibsedml.core"/>
+
+	<echo>${plugins.dir}</echo>
+	<path id="classpath">
+		<fileset dir="${plugins.dir}">
+					<exclude name="**/*junit*" />
+					<!-- prevents inclusion of Eclipse's junit -->
+					<exclude name="**/*org.apache.ant.*" />
+					<!-- prevents warning about multiple ant classes -->
+					<include name="**/*.jar" />
+					<exclude name="**/*.class" />
+					<!-- if any class files get into a fileset then ant tries to 'unzip' them and prints a load of errors-->
+				</fileset >
+		<fileset dir= "./devLib" includes="**.jar"/>
+		<fileset dir= "lib" includes="**.jar"/>
+		<fileset dir= "../JungLibs/lib" includes="**.jar"/>
+		<fileset dir= "${seded.core}/lib" includes="**.jar"/>
+		<fileset dir= "../uk.ac.ed.csbe.javaxws.libs/lib" includes="**.jar"/>
+	</path>
+
+	<path id="test.classpath">
+		<path refid="classpath" />
+		<pathelement location="${build.dir}" />
+	</path>
+
+	<target name="mkdirs" depends="" description="--> Creates the directories used in the build">
+		<mkdir dir="${build.dir}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}">
+		</delete>
+		<echo  message="Building using target: ${plugins.dir}"/>
+	</target>
+
+	<target name="buildAll" description="main build task" depends="buildSrc,buildTest" />
+	<!-- Should also depend on buildTest but at the moment we dont have any-->
+
+	<target name="buildTest" description="test build task" depends="buildSrc">
+		<javac classpathref="test.classpath" srcdir="test" debug="true" debuglevel="lines,vars,source" destdir="${build.dir}">
+		</javac>
+		<copy todir="${build.dir}">
+			<fileset dir="test">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="buildSrc" description="src build task" depends="clean,mkdirs">
+		<!-- <echo>running with classpath ${toString:classpath}</echo>-->
+		<javac classpathref="classpath" debug="true" debuglevel="lines,vars,source" destdir="${build.dir}">
+			<src path="src" />
+		</javac>
+
+		<copy todir="${build.dir}">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="tests">
+		<delete dir="${build.dir}/test/logs" />
+		<mkdir dir="${build.dir}/test/logs" />
+		<!--
+			run test cases. All test class names should end in 'Test' to avoid
+			inclusion of inner classes.
+		-->
+		
+			
+		<junit printsummary="yes" haltonfailure="no" fork="true" forkmode="once">
+			<jvmarg value="-ea"/>
+			<jvmarg value="-d32"/>
+			<classpath>
+				<path refid="test.classpath" />
+			</classpath>
+			<batchtest todir="${build.dir}/test/logs">
+				<formatter type="xml" />
+				<fileset dir="${build.dir}">
+					<include name="**/*Test.class" />
+				</fileset>
+			</batchtest>
+		</junit>
+
+		<!-- clean report directory -->
+		<delete dir="${build.dir}/test/junitReports" />
+		<mkdir dir="${build.dir}/test/junitReports" />
+
+		<!-- generate report -->
+		<junitreport todir="${build.dir}/test/junitReports">
+			<fileset dir="${build.dir}/test/logs" includes="**/*.xml" />
+			<report todir="${build.dir}/test/junitReports" />
+		</junitreport>
+	</target>
+</project>
+

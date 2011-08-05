@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+    <extension
+         id="org.sedml.jlibsedml.editor"
+         name="org.sedml.jlibsedml.editor"
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.sedml.jlibsedml.editor.MapEditor"
+            contributorClass="org.sedml.jlibsedml.editor.EditorActionContributor"
+            default="true"
+            extensions="xml, sedx"
+            id="org.sedml.jlibsedml.editor"
+            name="SED-ML editor">
+         <contentTypeBinding
+               contentTypeId="org.sedml.jlibsedml.editor.sedmlBinding">
+         </contentTypeBinding>
+      </editor>
+        </extension>
+        
+          <extension point="org.eclipse.ui.newWizards">
+      <category name="SED-ML"
+                id="org.sedml.jlibsedml.category"/>
+      <wizard
+            category="org.sedml.jlibsedml.category"
+            class="org.sedml.jlibsedml.editor.SEDMLCreationWizard"
+            icon="icons/sample.gif"
+            id="org.sedml.jlibsedml.editor.sedmlcreationwizard"
+            name="SED-ML document">
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+          <extension
+                point="org.eclipse.core.contenttype.contentTypes">
+             <content-type
+                   base-type="org.eclipse.core.runtime.xml"
+                   describer="org.sedml.jlibsedml.editor.SEDMLContentDescriber"
+                   file-extensions="xml"
+                   id="org.sedml.jlibsedml.editor.sedmlBinding"
+                   name="SEDML content type"
+                   priority="high">
+             </content-type>
+              
+          </extension>
+          <extension
+                point="org.eclipse.help.toc">
+             <toc
+                   file="help/SEDML_editor-toc.xml"
+                   primary="true">
+             </toc>
+          </extension>
+          <extension
+                point="org.eclipse.help.contexts">
+             <contexts
+                   file="contexts.xml"
+                   plugin="org.sedml.jlibsedml.editor">
+             </contexts>
+          </extension>
+          <extension
+                point="org.eclipse.ui.commands">
+             <category
+                   id="org.sedml.jlibsedml.editor.commands.category"
+                   name="SED_ED Category">
+             </category>
+             <command
+                   categoryId="org.sedml.jlibsedml.editor.commands.category"
+                   id="org.sedml.jlibsedml.editor.commands.sampleCommand"
+                   name="Save to SEDX command">
+             </command>
+          </extension>
+          <extension
+                point="org.eclipse.ui.handlers">
+             <handler
+                   class="org.sedml.jlibsedml.editor.handlers.SaveAsSedxArchiveHandler"
+                   commandId="org.sedml.jlibsedml.editor.commands.sampleCommand">
+             </handler>
+          </extension>
+          <extension
+                point="org.eclipse.ui.bindings">
+             <key
+                   commandId="org.sedml.jlibsedml.editor.commands.sampleCommand"
+                   contextId="org.eclipse.ui.contexts.window"
+                   schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+                   sequence="M1+6">
+             </key>
+          </extension>
+          <extension
+                point="org.eclipse.ui.menus">
+             <menuContribution
+                   locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+                <toolbar
+                      id="org.sedml.jlibsedml.editor.toolbars.sampleToolbar">
+                   <command
+                         commandId="org.sedml.jlibsedml.editor.commands.sampleCommand"
+                         icon="icons/sample.gif"
+                         id="org.sedml.jlibsedml.editor.toolbars.sampleCommand"
+                         tooltip="Save to SEDX archive format">
+                      <visibleWhen
+                            checkEnabled="false">
+                         <with
+                               variable="activeEditor">
+                            <instanceof
+                                  value="org.sedml.jlibsedml.editor.MapEditor">
+                            </instanceof>
+                         </with>
+                      </visibleWhen>
+                   </command>
+                </toolbar>
+             </menuContribution>
+          </extension>
+
+</plugin>

@@ -1,0 +1,274 @@
+{toc}
+
+h1. SEDML editor help
+
+This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files.  This documentation is valid for version 0.9.1
+
+
+h2(#license). Licence
+
+This editor is available under an MIT open source  license:
+
+
+
+h2(#start). Creating a new SED-ML file:
+
+From the  <span style="color:red"> File->New  </span> menu, choose the option <span style="color:red"> SED-ML->SED-ML editor  </span>:
+
+!{width:50%}images/createDoc.png!
+
+ In the following dialog choose a parent folder in which the new file will be placed, and give it a name:
+
+!{width:50%}images/createDoc2.png!
+
+This will create a new SED-ML file and open the editor:
+
+!{width:50%}images/emptyEditor.png!
+
+h3(#from_scratch). Creating a SED-ML document from scratch.
+
+This section describes the use of the graphical editor to create components of a SED-ML document. 
+* Top-level elements are added from the palette and can be laid out in the editor window by dragging.
+* Double-clicking on an object will open a dialog to configure it.
+* Elements that are not yet correctly configured will be highlighted in red. This means that insufficient information is included for the element to be saved, and it will be omitted from the saved SED-ML file.
+* The diagram can be saved at any time as a regular SED-ML file; graphical information is persisted as annotations to the elements and layout will be restored when the diagram is re-opened.
+* For elements that use identifiers, these should be globally unique in the document, and are added automatically by the software. Human-readable *names* for elements can be added, which is highly recommended as an aid to understanding the document. 
+* Cross references can be made by drawing a *Connection* between two elements. See section "Cross references":#cross_refs
+
+h3(#editor_ops). Basic editor operations
+
+Standard editing operations are enabled in the editor such as :
+* Copy/paste/delete of selected items using Ctrl-C /Ctrl-V/Delete, or  via the *Edit* menu. To paste  from the clipboard, click on an empty region of the diagram, or make sure no element on the diagram is selected.
+* Undo /redo  using Ctr-Z/Y, or via the *Edit* menu.
+* Select-All using Ctrl-A or via the *Edit menu*.
+* The view can be panned while holding the spacebar down to get a 'hand' icon then dragging with the mouse.
+
+h3(#notes). Adding Notes to an element.
+
+Any element can have an HTML  note added by selecting an element and choosing <span style="color:red">Add /Edit/View Note  </span> from the context menu.  This will open a dialog like this:
+
+!images/notedlg.png!
+
+The HTML that you add  should be contained in  a single container element such as a _div_ or _body_ element. A preview of the HTML is displayed on the right-hand panel, and error messages inform if the HTML is badly formed.
+
+Once you've added a note to an element, it will show a little icon to indicate this. E.g.,
+
+!images/ElementWithNoteIcon.png!
+
+The <span style="color:red">Remove Note </span> button removes a note from an element.
+
+h3(#create_sim). Creating a simulation element
+
+p. From the editor palette, choose  'Simulation'  and then click on the canvas to add a Simulation object.
+ A dialog will pop up for you to configure the simulation. SED-ML  level 1 version 1 is restricted to uniform time courses. By default, a simulation will defined as running  for 10 time units, using a general ODE solver, with 100 output time points.
+ 
+h3(#create_model). Creating a Model element.
+
+p.   From the editor palette, choose  'Model'  and then click on the canvas to add a Model object.
+ Choose the modelling language  of your model, and its source. This can be a location on the file-system chosen from the file browser or you can enter a stable URN such as a MIRIAM identifier. Currently the editor can retrieve SBML models from Biomodels, if the source is specificed with
+  the appropriate URN (e.g., *urn:miriam:biomodels.db:BIOMD0000000012*).
+ 
+!{width:50%}images/createModel.png!
+
+p. You can preview a model by clicking on the _Preview Model_ button. This will be enabled if the model itself can be retrieved based on the 'source' attribute of the SED-ML model element. _Preview Model_ will apply all changes and show the model as an XML tree for you to browse to check that the changes are as you expect.  You can also access this from within the 'Edit Change' dialog when you double click on a *Change* element.
+
+h4(#create_change). Defining changes to a model.
+
+p. In SED-ML, there are several method to apply changes to an XML based model:
+
+* Changing  the value of an  individual  attribute.
+* Adding new XML
+* Removing an XML element
+* Changing an XML element ( replacing one XML element with another ).
+
+p. In this editor, you can add a change to a model by choosing the <span style="color:red">Add Change  </span> context menu item when you have a model element selected:
+
+!{width:50%}(inline)images/addChange.png!
+
+This opens a dialog:
+
+!{width:50%}images/changeDialog1.png!
+
+p. The *Change type* drop-down menu enables you to choose what sort of change you want to apply. 
+The *Replacement Value* text field is where you insert the changes to make.
+
+p. If you choose to *change an attribute*, the replacement value should be a numerical value. If you choose to *Add XML* or *Change XML*, then the replacement value should be some well formed XML. If you choose *Remove XML* the content of the replacement value is irrelevant and is ignored.
+
+p. The *TargetXPath field* is where you specify the XML to be changed, using an XPath expression. This can be added manually, or by using the  *Get XPath from Model* feature.  If  this is  enabled, it  helps to  create the XPath expressions  from an XML view of your model.  The button is enabled if the editor can get hold of the actual model, specified in the *source* attribute of the Model element to which this change is being added.
+
+p. Currently, two operations are supported by *Get XPath from Model*. Firstly, if you wish to change an attribute:
+# Expand the XML view to the element whose attribute you want to change. 
+# Select two attributes of that element.  The first selected attribute is the attribute whose value you want to change.   The second selected element will be used to identify that element. For SBML elements, for example,  the 'id' attribute would be an ideal choice. E.g., 
+
+!{width:75%}images/chAttributeXML.png!
+
+In the above example. the _initialConcentration_  attribute was selected first,which is what we want to change, then the _id_ attribute, . The XPath expression is previewed in the bottom text field.
+
+p. Secondly, if you choose to add/remove/change XML, choose an identifying attribute of  the element which is to be the target of   the modification, and an XPath expression will be generated. If the element you wish to target has no attributes, then the element is chosen with no identifiers inserted into the XPath expression, which should be sufficient if an element is unique within its parent element.
+
+
+!{width:75%}images/elementXPath.png!
+
+In the above example, we might have chosen this element to be removed. 
+
+p(xpath_prefixes). XPath expressions must always be prefixed, in such a way that they can be mapped to a namespace when  they are evaluated. In this editor,  XPath prefixes are generated according to the following rules.
+# If the  namespace declaration in the model specifies a prefix, then that prefix is used for XPath components in that namespace.
+# If the namespace declaration in the mode does *NOT* specifiy a prefix,  then the name of the element containing the _xmlns_  attribute declaring the namespace is used as an XPath prefix.
+
+ 
+h3(#create_task). Creating a Task
+
+p. *Task* elements connect a *Model* to a *Simulation*. From the editor palette, choose  'Task'  and then click on the canvas to add a Task object. Task elements need no mandatory configuration from a dialog, but must be connected to a *Model* and a *Simulation* to be valid.
+E.g., 
+!{width:50%}images/taskNotOK.png! 
+
+is invalid as the task is not connected. But in
+!{width:50%}images/taskOK.png! 
+
+the task is no longer highlighted in red, as it is connected correctly.
+
+h3(#create_dg). Creating a Data generator
+
+*DataGenerator* elements define one  output of a  simulation. To create a DataGenerator,  from the editor palette, choose  'DataGenerator'  and then click on the canvas to add a DataGenerator object. 
+
+p. In the dialog, you need to enter a mathematical expression for a column of data from the simulation. For example, to just specify unchanged output, enter the ID of the variable you want to display. 
+
+h3(#create_var). Creating a Variable
+
+p. To define variable, select a *DataGenerator* element and choose *Add Variable* from the context menu.
+ A *Variable* is the only SED-ML data type in this editor whose ID is editable - this gives you the chance to use a meaningful ID ( so long as it is alphanumeric and unique in the SED-ML document ). The reason for this is that the variable and parameter names  occurring in the _maths_  section of a DataGenerator must be the IDs of *Variable* and *Parameter* elements.  Variables can also refer to symbols. In SEDML L1V1, 'Time' is the only symbol. If 'No symbol' is chosen, you need to specify an XPath expression to locate the variable in the model whose value you want to display. As with "Changes":#create_change, if your model is accessible, the *Get XPath From Model* button will be enabled, which 
+ helps generate the XPath expression  for you.
+ 
+!{width:75%}images/VariableConfig.png!
+ 
+ In the above diagram, we would use the id 'B' in mathematical expressions in the DataGenerator referring to this variable.
+
+h3(#create_output). Creating an Output
+
+p. *Output* elements define how the simulation results will be presented. To create a Output,  from the editor palette, choose  either 'Plot2D	' or 'Report'   and then click on the canvas to add it. 
+
+p. If you create a *Plot2d* you will need to add *Curve* elements using the   <span style="color:red"> Add Curve </span> menu item. When you create a Curve, it will first appear highlighted in red. You now need to connect the Curve to 2 *DataGenerators*, one for the X axis and one for the Y axis. 
+
+p. If you create a *Report* you will need to add *Dataset* elements using the   <span style="color:red"> Add Dataset </span> menu item. When you create a Dataset, it will first appear highlighted in red. You now need to connect the Dataset to a  *DataGenerator* element.
+
+h2(#edit). Editing existing elements
+
+To edit an existing element, just double-click on  the element to obtain the configuration dialog. You can *undo*  or *redo* edits by clicking Ctrl-Z  and Ctrl-Y, respectively.
+
+h2(#search). Searching for elements.
+
+SEDML documents can be quite long, if there are many output descriptions and many variables are output, so the graph view can be tricky to navigate by itself. SED-ED provides some help, though:
+
+h3. Restricting the view:
+
+From a particular *Output*, it's possible to work out all the simulations and models needed to generate the output. If you select an Output in the editor ( i.e., a Plot or  Report ) and click  
+<span style="color:red"> Toggle Restricted View </span> 
+then only the resources used to generate that output will be shown, all other elements will disappear from view ( although they're *NOT* deleted and remain in the SED-ML model).
+ 
+For example, here's a screenshot of a SED-ML document with two outputs:
+
+!{width:50%}images/beforeReduceView.png!
+Choose the output whose information you want to keep displayed.
+
+!{width:50%}images/reduceViewMenu.png!
+Now, click *Toggle Restricted View*
+
+!{width:50%}images/afterReduceView.png!
+and the elements not needed to reproduce your output are now hidden. To get these restored, repeat the action.
+
+h3. Highlighting elements in the editor using the file view:
+
+If you have the editor open, you can use the content outline in the resource viewer to scroll
+ and highlight the SEDML element in the editor. Simply select the item in the content viewer. For example,
+ 
+ !{width:50%}images/linkFromFileBrowser.png!
+ 
+This feature works with SEDX Archives as well as SEDML files. 
+Currently though, mapping is only made using the element's ID - so if you have multiple editors open on different versions of the SEDML document, you will highlight the element in the currently active editor, which might not edit the same file as that from which you selected the element. To circumvent this,  ensure that the currently active editor refers to the same file as that from which you selected an element. 
+
+
+
+
+
+h2(#sedx). Working with SED-ML archive files
+
+SED-ED supports the proposed SED-ML archive format (SEDX) , described in appendix D of the SED-ML level 1 version 1 specification. This format bundles the SED-ML files and the models it needs in a single archive format.
+
+Features include:
+
+* You can export your SED-ML file to SEDX if the model files can be retrieved based on the value of the source references in the *Model* elements in SED-ML. At present it just supports file paths but in future we hope to support access from  online repositories such as BioModels. To do this, click the blue  button here at the top-left corner of  the toolbar, which will be active when you are when you have a SED-ML editor pane active:
+!./images/sedxport.png!
+* You can inspect the contents of a SED-ML archive by expanding it in the resource viewer ( if it has the *.sedx* extension).
+*  You can open, edit and save an archive format in the same way as a regular file ( if it has the *.sedx* extension).
+* You can expand  a SEDX file by selecting it, then right-clicking and choosing *'Expand SED-ML archive*' from the file menu. This will write files into the same folder  as the archive, and the archive will be preserved ( if it has the *.sedx* extension).
+
+h2(#opening_existing_sedml). Working with existing SED-ML documents
+
+To open an existing SED-ML document using this editor, select it in the Resource View, and from the context menu, choose 
+
+<span style="color:red"> Open->Open With->SED-ML editor </span>
+
+If the SED-ML document has been imported from another source, or not yet edited in the SED-ML Editor, you'll be prompted for some "layout":#layout options.
+# Manually layout. All elements with no Location/Size information will be positioned at (0,0)
+# Layout all. All elements will be laid out afresh, ignoring previous layout information
+# Layout some. This option fixes the location of elements with existing positions but lays out all others. 
+
+
+h2(#layout). Graphical layout of elements.
+
+To automatically layout some or all elements, click on the drawing canvas, and from the context menu, choose <span style="color:red"> Layout </span>. This will layout all un-selected elements. So, to layout all elements, make sure no elements are selected in the editor.  *Be warned that auto-layout is not undoable, so only do it if you really want to!*.
+
+Layout runs in a background thread and can be stopped at any time by clicking cancel in the progress monitor ( the red square in the bottom right-hand corner of the screen-shot below).
+
+ !{width:75%}images/layoutprogress.png!
+ 
+h2(#cross_refs). Connections reference
+
+Two sorts of relationships are represented by edges (connections ) in the SED-ED editor. Firstly, the reference relations specified in section 2.3.5 of the level1 version1 specification, namely:
+
+* Variable ->Task
+* Task->Model
+* Task ->Simulation
+* Output -> Datagenerators
+* Variable->Model ( in *ComputeChange* elements, not yet supported).
+
+Secondly, containment or aggregation relations, such as:
+
+* Model->Changes
+* DataGenerator->Variables
+* DataGenerator->Parameters
+* Report->Datasets
+* Plot2d -> Curves
+
+The reference relations need to be drawn explicitly using the *Connection* tool in the palette, whereas the aggregation relations are automatically added when a child element is added.
+
+h2(#validation). Levels of validation - syntax vs semantics
+
+Any editor needs to provide freedom to enter data in a non-specified order, to be usable, while at the same time ensuring persisted data is not corrupt or meaningless. This section explains some of the levels of validity checking in a SED-ML document.
+
+h3. Syntax validation
+  
+The editor allows for the creation of SED-ML data structures in memory that lack essential information, but any aberrant elements will not be persisted. For example, a *Task* icon that is not connected to a *Model* and a *Simulation* will not be saved to file. 
+
+These elements are highlighted in red in the editor. 
+
+h3. Semantic validation
+
+A document may be syntactically valid but still useless - for example if XPath expressions don't refer elements in a model properly, or if a model cannot be found from the information  in a SED-ML *Model* element. If a model can be retrieved, feedback will be given if an XPath expression does not identify any model element. Other errors are reported in the 'Problems' view or in the expanded tree view of a SED-ML document in the _System View_. E.g., 
+
+!{width=75%}images/Sedmltreeview.png!
+
+h3. Validation for execution
+
+This is the highest level of validation, and this is not checked in SED-ED. Such validation would include, for example, that a simulation algorithm is available which  supports the modelling language specified in the SED-ML document.
+
+
+
+
+
+
+
+
+
+
+ 

@@ -25,7 +25,7 @@ public class ConnectionManagerTest {
 		assertTrue(manager.canConnectReferenceRelations(new GTask(), new GModel() ));
 		assertTrue(manager.canConnectReferenceRelations(new GTask(), new GSimulation() ));
 		assertTrue(manager.canConnectReferenceRelations(new GVariable(), new GTask() ));
-		assertTrue(manager.canConnectReferenceRelations(new GVariable(), new GModel() ));
+		assertFalse(manager.canConnectReferenceRelations(new GVariable(), new GModel() ));
 		
 		assertTrue(manager.canConnectReferenceRelations(new GCurve(), new GDataGenerator() ));
 		assertTrue(manager.canConnectReferenceRelations(new GDataset(), new GDataGenerator() ));

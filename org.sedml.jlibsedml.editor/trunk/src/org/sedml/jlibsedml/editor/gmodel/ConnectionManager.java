@@ -14,7 +14,7 @@ public class ConnectionManager {
 	static Map<Class, List<Class>> src2TargRefRelations = new HashMap<Class, List<Class>>();
 	static {
 		src2TargRefRelations.put(GTask.class, Arrays.asList(new Class[]{GSimulation.class,GModel.class}));
-		src2TargRefRelations.put(GVariable.class, Arrays.asList(new Class[]{GTask.class,GModel.class}));
+		src2TargRefRelations.put(GVariable.class, Arrays.asList(new Class[]{GTask.class}));
 		src2TargRefRelations.put(GCurve.class,Arrays.asList(new Class[]{GDataGenerator.class}));
 		src2TargRefRelations.put(GDataset.class,Arrays.asList(new Class[]{GDataGenerator.class}));
 		

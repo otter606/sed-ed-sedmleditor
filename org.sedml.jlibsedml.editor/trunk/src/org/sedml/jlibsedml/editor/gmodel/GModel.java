@@ -124,42 +124,59 @@ public class GModel extends GElement {
 		return SEDMLTags.MODEL_TAG;
 		}
 	
-	public String getModelAsString(){
+	public String getModelAsString(boolean applyChanges){
 		
 	String rc=null;
 	if(getSource()!=null){
-		
-		
 		if(  canGetSedML() && getParent()!=null){
-			if(WindowsFileRetriever.isWindows()) {
-				setSource(WindowsFileRetriever.convertAbsoluteFilePathToURI(getSource()));;
+			ModelResolver mr = setUpModelResolvers();
+			if(applyChanges) {
+				rc =mr.getModelString(getSEDMLObject());
 			}
-			ModelResolver mr = new ModelResolver(getParent().buildSEDML());
-			mr.add(new FileModelResolver());
-			if(getParent().isSedxArchive()){
-				mr.add(new ArchiveModelResolver(getParent().getArchiveComponents()));
+			else {
+				rc = mr.getReferenceModelString(getSEDMLObject());
 			}
-			if(WindowsFileRetriever.isWindows()){
-				mr.add(new WindowsFileRetriever());
-			}
-			mr.add(new BioModelsModelsRetriever());
-		
-			
-			
-			
-			rc =mr.getModelString(getSEDMLObject());
 		}
 	}
 	return rc;
 	}
 	
+	public String getUnchangedModelAsString(){
+		
+		String rc=null;
+		if(getSource()!=null){
+			if(  canGetSedML() && getParent()!=null){
+				ModelResolver mr = setUpModelResolvers();
+				rc =mr.getReferenceModelString(getSEDMLObject());
+			}
+		}
+		return rc;
+		}
+
+	ModelResolver setUpModelResolvers() {
+		if(WindowsFileRetriever.isWindows()) {
+			setSource(WindowsFileRetriever.convertAbsoluteFilePathToURI(getSource()));;
+		}
+		ModelResolver mr = new ModelResolver(getParent().buildSEDML());
+		mr.add(new FileModelResolver());
+		if(getParent().isSedxArchive()){
+			mr.add(new ArchiveModelResolver(getParent().getArchiveComponents()));
+		}
+		if(WindowsFileRetriever.isWindows()){
+			mr.add(new WindowsFileRetriever());
+		}
+		mr.add(new BioModelsModelsRetriever());
+		return mr;
+	}
+	
 	
 
-	public Document getModelDocument() {
+	public Document getModelDocument(boolean applyChanges) {
 		Document rc = null;
 		SAXBuilder builder = new SAXBuilder();
 		try {
-			String modelStr= getModelAsString();
+			
+			String modelStr= getModelAsString(applyChanges);
 			if(modelStr== null|| modelStr.equals("")) {
 				return null;
 			}

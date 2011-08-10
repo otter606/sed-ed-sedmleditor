@@ -87,7 +87,7 @@ public class GChangeTest {
 		GSedML sedml = new GSedML();
 		sedml.addChild(gm);
 		assertTrue(change.canGetModel());
-		assertNotNull(change.getModelDocument());
+		assertNotNull(change.getModelDocument(true));
 	}
 	
 	@Test

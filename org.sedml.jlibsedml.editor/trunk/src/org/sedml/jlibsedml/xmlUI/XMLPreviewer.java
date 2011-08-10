@@ -9,9 +9,10 @@ import org.eclipse.swt.widgets.Tree;
 import org.jdom.Document;
 
 public class XMLPreviewer extends BaseXMLDialog {
-
-	public XMLPreviewer(Shell parent, Document XML) {
+    private Document unChangedDoc;
+	public XMLPreviewer(Shell parent, Document XML, Document unChangedModel) {
 		super(parent, XML);
+		this.unChangedDoc=unChangedModel;
 	
 	}
 	
@@ -22,7 +23,8 @@ public class XMLPreviewer extends BaseXMLDialog {
 		child.setLayout(new GridLayout());
 		Tree tree = createTree(child,SWT.READ_ONLY | SWT.MULTI);
 		
-		viewer.createViewer(tree, xmlDoc);
+	
+		viewer.createViewer(tree, xmlDoc, unChangedDoc);
 		
 		return child;
 	}

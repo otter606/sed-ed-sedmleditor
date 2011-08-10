@@ -65,7 +65,7 @@ public class XMLAttributeXPathGeneratorDialog extends BaseXMLDialog {
 		final Text t = new Text(child, SWT.BORDER | SWT.READ_ONLY);
 		GridData gd2 = new GridData(SWT.FILL, SWT.FILL, true, false);
 
-		viewer.createViewer(tree, xmlDoc);
+		viewer.createViewer(tree, xmlDoc,null);
 
 		t.setLayoutData(gd2);
 		SelectionListener sl = new SelectionListener() {

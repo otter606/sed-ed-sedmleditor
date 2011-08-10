@@ -241,18 +241,18 @@ public  class GChange extends GElement {
 	
 	public boolean canGetModel() {
 	     return owner != null &&
-	     owner.getModelDocument()!=null;
+	     owner.getModelDocument(true)!=null;
 	}
 
 
 
 
 	public String getModelAsString() {
-		return owner.getModelAsString();
+		return owner.getModelAsString(true);
 	}
 	
-	public Document getModelDocument() {
-		return owner.getModelDocument();
+	public Document getModelDocument(boolean applyChanges) {
+		return owner.getModelDocument(applyChanges);
 	}
 
 	public void setModel(GModel gModel) {

@@ -10,6 +10,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
@@ -143,6 +144,13 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.minimumWidth=100;
 		target.setLayoutData(gd);
+		target.addModifyListener(new ModifyListener() {
+			
+			public void modifyText(ModifyEvent e) {
+				previewModel.setEnabled(calculateEnabled());
+				
+			}
+		});
 		Composite modelViewButtons = new Composite(child,SWT.NONE);
 		GridLayout gl2 = new GridLayout(1, true);
 		modelViewButtons.setLayout(gl2);
@@ -161,10 +169,10 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 					BaseXMLDialog xmlDialog=null;
 					if(chTypeCombo.getText().equals(SEDMLTags.CHANGE_ATTRIBUTE_KIND)){
 						xmlDialog = new XMLAttributeXPathGeneratorDialog(activeShell,
-								gc.getModelDocument());
+								gc.getModelDocument(true));
 					} else {
 						xmlDialog=new XMLElementXPathGeneratorDialog(activeShell,
-								gc.getModelDocument());
+								gc.getModelDocument(true));
 					}
 					if(xmlDialog.open()==Window.OK){
 						target.setText(xmlDialog.getSelectedXPathFromViewer());
@@ -196,8 +204,9 @@ public class ChangeConfigDialog extends BaseConfigDialog {
 					//GChange tm = gc.getCopy();
 					updateModel(gc, chTypeCombo.getText(), target.getText(), replacement.getText());
 				//	tm.setOwner(gc.getOwner());
-					Document model = gc.getModelDocument();
-					XMLPreviewer viewer = new XMLPreviewer(getShell(), model);
+					Document model = gc.getModelDocument(true);
+					Document unChangedModel = gc.getModelDocument(false);
+					XMLPreviewer viewer = new XMLPreviewer(getShell(), model,unChangedModel);
 					viewer.open();
 				}
 				

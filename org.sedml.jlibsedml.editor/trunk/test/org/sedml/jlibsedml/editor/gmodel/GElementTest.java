@@ -39,7 +39,7 @@ public class GElementTest {
 	@Test
 	public final void testGetModelDocumentReturnsNullByDefault() {
 		toTest=new ElementStub();
-		assertNull(toTest.getModelDocument());
+		assertNull(toTest.getModelDocument(true));
 	}
 
 }

@@ -79,8 +79,9 @@ public class ModelConfigDialog extends BaseConfigDialog {
 
 					updateModel(srcText.getText(), lCombo.getText());
 
-					Document model = m.getModelDocument();
-					XMLPreviewer viewer = new XMLPreviewer(getShell(), model);
+					Document model = m.getModelDocument(true);
+					Document unChangedModel = m.getModelDocument(false);
+					XMLPreviewer viewer = new XMLPreviewer(getShell(), model,unChangedModel);
 					viewer.open();
 				}
 

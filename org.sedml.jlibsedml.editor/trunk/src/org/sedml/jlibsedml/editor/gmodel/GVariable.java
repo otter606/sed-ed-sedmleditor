@@ -119,7 +119,7 @@ public class GVariable  extends GElement{
 			GTask t = getTask();
 			if(t.getModel()!=null){
 				GModel m = t.getModel();
-				rc=m.getModelDocument();
+				rc=m.getModelDocument(true);
 				}
 			}
 			

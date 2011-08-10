@@ -399,7 +399,7 @@ public abstract class GElement implements IPropertyChangeSupport {
 	 * @return <code>true</code> if the model can be accessed.
 	 */
 	public boolean canGetModel() {
-		return getModelDocument() != null;
+		return getModelDocument(true) != null;
 	}
 	
 	/**
@@ -409,7 +409,7 @@ public abstract class GElement implements IPropertyChangeSupport {
 	 * @return  A {@link org.jdom.Document} object or <code> null</code> if
 	 *   model could not be identified.
 	 */
-	public Document getModelDocument() {
+	public Document getModelDocument(boolean applyChanges) {
 		return null;
 	}
 	/**

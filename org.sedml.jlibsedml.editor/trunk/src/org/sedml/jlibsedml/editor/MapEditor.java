@@ -138,7 +138,6 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 		super.setInput(input);
 		try {
 			IFile file = ((IFileEditorInput) input).getFile();
-			System.err.println("setting input");
 			SEDMLDocument doc = null;
 			if(file.getFileExtension().equals("sedx")){
 				isSedxArchive=true;
@@ -154,7 +153,7 @@ public class MapEditor extends GraphicalEditorWithFlyoutPalette implements Prope
 			 doc = Libsedml.readDocument(file.getLocation().toFile());
 			}
 			if(doc.hasErrors()){
-				boolean rc  =showPossErrorDialog();
+				boolean rc  = showPossErrorDialog();
 				if(rc == false){
 					return;
 				}

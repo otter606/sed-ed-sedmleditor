@@ -2,7 +2,16 @@
 
 h1. SEDML editor help
 
-This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files.  This documentation is valid for version 0.9.1
+This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files.  This documentation is valid for version 0.9.2.
+
+h2. New in this version
+
+Version 0.9 contains several new features and bug fixes, which are described more completely in the ensuing documentation:
+
+# Improved navigation of SED-ML using the file view.
+# Retrieval of model files via MIRIAM URNs.
+# Filtering the display of large SED-ML files by output.
+# Highlighting changes applied to  models in the model content.
 
 
 h2(#license). Licence
@@ -77,8 +86,8 @@ h4(#create_change). Defining changes to a model.
 p. In SED-ML, there are several method to apply changes to an XML based model:
 
 * Changing  the value of an  individual  attribute.
-* Adding new XML
-* Removing an XML element
+* Adding new XML.
+* Removing an XML element.
 * Changing an XML element ( replacing one XML element with another ).
 
 p. In this editor, you can add a change to a model by choosing the <span style="color:red">Add Change  </span> context menu item when you have a model element selected:
@@ -97,12 +106,12 @@ p. If you choose to *change an attribute*, the replacement value should be a num
 p. The *TargetXPath field* is where you specify the XML to be changed, using an XPath expression. This can be added manually, or by using the  *Get XPath from Model* feature.  If  this is  enabled, it  helps to  create the XPath expressions  from an XML view of your model.  The button is enabled if the editor can get hold of the actual model, specified in the *source* attribute of the Model element to which this change is being added.
 
 p. Currently, two operations are supported by *Get XPath from Model*. Firstly, if you wish to change an attribute:
-# Expand the XML view to the element whose attribute you want to change. 
+# Expand the XML view to the element with an attribute that you want to change. 
 # Select two attributes of that element.  The first selected attribute is the attribute whose value you want to change.   The second selected element will be used to identify that element. For SBML elements, for example,  the 'id' attribute would be an ideal choice. E.g., 
 
 !{width:75%}images/chAttributeXML.png!
 
-In the above example. the _initialConcentration_  attribute was selected first,which is what we want to change, then the _id_ attribute, . The XPath expression is previewed in the bottom text field.
+In the above example. the _initialConcentration_  attribute was selected first, which is what we want to change, then the _id_ attribute, . The XPath expression is previewed in the bottom text field.
 
 p. Secondly, if you choose to add/remove/change XML, choose an identifying attribute of  the element which is to be the target of   the modification, and an XPath expression will be generated. If the element you wish to target has no attributes, then the element is chosen with no identifiers inserted into the XPath expression, which should be sufficient if an element is unique within its parent element.
 
@@ -113,7 +122,7 @@ In the above example, we might have chosen this element to be removed.
 
 p(xpath_prefixes). XPath expressions must always be prefixed, in such a way that they can be mapped to a namespace when  they are evaluated. In this editor,  XPath prefixes are generated according to the following rules.
 # If the  namespace declaration in the model specifies a prefix, then that prefix is used for XPath components in that namespace.
-# If the namespace declaration in the mode does *NOT* specifiy a prefix,  then the name of the element containing the _xmlns_  attribute declaring the namespace is used as an XPath prefix.
+# If the namespace declaration in the mode does *NOT* specify a prefix,  then the name of the element containing the _xmlns_  attribute declaring the namespace is used as an XPath prefix.
 
  
 h3(#create_task). Creating a Task
@@ -176,7 +185,7 @@ Now, click *Toggle Restricted View*
 !{width:50%}images/afterReduceView.png!
 and the elements not needed to reproduce your output are now hidden. To get these restored, repeat the action.
 
-h3. Highlighting elements in the editor using the file view:
+h3(#highlight). Highlighting elements in the editor using the file view:
 
 If you have the editor open, you can use the content outline in the resource viewer to scroll
  and highlight the SEDML element in the editor. Simply select the item in the content viewer. For example,

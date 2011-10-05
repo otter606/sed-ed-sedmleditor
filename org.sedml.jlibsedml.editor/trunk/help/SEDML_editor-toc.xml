@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <toc topic="help/SEDML_editor.html" label="SEDML_editor">
 	<topic href="help/SEDML_editor.html" label="SEDML editor help">
+		<topic href="help/SEDML_editor.html#Newinthisversion" label="New in this version"></topic>
 		<topic href="help/SEDML_editor.html#license" label="Licence"></topic>
 		<topic href="help/SEDML_editor.html#start" label="Creating a new SED-ML file:">
 			<topic href="help/SEDML_editor.html#from_scratch" label="Creating a SED-ML document from scratch."></topic>
@@ -18,7 +19,7 @@
 		<topic href="help/SEDML_editor.html#edit" label="Editing existing elements"></topic>
 		<topic href="help/SEDML_editor.html#search" label="Searching for elements.">
 			<topic href="help/SEDML_editor.html#Restrictingtheview" label="Restricting the view:"></topic>
-			<topic href="help/SEDML_editor.html#Highlightingelementsintheeditorusingthefileview" label="Highlighting elements in the editor using the file view:"></topic>
+			<topic href="help/SEDML_editor.html#highlight" label="Highlighting elements in the editor using the file view:"></topic>
 		</topic>
 		<topic href="help/SEDML_editor.html#sedx" label="Working with SED-ML archive files"></topic>
 		<topic href="help/SEDML_editor.html#opening_existing_sedml" label="Working with existing SED-ML documents"></topic>

@@ -1,4 +1,0 @@
-instructions.configure=\
-	addRepository(type:0,location:http${#58}//www.sbsi.ed.ac.uk/update/, name:SBSI  public);\
-	addRepository(type:1,location:http${#58}//www.sbsi.ed.ac.uk/update/, name:SBSI  public);\
-

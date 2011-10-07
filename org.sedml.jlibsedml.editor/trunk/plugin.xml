@@ -39,7 +39,7 @@
                    file-extensions="xml"
                    id="org.sedml.jlibsedml.editor.sedmlBinding"
                    name="SEDML content type"
-                   priority="high">
+                   priority="low">
              </content-type>
               
           </extension>

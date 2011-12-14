@@ -85,6 +85,7 @@ public class EditorActionContributor extends ActionBarContributor
 		tbm.add(getAction(ActionFactory.REDO.getId()));
 		
 		tbm.add(getAction(ActionFactory.DELETE.getId()));
+		
 //		tbm.add(getAction(ActionFactory.SELECT_ALL.getId()));
 		
 	

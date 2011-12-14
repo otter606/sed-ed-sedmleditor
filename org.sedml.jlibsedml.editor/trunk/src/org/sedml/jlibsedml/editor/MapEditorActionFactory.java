@@ -19,6 +19,7 @@ import org.sedml.jlibsedml.editor.actions.AddNotesAction;
 import org.sedml.jlibsedml.editor.actions.AddParameterAction;
 import org.sedml.jlibsedml.editor.actions.AddVariableAction;
 import org.sedml.jlibsedml.editor.actions.CopyObjectsAction;
+import org.sedml.jlibsedml.editor.actions.CutObjectsAction;
 import org.sedml.jlibsedml.editor.actions.LayoutAction;
 import org.sedml.jlibsedml.editor.actions.PasteAction;
 import org.sedml.jlibsedml.editor.actions.PushOneBackZOrderAction;
@@ -110,6 +111,10 @@ class MapEditorActionFactory {
 
 
 	action = new CopyObjectsAction( mapEditor);
+	registry.registerAction(action);
+	selectionActions.add(action.getId());
+	
+	action = new CutObjectsAction( mapEditor);
 	registry.registerAction(action);
 	selectionActions.add(action.getId());
 

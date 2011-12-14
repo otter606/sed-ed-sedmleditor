@@ -22,7 +22,7 @@ h3. Installing the standalone application
 
 This is the most straightforward installation:
 
-# Go to the "SED-ED download site":http://sourceforge.net/projects/jlibsedml/files/SED-ED/ and download the version for your platform.
+# Go to the "SED-ED download site":http://sourceforge.net/projects/jlibsedml/files/SED-ED/  at http://sourceforge.net/projects/jlibsedml/files/SED-ED/ and download the version for your platform.
 # Unzip and you should get a folder with the following contents: !images/installationDir.png!. To start the application, double-click the launch icon.
 # The first time you run the application, you will be invited to choose a _workspace_. This should be a new folder on your filesystem that SED-ED will use to manage the files and resources you create.
 # The application will now open to produce a rather empty-looking window!{width:70%}images/initView.png!<br/>
@@ -40,7 +40,7 @@ This installation will take  a little longer, but once performed,  you will also
 
 h4. Installing SBSIVisual
 
-# Go to the "SBSI download site":http://sourceforge.net/projects/sbsi and download SBSI for your platform.
+# Go to the "SBSI download site": at http://sourceforge.net/projects/sbsi and download SBSI for your platform.
 # Unzip and launch by either clicking on the  launch icon (Windows users) or on the 'Launch.command' script (MacOSX and Linux users). Please review the README file in the SBSI downloaded folder for more precise instructions.
 # The first time you run the application, you will be invited to choose a _workspace_. This should be a new folder on your filesystem that SBSI will use to manage the files and resources you create.
 # The application will now open to produce a rather empty-looking window.

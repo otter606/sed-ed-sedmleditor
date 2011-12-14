@@ -12,7 +12,7 @@
     </uniformTimeCourse>
   </listOfSimulations>
   <listOfModels>
-    <model id="model1" name="Circadian Oscillations" language="urn:sedml:language:sbml" source="/Users/radams/Documents/SBSIVisualWSspaces/SBSIVisualDemoWS/SEDML_examples/Models/Clock_BIOMD21.xml">
+    <model id="model1" name="Circadian Oscillations" language="urn:sedml:language:sbml" source="urn:miriam:biomodels.db:BIOMD0000000021">
       <annotation>
         <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
           <location y="279" x="530" />

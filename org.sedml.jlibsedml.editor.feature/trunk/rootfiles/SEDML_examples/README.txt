@@ -1,5 +1,8 @@
 This folder contains example SED-ML files and SBML model files. The examples are 
 those used in the SED-ML specification document.
+All the examples now use Biomodels URNs to identify the model. In the editor, you can 
+still edit the 'source' field of the model to point to the filepath where these model files
+ are located, though.
 
 Circadian clock model example:
 ------------------------------

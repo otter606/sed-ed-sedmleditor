@@ -1,0 +1,37 @@
+<project name="doc" default="generate-help">
+<property name="wikitext.standalone" value="/Users/radams/Desktop/eclipseIndigoTarget/plugins"/>
+
+	<path id="wikitext.classpath">
+		<fileset dir="${wikitext.standalone}">
+			<include name="org.eclipse.mylyn.wikitext.*core*.jar"/>
+		</fileset>
+	</path>
+
+	<taskdef classpathref="wikitext.classpath" resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties" />
+	
+	<target name="generate-help"  description="Generate Eclipse help from textile source">
+		<wikitext-to-eclipse-help markupLanguage="Textile" 
+			multipleOutputFiles="true"
+			navigationImages="true"
+			helpPrefix="help">
+			<fileset dir="${basedir}">
+    				<include name="*.textile"/>
+			</fileset>
+			<stylesheet url="global_style.css"/>
+		</wikitext-to-eclipse-help>
+	</target>
+	<property name="fop.home" value="${user.home}/Library/DocPublishing/fop-0.95"/>
+	<target name="generateFO">
+	
+		<wikitext-to-xslfo markupLanguage="Textile" title="SED-ED editor tutorial" validate="false">
+			<fileset dir="." includes="*.textile"/>
+		</wikitext-to-xslfo>
+		<exec command="${fop.home}/fop">
+			        <arg value="-r"/>
+					<arg value="Tutorial.fo"/>
+					<arg value="SED-ED_editor.pdf"/>
+				</exec>
+	</target>
+	
+		
+</project>

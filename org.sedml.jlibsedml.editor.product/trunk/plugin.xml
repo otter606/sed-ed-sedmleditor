@@ -35,7 +35,7 @@
          </property>
          <property
                name="aboutText"
-               value="This is the SED-ED SED-ML editor v 0.9.1, June 2011">
+               value="This is the SED-ED SED-ML editor v 0.9.4, December 2011">
          </property>
          <property
                name="startupProgressRect"

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SED-ML graphical editor
 Bundle-SymbolicName: org.sedml.jlibsedml.editor; singleton:=true
-Bundle-Version: 0.9.3
+Bundle-Version: 0.9.4
 Bundle-Activator: org.sedml.jlibsedml.editor.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

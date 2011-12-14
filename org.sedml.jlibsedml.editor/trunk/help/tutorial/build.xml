@@ -23,7 +23,8 @@
 	<property name="fop.home" value="${user.home}/Library/DocPublishing/fop-0.95"/>
 	<target name="generateFO">
 	
-		<wikitext-to-xslfo markupLanguage="Textile" title="SED-ED editor tutorial" validate="false">
+		<wikitext-to-xslfo markupLanguage="Textile"
+		 title="SED-ED editor tutorial"  subtitle="Version 0.9, December 2011" validate="false">
 			<fileset dir="." includes="*.textile"/>
 		</wikitext-to-xslfo>
 		<exec command="${fop.home}/fop">

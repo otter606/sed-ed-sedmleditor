@@ -74,6 +74,11 @@ public void buildContextMenu(IMenuManager manager) {
 		manager.appendToGroup(GEFActionConstants.GROUP_COPY, action);
 	}
 	
+	action = getActionRegistry().getAction(ActionFactory.CUT.getId());
+	if (action.isEnabled()){
+		manager.appendToGroup(GEFActionConstants.GROUP_COPY, action);
+	}
+	
 	action = getActionRegistry().getAction(ActionFactory.PASTE.getId());
 	if (action.isEnabled()){
 		manager.appendToGroup(GEFActionConstants.GROUP_COPY, action);

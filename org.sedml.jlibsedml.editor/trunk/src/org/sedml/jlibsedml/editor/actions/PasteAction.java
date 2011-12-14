@@ -52,10 +52,13 @@ public class PasteAction extends SelectionAction {
 			return false;
 		
 		if(getSelectedObjects().size() > 0) {
-			for (Iterator<EditPart> it = getSelectedObjects().iterator(); it.hasNext();){
-				EditPart ep = it.next();
-				if(ep instanceof ConnectionEditPart || ep instanceof GElementEditPart){
-					return false;
+			for (Iterator it = getSelectedObjects().iterator(); it.hasNext();){
+				Object o = it.next();
+				if (o instanceof EditPart) {
+					EditPart ep = (EditPart)o;
+					if(ep instanceof ConnectionEditPart || ep instanceof GElementEditPart){
+						return false;
+					}
 				}
 			}
 		}

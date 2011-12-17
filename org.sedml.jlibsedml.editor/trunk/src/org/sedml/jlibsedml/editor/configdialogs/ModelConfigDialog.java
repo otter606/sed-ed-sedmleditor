@@ -77,7 +77,7 @@ public class ModelConfigDialog extends BaseConfigDialog {
 			public void widgetSelected(SelectionEvent e) {
 				if (m.canGetModel()) {
 
-					updateModel(srcText.getText(), lCombo.getText());
+					updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()));
 
 					Document model = m.getModelDocument(true);
 					Document unChangedModel = m.getModelDocument(false);
@@ -99,7 +99,7 @@ public class ModelConfigDialog extends BaseConfigDialog {
 			return;
 		}
 		if (srcText != null && lCombo != null && lCombo.getText() != null) {
-			updateModel(srcText.getText(), lCombo.getText());
+			updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()));
 			if (m.canGetModel())
 				previewButton.setEnabled(true);
 			else 
@@ -147,6 +147,7 @@ public class ModelConfigDialog extends BaseConfigDialog {
 		// text can be modified
 
 		lCombo.setItems(langHelper.getLanguagesAsStrings());
+		langHelper.getURNForLang("");
 
 		lCombo.addModifyListener(new VerifyingModifyListener() {
 			public void modifyText(ModifyEvent e) {

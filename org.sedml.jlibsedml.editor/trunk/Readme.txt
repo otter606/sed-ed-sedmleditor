@@ -1,6 +1,16 @@
-This is the README file for the SED-ED SEDML editor, released August 2011.
+This is the README file for the SED-ED SEDML editor, released December 2011.
 
-What's new this version:
+
+
+What's new in 0.9.5
+
+New Features
+
+ - 'Cut' editing functionality added
+ - You can now copy and paste between diagrams
+ - Bugfix for editing Miriam URNs which caused application to hang.
+
+What's new this version (0.9.1):
 
 New features
 1) Can now obtain SBML models from BioModels referenced by a Miriam URN ( needs internet connection ).
@@ -16,4 +26,4 @@ See the embedded help documentation for details.
 Any questions or bugs, please email to richard.adamsATed.ac.uk
 
 Richard Adams
-Edinburgh, August 2011
+Edinburgh, December 2011

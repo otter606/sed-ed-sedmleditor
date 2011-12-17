@@ -244,6 +244,7 @@ You should now see a new model element with two Change Shapes attached to it.
 
 !images/changes.png! 
 
+
 The changes we applied above have  the effect of dampening oscillations in the model. If you're running SBSIVisual then you can see this by reconnecting the task shape to the new model and executing the SED-ML file. ( To reconnect, click on the connection between the task and the original model to select it, then drag the connection target from the first model to the second). 
 
 To generate a new output showing the simulation output of the new model, make a copy of the  existing  tasks, dataGenerators, and outputs, and connect the new model to the new copy of  the task. You may need to edit the new Variable Ids and Math expressions - every ID must be globally unique in SED-ML.

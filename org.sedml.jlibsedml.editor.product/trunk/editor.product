@@ -114,7 +114,7 @@
       <feature id="org.eclipse.wst.xml_ui.feature" version="3.3.0.v201103310011-7H7EFZ-DxumTla66ahfUnHfpsz0u5Z92pU4TxSL"/>
       <feature id="org.sedml.jlibsedml.editor.product.feature" version="0.9.3"/>
       <feature id="org.sedml.jlibsedml.feature" version="1.0.5"/>
-      <feature id="org.sedml.jlibsedml.editor.feature" version="0.9.5"/>
+      <feature id="org.sedml.jlibsedml.editor.feature" version="0.9.6"/>
    </features>
 
 

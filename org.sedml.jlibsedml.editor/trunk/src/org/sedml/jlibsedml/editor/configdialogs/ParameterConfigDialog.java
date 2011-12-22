@@ -74,7 +74,8 @@ public class ParameterConfigDialog extends BaseConfigDialog {
 	protected void okPressed() {
 		final double TOLERANCE=0.0001;
 		final double d = Double.parseDouble(textValue.getText());
-		if( hasChanged(TOLERANCE, d)) {
+		final String name = gParam.getName();
+		if( hasChanged(TOLERANCE, d, name)) {
 			execute( new ICommand() {
 				
 				public void undo() {
@@ -83,6 +84,8 @@ public class ParameterConfigDialog extends BaseConfigDialog {
 				
 				public void redo() {
 					gParam.setValue(d);	
+					gParam.setName(name);
+					
 				}
 				
 				public void execute() {
@@ -98,8 +101,8 @@ public class ParameterConfigDialog extends BaseConfigDialog {
 
 	}
 
-	private boolean hasChanged(final double TOLERANCE, final double d) {
-		return Math.abs(d - oldValue)  >TOLERANCE;
+	private boolean hasChanged(final double TOLERANCE, final double d, String name) {
+		return Math.abs(d - oldValue)  >TOLERANCE || !oldName.equals(name);
 	}
 
 	@Override

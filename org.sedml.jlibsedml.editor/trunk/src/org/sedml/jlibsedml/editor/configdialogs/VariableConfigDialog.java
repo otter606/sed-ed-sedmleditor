@@ -168,8 +168,9 @@ public class VariableConfigDialog extends BaseConfigDialog {
 		final String targetstr= target.getText();
 		final VariableSymbol symbolstr = (symbols.getSelectionIndex()==TIME_INDEX)?VariableSymbol.TIME:null;
 		final String id = nameGroup.idText.getText();
+		final String name = nameGroup.nmText.getText();
 		
-		if(hasChanged(targetstr, symbolstr, id)) {
+		if(hasChanged(targetstr, symbolstr, id, name)) {
 			execute ( new ICommand() {
 				
 				public void undo() {
@@ -183,7 +184,8 @@ public class VariableConfigDialog extends BaseConfigDialog {
 						gvar.setTargetXPath(targetstr);	
 					}
 					gvar.setSymbol(symbolstr);
-					gvar.setId(id);			
+					gvar.setId(id);	
+					gvar.setName(name);
 				}
 				public void execute() {
 					redo();
@@ -199,8 +201,8 @@ public class VariableConfigDialog extends BaseConfigDialog {
 	}
 
 	private boolean hasChanged(String targetstr, VariableSymbol symbolstr,
-			String id) {
-	return !targetstr.equals(oldtarget)|| !id.equals(oldId) ||
+			String id, String name) {
+	return !targetstr.equals(oldtarget)|| !id.equals(oldId) ||(name !=null && !name.equals(gvar.getName())) ||
 	   (  symbolstr!=null &&!symbolstr.toString().equals(oldSymbol==null?"":oldSymbol.toString()));
 	}
 

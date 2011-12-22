@@ -30,12 +30,14 @@ public class DGConfigDialog extends BaseConfigDialog {
 	private GDataGenerator gdg;
 	private Text maths;
 	private ASTNode oldMaths;
+	private String oldName;
 	private IDNameGroup nameGroup;
 	private ListViewer varViewer;
 	public DGConfigDialog(Shell shell, GDataGenerator gdg) {
 		super(shell);
 		this.gdg=gdg;
 		this.oldMaths=gdg.getMath();
+		this.oldName=gdg.getName();
 	}
 	
 	protected Control createDialogArea(Composite parent) {
@@ -128,13 +130,16 @@ public class DGConfigDialog extends BaseConfigDialog {
 	
 	protected void okPressed() {
 		final String mathsText = maths.getText();
-		if(oldMaths == null || !mathsText.equals(new FormulaFormatter().formulaToString(oldMaths))){
+		final String name = gdg.getName();
+		if(oldMaths == null || !mathsText.equals(new FormulaFormatter().formulaToString(oldMaths))
+				|| !(name.equals(oldName))){
 			execute( new ICommand() {	
 				public void undo() {
 					resetOldValues();	
 				}
 				public void redo() {
 					gdg.setMath(Libsedml.parseFormulaString(mathsText));
+					gdg.setName(name);
 				}
 				
 				public void execute() {

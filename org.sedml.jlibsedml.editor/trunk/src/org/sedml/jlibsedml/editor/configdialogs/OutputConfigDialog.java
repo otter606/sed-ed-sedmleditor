@@ -59,6 +59,33 @@ public class OutputConfigDialog extends BaseConfigDialog {
 		 outPut.setId(oldID);
 		 outPut.setName(oldName);	
 	}
+	
+	protected void okPressed() {
+		
+		final String name = outPut.getName();
+		if( oldName !=null && !oldName.equals(name)) {
+			execute( new ICommand() {
+				
+				public void undo() {
+					resetOldValues();
+					}
+				
+				public void redo() {
+					outPut.setName(name);
+				}
+				
+				public void execute() {
+					redo();		
+				}
+				public String getLabel() {
+					return "Edit Output";
+				}
+			});
+		}
+	
+		super.okPressed();
+
+	}
 	@Override
 	List<VerifyObject> createVerifyObjects() {
 		return Collections.EMPTY_LIST;

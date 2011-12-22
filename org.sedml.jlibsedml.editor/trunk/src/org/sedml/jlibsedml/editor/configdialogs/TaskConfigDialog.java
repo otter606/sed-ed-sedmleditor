@@ -43,6 +43,33 @@ public class TaskConfigDialog extends BaseConfigDialog {
 
 	}
 	
+	protected void okPressed() {
+	
+		final String name = t.getName();
+		if( oldName !=null && !oldName.equals(name)) {
+			execute( new ICommand() {
+				
+				public void undo() {
+					resetOldValues();
+					}
+				
+				public void redo() {
+					t.setName(name);
+				}
+				
+				public void execute() {
+					redo();		
+				}
+				public String getLabel() {
+					return "Edit Task";
+				}
+			});
+		}
+	
+		super.okPressed();
+
+	}
+	
 	
 	 void resetOldValues() {
 		t.setId(oldID);

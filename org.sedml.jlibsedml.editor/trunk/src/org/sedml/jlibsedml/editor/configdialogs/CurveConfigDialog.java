@@ -73,7 +73,9 @@ public class CurveConfigDialog extends BaseConfigDialog {
 	protected void okPressed() {
 		final boolean logXsel = xbutt.getSelection();
 		final boolean logYsel = ybutt.getSelection();
-		if(logXsel!=oldLogx || logYsel!=oldLogy ) {
+		final String name = gc.getName();
+
+		if(logXsel!=oldLogx || logYsel!=oldLogy || !(name.equals(oldName) )) {
 			execute ( new ICommand() {
 				
 				public void undo() {
@@ -82,7 +84,8 @@ public class CurveConfigDialog extends BaseConfigDialog {
 				
 				public void redo() {
 					gc.setLogx(logXsel);
-					gc.setLogy(logYsel);	
+					gc.setLogy(logYsel);
+					gc.setName(name);
 				}
 				
 				public void execute() {

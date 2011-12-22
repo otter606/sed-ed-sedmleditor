@@ -77,7 +77,7 @@ public class ModelConfigDialog extends BaseConfigDialog {
 			public void widgetSelected(SelectionEvent e) {
 				if (m.canGetModel()) {
 
-					updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()));
+					updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()),m.getName());
 
 					Document model = m.getModelDocument(true);
 					Document unChangedModel = m.getModelDocument(false);
@@ -99,7 +99,7 @@ public class ModelConfigDialog extends BaseConfigDialog {
 			return;
 		}
 		if (srcText != null && lCombo != null && lCombo.getText() != null) {
-			updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()));
+			updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()), m.getName());
 			if (m.canGetModel())
 				previewButton.setEnabled(true);
 			else 
@@ -223,7 +223,8 @@ public class ModelConfigDialog extends BaseConfigDialog {
 	protected void okPressed() {
 		final String src = srcText.getText();
 		final String lang = langHelper.getURNForLang(lCombo.getText());
-		if (hasChanged(src, lang)) {
+		final String name = m.getName();
+		if (hasChanged(src, lang,name)) {
 
 			execute(new ICommand() {
 
@@ -232,7 +233,7 @@ public class ModelConfigDialog extends BaseConfigDialog {
 				}
 
 				public void redo() {
-					updateModel(src, lang);
+					updateModel(src, lang,name);
 
 				}
 
@@ -251,13 +252,14 @@ public class ModelConfigDialog extends BaseConfigDialog {
 
 	}
 
-	private void updateModel(final String src, final String lang) {
+	private void updateModel(final String src, final String lang, String name) {
 		m.setSource(src);
 		m.setLanguage(lang);
+		m.setName(name);
 	}
 
-	private boolean hasChanged(String src, String lang) {
-		return (!src.equals(OldSrc) || !lang.equals(OldLang));
+	private boolean hasChanged(String src, String lang, String name) {
+		return (!src.equals(OldSrc) || !lang.equals(OldLang) || !name.equals(oldName));
 	}
 
 }

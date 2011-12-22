@@ -77,6 +77,7 @@ public class DatasetConfigDialog extends BaseConfigDialog {
 	
 	protected void okPressed() {
 		final String text = labelText.getText();
+		final String name = gc.getName();
 		if(hasChanged(text)){
 			execute (new ICommand() {
 				
@@ -87,6 +88,7 @@ public class DatasetConfigDialog extends BaseConfigDialog {
 				
 				public void redo() {
 					gc.setLabel(text);
+					gc.setName(name);
 					
 				}
 				
@@ -105,7 +107,7 @@ public class DatasetConfigDialog extends BaseConfigDialog {
 	}
 
 	private boolean hasChanged(String text) {
-		return ! text.equals(oldLabel);
+		return ! text.equals(oldLabel) || !(gc.getName().equals(oldName));
 	}
 
 	@Override

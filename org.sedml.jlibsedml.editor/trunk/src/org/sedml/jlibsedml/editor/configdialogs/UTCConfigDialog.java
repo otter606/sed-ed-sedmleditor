@@ -167,8 +167,9 @@ public class UTCConfigDialog extends BaseConfigDialog {
 		final double outStartd = Double.parseDouble(outStart.getText());
 		final double outEndd = Double.parseDouble(end.getText());
 		final int numpointss = Integer.parseInt(numPoints.getText());
+		final String name=sim.getName() ;
 		final Algorithm alg = sim.getAlgorithm();
-		if( hasChanged(simStartd, outStartd, outEndd, numpointss )
+		if( hasChanged(simStartd, outStartd, outEndd, numpointss, name)
 				|| !sim.getAlgorithm().equals(oldUTC.getAlgorithm())){
 			execute( new ICommand() {
 				
@@ -182,6 +183,7 @@ public class UTCConfigDialog extends BaseConfigDialog {
 					sim.setOutEnd(outEndd);
 					sim.setNumPoints(numpointss);
 					sim.setAlgorithm(alg);
+					sim.setName(name);
 				}
 				
 				public void execute() {
@@ -201,12 +203,13 @@ public class UTCConfigDialog extends BaseConfigDialog {
 	
 
 	private boolean hasChanged(double simStartd, double outStartd,
-			double outEndd, int numpointss) {
+			double outEndd, int numpointss, String name) {
 		double TOLERANCE = 0.000001;
 		return numpointss != oldUTC.getNumberOfPoints() ||
 		Math.abs( simStartd - oldUTC.getInitialTime()) >TOLERANCE ||
 		Math.abs(outStartd-oldUTC.getOutputStartTime()) > TOLERANCE ||
-		Math.abs(outEndd-oldUTC.getOutputEndTime()) > TOLERANCE; 
+		Math.abs(outEndd-oldUTC.getOutputEndTime()) > TOLERANCE ||
+		 (name !=null && !name.equals(sim.getName())); 
 		}
 
 	private void createEnd(Composite child) {

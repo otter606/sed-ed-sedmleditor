@@ -15,7 +15,7 @@ public class CurveConfigDialog extends BaseConfigDialog {
 	
 	private GCurve gc;
 	
-	private String oldName;
+	private String oldName, oldId;
 	private boolean oldLogx, oldLogy;
 	private Button xbutt, ybutt;
 
@@ -25,6 +25,7 @@ public class CurveConfigDialog extends BaseConfigDialog {
 	    this.oldName=gc.getName();
 	    this.oldLogx=gc.isLogx();
 	    this.oldLogy=gc.isLogy();
+	    this.oldId=gc.getId();
 	   
 		
 	}
@@ -74,8 +75,10 @@ public class CurveConfigDialog extends BaseConfigDialog {
 		final boolean logXsel = xbutt.getSelection();
 		final boolean logYsel = ybutt.getSelection();
 		final String name = gc.getName();
+		final String id = gc.getId();
 
-		if(logXsel!=oldLogx || logYsel!=oldLogy || !(name.equals(oldName) )) {
+		if(logXsel!=oldLogx || logYsel!=oldLogy || !(name.equals(oldName) )
+				|| !(id.equals(oldId) )) {
 			execute ( new ICommand() {
 				
 				public void undo() {
@@ -86,6 +89,7 @@ public class CurveConfigDialog extends BaseConfigDialog {
 					gc.setLogx(logXsel);
 					gc.setLogy(logYsel);
 					gc.setName(name);
+					gc.setId(id);
 				}
 				
 				public void execute() {
@@ -108,6 +112,7 @@ public class CurveConfigDialog extends BaseConfigDialog {
 		gc.setName(oldName);
 		gc.setLogx(oldLogx);
 		gc.setLogy(oldLogy);
+		gc.setId(oldId);
 		
 
 	}

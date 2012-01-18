@@ -77,7 +77,8 @@ public class ModelConfigDialog extends BaseConfigDialog {
 			public void widgetSelected(SelectionEvent e) {
 				if (m.canGetModel()) {
 
-					updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()),m.getName());
+					updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()),
+							m.getName(),m.getId());
 
 					Document model = m.getModelDocument(true);
 					Document unChangedModel = m.getModelDocument(false);
@@ -99,7 +100,8 @@ public class ModelConfigDialog extends BaseConfigDialog {
 			return;
 		}
 		if (srcText != null && lCombo != null && lCombo.getText() != null) {
-			updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()), m.getName());
+			updateModel(srcText.getText(), langHelper.getURNForLang(lCombo.getText()),
+					m.getName(),m.getId());
 			if (m.canGetModel())
 				previewButton.setEnabled(true);
 			else 
@@ -224,7 +226,8 @@ public class ModelConfigDialog extends BaseConfigDialog {
 		final String src = srcText.getText();
 		final String lang = langHelper.getURNForLang(lCombo.getText());
 		final String name = m.getName();
-		if (hasChanged(src, lang,name)) {
+		final String id = m.getId();
+		if (hasChanged(src, lang,name,id)) {
 
 			execute(new ICommand() {
 
@@ -233,7 +236,7 @@ public class ModelConfigDialog extends BaseConfigDialog {
 				}
 
 				public void redo() {
-					updateModel(src, lang,name);
+					updateModel(src, lang,name,id);
 
 				}
 
@@ -252,14 +255,16 @@ public class ModelConfigDialog extends BaseConfigDialog {
 
 	}
 
-	private void updateModel(final String src, final String lang, String name) {
+	private void updateModel(final String src, final String lang, String name, String id) {
 		m.setSource(src);
 		m.setLanguage(lang);
 		m.setName(name);
+		m.setId(id);
 	}
 
-	private boolean hasChanged(String src, String lang, String name) {
-		return (!src.equals(OldSrc) || !lang.equals(OldLang) || !name.equals(oldName));
+	private boolean hasChanged(String src, String lang, String name, String id) {
+		return (!src.equals(OldSrc) || !lang.equals(OldLang) || !name.equals(oldName)
+				||!id.equals(oldID));
 	}
 
 }

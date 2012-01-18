@@ -16,13 +16,14 @@ public class DatasetConfigDialog extends BaseConfigDialog {
 	
 	private GDataset gc;
 	
-	private String oldName, oldLabel;
+	private String oldName, oldLabel, oldId;
 	private Text labelText;
 
 	public DatasetConfigDialog(Shell shell, GDataset gc) {
 		super(shell);
 		this.gc=gc;
 	    this.oldName=gc.getName();
+	    this.oldId=gc.getId();
 	    this.oldLabel=gc.getLabel();
 	   
 	   
@@ -78,6 +79,7 @@ public class DatasetConfigDialog extends BaseConfigDialog {
 	protected void okPressed() {
 		final String text = labelText.getText();
 		final String name = gc.getName();
+		final String id = gc.getId();
 		if(hasChanged(text)){
 			execute (new ICommand() {
 				
@@ -89,6 +91,7 @@ public class DatasetConfigDialog extends BaseConfigDialog {
 				public void redo() {
 					gc.setLabel(text);
 					gc.setName(name);
+					gc.setId(id);
 					
 				}
 				
@@ -114,6 +117,7 @@ public class DatasetConfigDialog extends BaseConfigDialog {
 	void resetOldValues() {
 		gc.setName(oldName);
 		gc.setLabel(oldLabel);
+		gc.setId(oldId);
 	}
 
 }

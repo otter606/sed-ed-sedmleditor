@@ -63,6 +63,7 @@ public class OutputConfigDialog extends BaseConfigDialog {
 	protected void okPressed() {
 		
 		final String name = outPut.getName();
+		final String id = outPut.getId();
 		if( oldName !=null && !oldName.equals(name)) {
 			execute( new ICommand() {
 				
@@ -72,6 +73,7 @@ public class OutputConfigDialog extends BaseConfigDialog {
 				
 				public void redo() {
 					outPut.setName(name);
+					outPut.setId(id);
 				}
 				
 				public void execute() {

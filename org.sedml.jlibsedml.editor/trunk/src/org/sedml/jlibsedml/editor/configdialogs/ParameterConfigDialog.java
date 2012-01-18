@@ -16,6 +16,7 @@ public class ParameterConfigDialog extends BaseConfigDialog {
 
 	private GParameter gParam;
 	private String oldName;
+	private String oldId;
 	private double oldValue;
 	private Text textValue;
 	private IDNameGroup nameGroup;
@@ -25,6 +26,7 @@ public class ParameterConfigDialog extends BaseConfigDialog {
 		this.gParam = gParam;
 		this.oldName = gParam.getName();
 		this.oldValue = gParam.getValue();
+		this.oldId=gParam.getId();
 
 	}
 
@@ -75,7 +77,8 @@ public class ParameterConfigDialog extends BaseConfigDialog {
 		final double TOLERANCE=0.0001;
 		final double d = Double.parseDouble(textValue.getText());
 		final String name = gParam.getName();
-		if( hasChanged(TOLERANCE, d, name)) {
+		final String id = gParam.getId();
+		if( hasChanged(TOLERANCE, d, name,id)) {
 			execute( new ICommand() {
 				
 				public void undo() {
@@ -85,6 +88,7 @@ public class ParameterConfigDialog extends BaseConfigDialog {
 				public void redo() {
 					gParam.setValue(d);	
 					gParam.setName(name);
+					gParam.setId(id);
 					
 				}
 				
@@ -101,14 +105,16 @@ public class ParameterConfigDialog extends BaseConfigDialog {
 
 	}
 
-	private boolean hasChanged(final double TOLERANCE, final double d, String name) {
-		return Math.abs(d - oldValue)  >TOLERANCE || !oldName.equals(name);
+	private boolean hasChanged(final double TOLERANCE, final double d, String name, String id) {
+		return Math.abs(d - oldValue)  >TOLERANCE || !oldName.equals(name)
+				||!id.equals(id);
 	}
 
 	@Override
 	void resetOldValues() {
 		gParam.setName(oldName);
 		gParam.setValue(oldValue);
+		gParam.setId(oldId);
 
 	}
 

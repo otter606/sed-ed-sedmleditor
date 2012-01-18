@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.sedml.jlibsedml.editor.Activator;
-import org.sedml.jlibsedml.editor.WorkbenchPartExecutor;
 
 public abstract class BaseConfigDialog extends TrayDialog {
     Label status;

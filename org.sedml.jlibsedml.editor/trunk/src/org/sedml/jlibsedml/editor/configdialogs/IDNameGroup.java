@@ -27,20 +27,18 @@ public class IDNameGroup {
 	public IDNameGroup (Composite parent, GElement gElement) {
 		this.gElement=gElement;
 		createIDRow(parent);
-		createNameRow(parent);
-		
+		createNameRow(parent);		
 	}
 	
 	// read only - ids are created automatically
 	private void createIDRow(Composite child) {
 		new Label (child,SWT.NULL).setText(IDLabel);
 		idText = new Text(child,SWT.BORDER);
-		idText.setEditable(false);
+		idText.setEditable(true);
 		idText.setText(gElement.getId());
 		GridData gd = new GridData(SWT.FILL, SWT.CENTER,true, false);
 		gd.minimumWidth=150;
 		gd.horizontalSpan=2;
-
 		idText.setLayoutData(gd);
 	}
 	
@@ -58,6 +56,14 @@ public class IDNameGroup {
 		nmText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				gElement.setName(nmText.getText());
+			}
+		});
+		
+		idText.addModifyListener(new ModifyListener() {
+			
+			public void modifyText(ModifyEvent e) {
+				gElement.setId(idText.getText());
+				
 			}
 		});
 	}

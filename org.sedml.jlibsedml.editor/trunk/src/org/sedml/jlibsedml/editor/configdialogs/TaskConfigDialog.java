@@ -46,7 +46,10 @@ public class TaskConfigDialog extends BaseConfigDialog {
 	protected void okPressed() {
 	
 		final String name = t.getName();
-		if( oldName !=null && !oldName.equals(name)) {
+
+		final String id = t.getId();
+		if( oldName !=null && !oldName.equals(name) || 
+				oldID !=null && !oldID.equals(id)) {
 			execute( new ICommand() {
 				
 				public void undo() {
@@ -55,6 +58,7 @@ public class TaskConfigDialog extends BaseConfigDialog {
 				
 				public void redo() {
 					t.setName(name);
+					t.setId(id);
 				}
 				
 				public void execute() {

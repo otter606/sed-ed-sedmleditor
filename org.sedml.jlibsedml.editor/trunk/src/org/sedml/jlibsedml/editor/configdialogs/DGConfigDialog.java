@@ -31,6 +31,7 @@ public class DGConfigDialog extends BaseConfigDialog {
 	private Text maths;
 	private ASTNode oldMaths;
 	private String oldName;
+	private String oldId;
 	private IDNameGroup nameGroup;
 	private ListViewer varViewer;
 	public DGConfigDialog(Shell shell, GDataGenerator gdg) {
@@ -38,6 +39,7 @@ public class DGConfigDialog extends BaseConfigDialog {
 		this.gdg=gdg;
 		this.oldMaths=gdg.getMath();
 		this.oldName=gdg.getName();
+		this.oldId=gdg.getId();
 	}
 	
 	protected Control createDialogArea(Composite parent) {
@@ -131,8 +133,9 @@ public class DGConfigDialog extends BaseConfigDialog {
 	protected void okPressed() {
 		final String mathsText = maths.getText();
 		final String name = gdg.getName();
+		final String id = gdg.getId();
 		if(oldMaths == null || !mathsText.equals(new FormulaFormatter().formulaToString(oldMaths))
-				|| !(name.equals(oldName))){
+				|| !(name.equals(oldName)) ||  !(id.equals(oldId))){
 			execute( new ICommand() {	
 				public void undo() {
 					resetOldValues();	
@@ -140,6 +143,7 @@ public class DGConfigDialog extends BaseConfigDialog {
 				public void redo() {
 					gdg.setMath(Libsedml.parseFormulaString(mathsText));
 					gdg.setName(name);
+					gdg.setId(id);
 				}
 				
 				public void execute() {

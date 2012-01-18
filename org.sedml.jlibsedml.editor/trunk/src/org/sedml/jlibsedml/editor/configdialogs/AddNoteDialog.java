@@ -7,6 +7,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -31,7 +32,7 @@ import org.sedml.jlibsedml.xmlutils.XMLHandler;
  * 
  */
 public class AddNoteDialog extends BaseConfigDialog {
-	private Text text;
+	private StyledText text;
 	private Browser browser;
 	private GElement sedmlEl;
 	private XMLHandler handler;
@@ -57,14 +58,17 @@ public class AddNoteDialog extends BaseConfigDialog {
 
 		createBrowser(child);
 		createClearNotesBttn(child);
-
+		text.addModifyListener(new VerifyingModifyListener());
+		text.addFocusListener(new VerifyingFocusListener());
 		if (sedmlEl.getNotes() != null) {
 			Element el = sedmlEl.getNotes().getNotesElement();
 			text.setText(handler.getElementsAsString(Arrays
 					.asList(new Element[] { el })));
+		}else {
+			text.setText("<p>\n\n</p>");
+			text.setCaretOffset(4); // sets cursor between p tags
 		}
-		text.addModifyListener(new VerifyingModifyListener());
-		text.addFocusListener(new VerifyingFocusListener());
+		
 		createStatus(child, 2);
 		setHelp(parent);
 		setHelpAvailable(true);
@@ -114,7 +118,7 @@ public class AddNoteDialog extends BaseConfigDialog {
 	}
 
 	private void createTextEntryField(Composite child) {
-		text = new Text(child, SWT.BORDER | SWT.WRAP);
+		text = new StyledText(child, SWT.BORDER | SWT.WRAP);
 		GridData gd = new GridData(GridData.FILL_BOTH);
 		gd.minimumHeight = 200;
 		gd.minimumWidth = 200;

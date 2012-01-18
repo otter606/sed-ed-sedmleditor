@@ -1,5 +1,10 @@
-This is the README file for the SED-ED SEDML editor, released December 2011.
+This is the README file for the SED-ED SEDML editor, released January 2012.
 
+
+What's new in 0.9.7
+
+- Element IDs are now editable
+- HTML note editor now provides HTML wrapper for content.
 
 
 What's new in 0.9.5

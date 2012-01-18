@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.sedml.jlibsedml.editor.feature_0.9.5.jar" id="org.sedml.jlibsedml.editor.feature" version="0.9.5">
+   <feature url="features/org.sedml.jlibsedml.editor.feature_0.9.7.jar" id="org.sedml.jlibsedml.editor.feature" version="0.9.7">
       <category name="sedmlTools"/>
    </feature>
    <category-def name="sedmlTools" label="SED-ML Tools">

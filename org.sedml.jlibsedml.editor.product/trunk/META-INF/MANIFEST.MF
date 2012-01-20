@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SED-ED
 Bundle-SymbolicName: org.sedml.jlibsedml.editor.product; singleton:=true
-Bundle-Version: 0.9.7
+Bundle-Version: 0.9.8
 Bundle-Activator: org.sedml.jlibsedml.editor.product.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,

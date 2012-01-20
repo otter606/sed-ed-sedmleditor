@@ -49,6 +49,7 @@ public class CopyObjectsActionTest {
 	
 		private List selectedObjects;
 		boolean isIconSet;
+		private Object clipboard;
 		 /*
 		  * Package scoped for testing only
 		  */
@@ -65,6 +66,9 @@ public class CopyObjectsActionTest {
 					
 				 }
 			void	setIcons(){isIconSet=true;}
+			 void copyToClipboard(Object copied) {
+					clipboard=copied;	
+				}
 	}
 	@Before
 	public void setUp() throws Exception {
@@ -74,11 +78,7 @@ public class CopyObjectsActionTest {
 		 ep2 = new GElementEditPart();
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		Clipboard.getDefault().setContents("");
-	}
-
+	
 	@Test
 	public final void testRun() {
 	
@@ -89,7 +89,7 @@ public class CopyObjectsActionTest {
 		new Connection(gm,gt);
 		actionTSS.setSelectedObjects(Arrays.asList(new GElementEditPart []{ep,ep2}));
 		actionTSS.run();
-		List<GElement> cp = (List<GElement>)Clipboard.getDefault().getContents();
+		List<GElement> cp = (List<GElement>)actionTSS.clipboard;
 		assertNotNull(cp);
 		assertEquals(2,cp.size());
 		assertEquals(1, cp.get(0).getSrcConnections().size());
@@ -106,7 +106,7 @@ public class CopyObjectsActionTest {
 		ep.setModel(gm);
 		actionTSS.setSelectedObjects(Arrays.asList(new GElementEditPart []{ep}));
 		actionTSS.run();
-		List<GElement> cp = (List<GElement>)Clipboard.getDefault().getContents();
+		List<GElement> cp = (List<GElement>) (List<GElement>)actionTSS.clipboard;
 		assertNotNull(cp);
 		assertEquals(1,cp.size());
 		assertEquals(gm.getName(), cp.get(0).getName());

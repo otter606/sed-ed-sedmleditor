@@ -55,7 +55,7 @@ public class CutObjectsAction extends SelectionAction {
 		CopyAndCutActionHelper helper= new CopyAndCutActionHelper();
 		List<GElement> copied = helper.getCopiesOfSelection(getSelectedObjects());
 
-		Clipboard.getDefault().setContents(copied);
+		copyToClipboard(copied);
 		CompoundCommand cc = new CompoundCommand("Cut");
 		for (Iterator it = getSelectedObjects().iterator(); it.hasNext();) {
 			Object o = it.next();
@@ -70,5 +70,9 @@ public class CutObjectsAction extends SelectionAction {
 		execute(cc);
 		
 	}
+	
+	 void copyToClipboard(Object copied) {
+			Clipboard.getDefault().setContents(copied);	
+		}
 
 }

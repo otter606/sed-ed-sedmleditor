@@ -56,7 +56,11 @@ public class CopyObjectsAction extends SelectionAction {
 		CopyAndCutActionHelper helper= new CopyAndCutActionHelper();
 		List<GElement> copied = helper.getCopiesOfSelection(getSelectedObjects());
 
-		Clipboard.getDefault().setContents(copied);
+		copyToClipboard(copied);
+	}
+
+	 void copyToClipboard(Object copied) {
+		Clipboard.getDefault().setContents(copied);	
 	}
 
 	

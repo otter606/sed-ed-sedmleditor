@@ -46,9 +46,12 @@ public class PasteAction extends SelectionAction {
 		setDisabledImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE_DISABLED));
 	}
 
+	Object getClipboard(){
+		return Clipboard.getDefault().getContents();
+	}
 	@Override
 	protected boolean calculateEnabled() {
-		if (Clipboard.getDefault().getContents() == null)
+		if ( getClipboard() == null)
 			return false;
 		
 		if(getSelectedObjects().size() > 0) {
@@ -62,7 +65,7 @@ public class PasteAction extends SelectionAction {
 				}
 			}
 		}
-		Object  contents = Clipboard.getDefault().getContents();
+		Object  contents =  getClipboard();
 		if(contents instanceof List &&!((List)contents).isEmpty() && ((List)contents).get(0) instanceof GElement ) {
 			return true;
 		}
@@ -73,7 +76,7 @@ public class PasteAction extends SelectionAction {
 		MapEditPart selected = ((MapEditPart) getSelectedObjects().get(0));
 		GSedML root =  (GSedML)(selected.getModel());
 		List<GElement> toAdd = new ArrayList<GElement>();
-		List<GElement>  clipboard =(List) Clipboard.getDefault().getContents();
+		List<GElement>  clipboard =(List)  getClipboard();
 		Map<GElement, GElement> clipBrd2Copy = new HashMap<GElement, GElement>();
 		for (GElement cpbord: clipboard) {
 			GElement gep = cpbord.getCopy();

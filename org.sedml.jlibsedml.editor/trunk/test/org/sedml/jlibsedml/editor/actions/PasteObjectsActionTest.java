@@ -37,6 +37,12 @@ public class PasteObjectsActionTest {
 	GElementEditPart ep ;
 	GElementEditPart ep2 ;
 	
+	private Object clipboard;
+	
+	public void setClipboard(Object clipboard) {
+		this.clipboard = clipboard;
+	}
+
 	class PasteActionStub extends PasteAction{
 
 		public PasteActionStub(IWorkbenchPart part) {
@@ -63,6 +69,9 @@ public class PasteObjectsActionTest {
 					
 				 }
 			void	setIcons(){isIconSet=true;}
+			Object getClipboard(){
+				return clipboard;
+			}
 	}
 	@Before
 	public void setUp() throws Exception {
@@ -72,11 +81,7 @@ public class PasteObjectsActionTest {
 		 ep2 = new GElementEditPart();
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		Clipboard.getDefault().setContents(new Object());
-	}
-
+	
 	
 	
 	@Test
@@ -95,7 +100,7 @@ public class PasteObjectsActionTest {
 	public final void testCalculateEnabledFalseIfItemSelected() {
 		GModel model = TestUtils.createValidGModel("id");
 		List<GElement> el = Arrays.asList(new GElement[]{model});
-		Clipboard.getDefault().setContents(el);
+		setClipboard(el);
 		actionTSS.setSelectedObjects(Arrays.asList(new GElementEditPart[]{ep}));
 		assertFalse(action.isEnabled());
 	}
@@ -104,10 +109,10 @@ public class PasteObjectsActionTest {
 	public final void testCalculateEnabledForGElementt() {
 		GModel model = TestUtils.createValidGModel("id");
 		List<GElement> el = Arrays.asList(new GElement[]{model});
-		Clipboard.getDefault().setContents(el);
+		setClipboard(el);
 		actionTSS.setSelectedObjects(Collections.EMPTY_LIST);
 		assertTrue(action.isEnabled());
-		Clipboard.getDefault().setContents(Collections.EMPTY_LIST);
+		setClipboard(Collections.EMPTY_LIST);
 		assertFalse(action.isEnabled());
 	}
 	

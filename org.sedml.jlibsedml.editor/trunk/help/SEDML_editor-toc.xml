@@ -1,7 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <toc topic="help/SEDML_editor.html" label="SEDML_editor">
 	<topic href="help/SEDML_editor.html" label="SEDML editor help">
-		<topic href="help/SEDML_editor.html#Newinthisversion" label="New in this version"></topic>
+		<topic href="help/SEDML_editor.html#Newinthisversion" label="New in this version">
+			<topic href="help/SEDML_editor.html#Whatsnewin0.9.7" label="What's new in 0.9.7"></topic>
+			<topic href="help/SEDML_editor.html#Whatsnewin0.9.5" label="What's new in 0.9.5"></topic>
+			<topic href="help/SEDML_editor.html#Whatsnewin0.9.4" label="What's new in 0.9.4"></topic>
+		</topic>
 		<topic href="help/SEDML_editor.html#license" label="Licence"></topic>
 		<topic href="help/SEDML_editor.html#start" label="Creating a new SED-ML file:">
 			<topic href="help/SEDML_editor.html#from_scratch" label="Creating a SED-ML document from scratch."></topic>

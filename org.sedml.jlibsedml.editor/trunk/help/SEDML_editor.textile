@@ -2,11 +2,23 @@
 
 h1. SEDML editor help
 
-This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files.  This documentation is valid for version 0.9.4.
+This document describes how to use the SED-ML graphical  editor plugin for SBSI, for the creation, viewing and editing of SED-ML files.  This documentation is valid for version 0.9 onwards.
 
 h2. New in this version
 
-Version 0.9 contains several new features and bug fixes, which are described more completely in the ensuing documentation:
+h4. What's new in 0.9.7
+
+# Element IDs are now editable. 
+# HTML note editor now provides HTML wrapper for content.
+# You can now view the SED-ML file as an HTML document by selecting a SED-ML file and clicking '*View in Browser*'.
+
+h4. What's new in 0.9.5
+
+# 'Cut' editing functionality added.
+# You can now copy and paste between diagrams.
+# Bugfix for editing Miriam URNs which caused application to hang.
+
+h4. What's new in 0.9.4
 
 # Improved navigation of SED-ML using the file view.
 # Retrieval of model files via MIRIAM URNs.

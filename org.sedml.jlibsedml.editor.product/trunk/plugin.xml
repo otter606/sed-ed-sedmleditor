@@ -57,6 +57,36 @@
    </extension>
    <extension
          point="org.eclipse.ui.menus">
+          <!-- Help menu -->
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="help"
+               label="Help"
+               tooltip="Actions for help, update and about dialogs">
+            <command
+                  commandId="org.eclipse.ui.help.helpContents"
+                  id="help.helpContents"
+                  label="Help Contents"
+                  style="push">
+            </command>
+            <separator
+                  name="uk.ac.ed.csbe.help.separator1"
+                  visible="true">
+            </separator>
+        
+            <separator
+                  name="uk.ac.ed.csbe.sbsivisual2.separator1">
+            </separator>
+                <command
+                  commandId="org.eclipse.ui.help.aboutAction"
+                  id="help.helpAbout"
+                  label="About SED-ED"
+                  style="push">
+            </command>
+         
+         </menu>
+      </menuContribution>
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu">
          <menu

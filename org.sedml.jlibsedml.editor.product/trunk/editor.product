@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="SED-ED" id="org.sedml.jlibsedml.editor.product.product" application="org.sedml.jlibsedml.editor.product.application" version="0.9.7" useFeatures="true" includeLaunchers="true">
+<product name="SED-ED" id="org.sedml.jlibsedml.editor.product.product" application="org.sedml.jlibsedml.editor.product.application" version="0.9.8" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <text>
@@ -114,7 +114,7 @@
       <feature id="org.eclipse.wst.xml_ui.feature" version="3.3.0.v201103310011-7H7EFZ-DxumTla66ahfUnHfpsz0u5Z92pU4TxSL"/>
       <feature id="org.sedml.jlibsedml.feature" version="1.0.5"/>
       <feature id="org.sedml.jlibsedml.editor.feature" version="0.9.7"/>
-      <feature id="org.sedml.jlibsedml.editor.product.feature" version="0.9.7"/>
+      <feature id="org.sedml.jlibsedml.editor.product.feature" version="0.9.8"/>
    </features>
 
 

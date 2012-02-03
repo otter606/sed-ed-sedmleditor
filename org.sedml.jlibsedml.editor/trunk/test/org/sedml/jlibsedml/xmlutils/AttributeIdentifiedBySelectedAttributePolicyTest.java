@@ -40,7 +40,7 @@ public class AttributeIdentifiedBySelectedAttributePolicyTest {
 	@Test
 	public final void testGetXPathForAttribute() throws JDOMException, IOException {
 		String xmltoTest="<a><b name='c' id='2'/></a>";
-		doc = getDoc(xmltoTest);
+		doc = TestUtils.getDoc(xmltoTest);
 		List els = doc.getRootElement().getContent(new ElementFilter());
 		Attribute wanted = ((Element)els.get(0)).getAttribute("name");
 		Attribute elID = ((Element)els.get(0)).getAttribute("id");
@@ -50,13 +50,11 @@ public class AttributeIdentifiedBySelectedAttributePolicyTest {
 		assertEquals("/a:a/a:b[@id='2']/@name",policy.getXPathForAttribute(wanted));
 	}
 
-	Document getDoc(String in) throws JDOMException, IOException {
-		return new XMLUtils().readDoc(new ByteArrayInputStream(in.getBytes()));
-	}
+	
 	@Test
 	public final void testGetXPathForElement() throws JDOMException, IOException {
 		String xmltoTest="<a><b name='c'/></a>";
-		doc = getDoc(xmltoTest);
+		doc = TestUtils.getDoc(xmltoTest);
 		policy = new ElementIdentifiedBySelectedAttributePolicy(doc);
 		assertEquals("/a:a",policy.getXPathForElement(doc.getRootElement()));
 	}

@@ -5,6 +5,8 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jdom.Document;
 import org.jdom.JDOMException;
@@ -15,6 +17,7 @@ import org.sedml.execution.ArchiveModelResolver;
 import org.sedml.execution.FileModelResolver;
 import org.sedml.execution.ModelResolver;
 import org.sedml.modelsupport.BioModelsModelsRetriever;
+import org.sedml.modelsupport.URLResourceRetriever;
 
 public class GModel extends GElement {
 	
@@ -138,6 +141,17 @@ public class GModel extends GElement {
 			}
 		}
 	}
+	if(rc!=null){
+		String cleanXMLString = null;
+		Pattern pattern = null;
+		Matcher matcher = null;
+		pattern = Pattern.compile("[\\000]*");
+		matcher = pattern.matcher(rc);
+		if (matcher.find()) {
+		   cleanXMLString = matcher.replaceAll("");
+		   rc=cleanXMLString;
+		}
+	}
 	return rc;
 	}
 	
@@ -166,6 +180,7 @@ public class GModel extends GElement {
 			mr.add(new WindowsFileRetriever());
 		}
 		mr.add(new BioModelsModelsRetriever());
+		mr.add(new URLResourceRetriever());
 		return mr;
 	}
 	
@@ -180,6 +195,7 @@ public class GModel extends GElement {
 			if(modelStr== null|| modelStr.equals("")) {
 				return null;
 			}
+			System.err.println(modelStr);
 			rc = builder.build(new StringReader(modelStr));
 		} catch (JDOMException e) {
 		

@@ -37,7 +37,7 @@ public final class Location {
 	
 	/**
 	 * Convenience constructor. X and y values are offset from top-left
-	 * hand corner of the dispaly area.
+	 * hand corner of the display area.
 	 * @param x an <code>int</code>
 	 * @param y an <code>int</code>
 	 */

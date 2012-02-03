@@ -3,19 +3,18 @@ This is the README file for the SED-ED SEDML editor, released January 2012.
 
 What's new in 0.9.7
 
-- Element IDs are now editable
+- Element IDs are now editable.
 - HTML note editor now provides HTML wrapper for content.
-
+- You can now view the SED-ML file as an HTML document by selecting
+   a SED-ML file and clicking '*View in Browser*'.
 
 What's new in 0.9.5
-
-New Features
 
  - 'Cut' editing functionality added
  - You can now copy and paste between diagrams
  - Bugfix for editing Miriam URNs which caused application to hang.
 
-What's new this version (0.9.1):
+What's new in 0.9.1
 
 New features
 1) Can now obtain SBML models from BioModels referenced by a Miriam URN ( needs internet connection ).
@@ -31,4 +30,4 @@ See the embedded help documentation for details.
 Any questions or bugs, please email to richard.adamsATed.ac.uk
 
 Richard Adams
-Edinburgh, December 2011
+Edinburgh, January 2012

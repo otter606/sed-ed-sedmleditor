@@ -70,6 +70,8 @@ public  String getXPathFor(Element el, Document doc) {
 			
 
 			
+		}else {
+			addIdentifiersToXPath(out,  el2);
 		}
 	}
 	
@@ -90,7 +92,7 @@ public  String getXPathForElementIdentifiedByAttribute(Element el, Document doc,
 	Map<Namespace,String> ns2Prefix= getNamespacesWithPRefixes(doc);
 	Stack<Element> s = buildElementStack(el);
 	StringBuffer out = new StringBuffer();
-
+	
 	while(!s.isEmpty()){
 		Element el2 = s.pop();
 		out.append("/").append(ns2Prefix.get(el2.getNamespace()) + ":"+el2.getName());
@@ -100,12 +102,29 @@ public  String getXPathForElementIdentifiedByAttribute(Element el, Document doc,
 		if(atts!=null){
 			out.append("[@").append(atts.getName()).append("='").append(atts.getValue()).append("']");
 		}
+		}else {
+			addIdentifiersToXPath(out, el2);
 		}
 	}
 
 	return out.toString();
 	
 	}
+
+void addIdentifiersToXPath(StringBuffer out, 
+		Element el2) {
+	AttributeUniqenessAnalyser anal = new AttributeUniqenessAnalyser();
+	String anaString = anal.getMostUniqueAttribute(el2);
+	if(anaString!=null){
+		out.append("[@").append( anaString).append("='")
+		.append(el2.getAttribute(anaString).getValue()).append("']");
+	}else {
+		int indx =anal.getIndexForElementAmongstSiblings(el2);
+		if(indx!=-1)
+		out.append("[").append(indx)
+		.append("]");
+	}
+}
 
 /**
  * An 
@@ -119,7 +138,8 @@ public  String getXPathForAttributeIdentifiedByAttribute(Element el, Attribute t
 	Map<Namespace,String> ns2Prefix= getNamespacesWithPRefixes(doc);
 	Stack<Element> s = buildElementStack(el);
 	StringBuffer out = new StringBuffer();
-
+	AttributeUniqenessAnalyser anal = new AttributeUniqenessAnalyser();
+	
 	while(!s.isEmpty()){
 		Element el2 = s.pop();
 		out.append("/").append(ns2Prefix.get(el2.getNamespace()) + ":"+el2.getName());
@@ -127,6 +147,8 @@ public  String getXPathForAttributeIdentifiedByAttribute(Element el, Attribute t
 			out.append("[@").append( identifier.getName()).append("='")
 				.append(identifier.getValue()).append("']")
 				.append("/@").append(toIdentify.getName());
+		}else {
+			addIdentifiersToXPath(out,  el2);
 		}
 		
 	}

@@ -1,5 +1,13 @@
-This is the README file for the SED-ED SEDML editor, released January 2012.
+This is the README file for the SED-ED SEDML editor, released February 2012.
 
+
+What's new in 0.9.9
+
+- Models can now be retrieved from standard URLs as well as Miriam URNs.
+- XPath generation now uniquely defines elements. Where possible,
+  the generated XPath will use a unique combination of attributes. If this is not possible,
+   then then indices of elements will be used. This is less preferable,though, as the ordering of 
+    elements could change without affecting the meaning of the model. 
 
 What's new in 0.9.7
 

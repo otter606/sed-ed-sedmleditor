@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.jdom.Attribute;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -51,7 +52,7 @@ public class XPathGeneratorTest {
 		Iterator it = doc.getDescendants(new ElementFilter());
 		while (it.hasNext()) {
 			Element el = (Element) it.next();
-			String XPATH = utils.getXPathForElementIdentifiedByAttribute(el, doc, "initialAmount");
+			String XPATH = utils.getXPathForElementIdentifiedByAttribute(el, doc, new Attribute("initialAmount","1"));
 			System.err.println(XPATH);
 		}
 	}

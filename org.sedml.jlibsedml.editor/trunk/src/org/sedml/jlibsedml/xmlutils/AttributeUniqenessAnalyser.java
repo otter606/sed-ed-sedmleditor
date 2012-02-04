@@ -13,19 +13,22 @@ import org.jdom.filter.ElementFilter;
 public class AttributeUniqenessAnalyser {
 	
 	
-	public String getMostUniqueAttribute(Element el) {
+	public AttDataObj getUniqueAttributeForElement(Element el) {
 		List<Element> sibs  = getSiblings(el);
 		Iterator it = sibs.iterator();
-		Map<String, Integer> map = new TreeMap<String, Integer>();
+		Map<AttDataObj, Integer> map = new TreeMap<AttDataObj, Integer>();
 		while (it.hasNext()){
 			Element sib = (Element)it.next();
 			List<Attribute> atts =sib.getAttributes();
 			for (Attribute att:atts){
 				// only consider atts that our element has
-				if(el.getAttribute(att.getName())== null){
+				if(el.getAttribute(att.getName(),att.getNamespace())== null){
 					continue;
 				}
-				String key = att.getName() + ">"+att.getValue();
+				AttDataObj key = new AttDataObj();
+				key.name=att.getName();
+				key.ns=att.getNamespace();
+				key.val=att.getValue();
 				if(map.containsKey(key)){
 					int incremented = map.get(key);
 					incremented++;
@@ -36,20 +39,24 @@ public class AttributeUniqenessAnalyser {
 			}
 		}
 		int currMin = Integer.MAX_VALUE;
-		String currAtt = null;
-		for (String key: map.keySet()){
+		AttDataObj currAtt = null;
+		for (AttDataObj key: map.keySet()){
 			if (map.get(key) < currMin){
 				currAtt = key;
 				currMin = map.get(key);
 			}
 		}
 		
-		String name = null;
-		if (currAtt!=null){
-			 name = currAtt.substring(0,currAtt.indexOf('>'));
+		
+		if (currAtt!=null && currMin ==1){
+			return currAtt;
+		}else {
+			return null;
 		}
-		return name;
+			
 	}
+	
+	
 
 	/**
 	 * Gets the index of an element amongst its siblings. This method is namespace aware and 

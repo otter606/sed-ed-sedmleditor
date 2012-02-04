@@ -37,7 +37,7 @@ public class ElementIdentifiedBySelectedAttributePolicy implements
 		
 		
 				return new XMLUtils().getXPathForElementIdentifiedByAttribute(
-						attribute.getParent(), doc, attribute.getName());
+						attribute.getParent(), doc, attribute);
 			
 			
 		

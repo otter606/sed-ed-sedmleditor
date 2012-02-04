@@ -71,7 +71,7 @@ public  String getXPathFor(Element el, Document doc) {
 
 			
 		}else {
-			addIdentifiersToXPath(out,  el2);
+			addIdentifiersToXPath(out,  el2,ns2Prefix);
 		}
 	}
 	
@@ -83,12 +83,12 @@ public  String getXPathFor(Element el, Document doc) {
 /**
  * An 
  * @param el An {@link Element} that is attached to its hierarchy. 
- * @param attName A
+ * @param attribute A
  * @return
  * @throws IOException 
  * @throws JDOMException 
  */
-public  String getXPathForElementIdentifiedByAttribute(Element el, Document doc,  String attName)  {
+public  String getXPathForElementIdentifiedByAttribute(Element el, Document doc,  Attribute selected)  {
 	Map<Namespace,String> ns2Prefix= getNamespacesWithPRefixes(doc);
 	Stack<Element> s = buildElementStack(el);
 	StringBuffer out = new StringBuffer();
@@ -97,13 +97,16 @@ public  String getXPathForElementIdentifiedByAttribute(Element el, Document doc,
 		Element el2 = s.pop();
 		out.append("/").append(ns2Prefix.get(el2.getNamespace()) + ":"+el2.getName());
 		if(s.size()==0){
-		 Attribute atts = el2.getAttribute(attName);
+			String attname = selected.getName();
+			// we have to consider attribute namespaces here.
+			if((selected.getNamespace()!=null && !selected.getNamespace().equals(Namespace.NO_NAMESPACE))){
+				String pf = ns2Prefix.get(selected.getNamespace());
+				attname=pf+":"+attname;
+			}
+			out.append("[@").append(attname).append("='").append(selected.getValue()).append("']");
 		
-		if(atts!=null){
-			out.append("[@").append(atts.getName()).append("='").append(atts.getValue()).append("']");
-		}
 		}else {
-			addIdentifiersToXPath(out, el2);
+			addIdentifiersToXPath(out, el2,ns2Prefix);
 		}
 	}
 
@@ -112,12 +115,18 @@ public  String getXPathForElementIdentifiedByAttribute(Element el, Document doc,
 	}
 
 void addIdentifiersToXPath(StringBuffer out, 
-		Element el2) {
+		Element el2, Map<Namespace, String> ns2Prefix) {
 	AttributeUniqenessAnalyser anal = new AttributeUniqenessAnalyser();
-	String anaString = anal.getMostUniqueAttribute(el2);
-	if(anaString!=null){
-		out.append("[@").append( anaString).append("='")
-		.append(el2.getAttribute(anaString).getValue()).append("']");
+	AttDataObj uniqueAttr = anal.getUniqueAttributeForElement(el2);
+	if(uniqueAttr!=null){
+		out.append("[@");
+		if(!uniqueAttr.ns.equals(Namespace.NO_NAMESPACE)){
+			String pfx = ns2Prefix.get(uniqueAttr.ns);
+			out.append(pfx+":");
+		}
+		out.append( uniqueAttr.name).append("='");
+		out.append(el2.getAttribute(uniqueAttr.name, uniqueAttr.ns).getValue()).append("']");
+		
 	}else {
 		int indx =anal.getIndexForElementAmongstSiblings(el2);
 		if(indx!=-1)
@@ -138,17 +147,17 @@ public  String getXPathForAttributeIdentifiedByAttribute(Element el, Attribute t
 	Map<Namespace,String> ns2Prefix= getNamespacesWithPRefixes(doc);
 	Stack<Element> s = buildElementStack(el);
 	StringBuffer out = new StringBuffer();
-	AttributeUniqenessAnalyser anal = new AttributeUniqenessAnalyser();
 	
 	while(!s.isEmpty()){
 		Element el2 = s.pop();
 		out.append("/").append(ns2Prefix.get(el2.getNamespace()) + ":"+el2.getName());
 		if(s.size()==0){
+			
 			out.append("[@").append( identifier.getName()).append("='")
 				.append(identifier.getValue()).append("']")
 				.append("/@").append(toIdentify.getName());
 		}else {
-			addIdentifiersToXPath(out,  el2);
+			addIdentifiersToXPath(out,  el2,ns2Prefix);
 		}
 		
 	}
@@ -156,6 +165,8 @@ public  String getXPathForAttributeIdentifiedByAttribute(Element el, Attribute t
 	return out.toString();
 	
 }
+
+
 private Stack<Element> buildElementStack(Element el) {
 	Stack<Element> s = new Stack<Element>();
 	s.push(el);

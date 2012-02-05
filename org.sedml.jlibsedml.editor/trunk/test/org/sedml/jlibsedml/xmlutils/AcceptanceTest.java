@@ -29,6 +29,7 @@ import org.jdom.filter.ElementFilter;
 import org.jdom.output.XMLOutputter;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.sedml.XPathEvaluationException;
 import org.sedml.XPathTarget;
@@ -48,7 +49,7 @@ public class AcceptanceTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	@Ignore
 	@Test
 	public final void test() throws JDOMException, IOException, XPathEvaluationException, ParserConfigurationException, SAXException {
 		File [] models = SBMLMODEL_DIR.listFiles();

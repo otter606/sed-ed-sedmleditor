@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jdom.Attribute;
 import org.jdom.Document;
@@ -29,13 +31,16 @@ public Document readDoc(InputStream is) throws JDOMException, IOException {
 	
 }
 
-public Map<Namespace,Element>  getNamespaces(Document doc) {
+
+
+public Map<Namespace,Element>  getElementNamespaces(Document doc) {
 	
 	Iterator it = doc.getDescendants(new ElementFilter());
 	Map<Namespace,Element> nss = new HashMap<Namespace,Element>();
 	while (it.hasNext()) {
 		Element el = (Element) it.next();
 		Namespace ns = el.getNamespace();
+		
 
 		if (ns != null && nss.get(ns)==null ){
 			nss.put(ns,el);
@@ -46,17 +51,37 @@ public Map<Namespace,Element>  getNamespaces(Document doc) {
 }
 
  Map<Namespace,String>  getNamespacesWithPRefixes(Document doc){
-	Map<Namespace,Element> n2El = getNamespaces(doc);
+	Map<Namespace,Element> n2El = getElementNamespaces(doc);
 	Map<Namespace,String> rc =new HashMap<Namespace,String>();
 	for (Namespace ns:n2El.keySet()){
+		String s = null;
+		// ideally we use the existing prefix in the model element
 		if(ns.getPrefix().length()>0){
 			rc.put(ns, ns.getPrefix());
+		// else we use the namespace to generate a prefix
+		}else if(( s =getNCNameFromNSURL(ns))!=null) {
+			rc.put(ns, s);
+		// else a last resort we sjust use the element name as a prefix and 
+		// hope this will get matched to a namespace in the model.
 		}else {
 			rc.put(ns, n2El.get(ns).getName());
 		}
 	}
 	return rc;
 }
+ 
+ // this method will generate a sensible ( but long winded) prefix based on 
+ // the URL, translating to an XML NcNAME suitable for use as an XPath prefix.
+ private String  getNCNameFromNSURL(Namespace ns){
+	 String uri = ns.getURI();
+	 Pattern p = Pattern.compile("^(.+://)?([^:\\? ]+)");
+	 Matcher m = p.matcher(uri);
+	 if(m.find()){
+		 return m.group(2).replaceAll("/", "_");
+	 }else {
+		 return null;
+	 }
+ }
 
 public  String getXPathFor(Element el, Document doc) {
 	Map<Namespace,String> ns2Prefix= getNamespacesWithPRefixes(doc);
@@ -66,9 +91,10 @@ public  String getXPathFor(Element el, Document doc) {
 	while(!s.isEmpty()){
 		Element el2 = s.pop();
 		out.append("/").append(ns2Prefix.get(el2.getNamespace()) + ":"+el2.getName());
+	
 		if(s.size()==0){
 			
-
+			addIdentifiersToXPath(out,  el2,ns2Prefix);
 			
 		}else {
 			addIdentifiersToXPath(out,  el2,ns2Prefix);
@@ -97,13 +123,7 @@ public  String getXPathForElementIdentifiedByAttribute(Element el, Document doc,
 		Element el2 = s.pop();
 		out.append("/").append(ns2Prefix.get(el2.getNamespace()) + ":"+el2.getName());
 		if(s.size()==0){
-			String attname = selected.getName();
-			// we have to consider attribute namespaces here.
-			if((selected.getNamespace()!=null && !selected.getNamespace().equals(Namespace.NO_NAMESPACE))){
-				String pf = ns2Prefix.get(selected.getNamespace());
-				attname=pf+":"+attname;
-			}
-			out.append("[@").append(attname).append("='").append(selected.getValue()).append("']");
+			out.append("[@").append(getAttStrForAtt(selected)).append("='").append(selected.getValue()).append("']");
 		
 		}else {
 			addIdentifiersToXPath(out, el2,ns2Prefix);
@@ -114,18 +134,16 @@ public  String getXPathForElementIdentifiedByAttribute(Element el, Document doc,
 	
 	}
 
+// adds predicates to an element in the location path to enable unambigous identification 
 void addIdentifiersToXPath(StringBuffer out, 
 		Element el2, Map<Namespace, String> ns2Prefix) {
 	AttributeUniqenessAnalyser anal = new AttributeUniqenessAnalyser();
 	AttDataObj uniqueAttr = anal.getUniqueAttributeForElement(el2);
 	if(uniqueAttr!=null){
 		out.append("[@");
-		if(!uniqueAttr.ns.equals(Namespace.NO_NAMESPACE)){
-			String pfx = ns2Prefix.get(uniqueAttr.ns);
-			out.append(pfx+":");
-		}
-		out.append( uniqueAttr.name).append("='");
-		out.append(el2.getAttribute(uniqueAttr.name, uniqueAttr.ns).getValue()).append("']");
+		out.append(getAttStrForAtt(uniqueAttr.att)).append("='");
+		String val = el2.getAttribute(uniqueAttr.name, uniqueAttr.ns).getValue();
+		out.append(escape(val)).append("']");
 		
 	}else {
 		int indx =anal.getIndexForElementAmongstSiblings(el2);
@@ -133,6 +151,10 @@ void addIdentifiersToXPath(StringBuffer out,
 		out.append("[").append(indx)
 		.append("]");
 	}
+}
+
+private Object escape(String val) {
+	return val.replaceAll("'", "&apos;");
 }
 
 /**
@@ -153,9 +175,9 @@ public  String getXPathForAttributeIdentifiedByAttribute(Element el, Attribute t
 		out.append("/").append(ns2Prefix.get(el2.getNamespace()) + ":"+el2.getName());
 		if(s.size()==0){
 			
-			out.append("[@").append( identifier.getName()).append("='")
+			out.append("[@").append( getAttStrForAtt(identifier)).append("='")
 				.append(identifier.getValue()).append("']")
-				.append("/@").append(toIdentify.getName());
+				.append("/@").append(getAttStrForAtt(toIdentify));
 		}else {
 			addIdentifiersToXPath(out,  el2,ns2Prefix);
 		}
@@ -163,6 +185,15 @@ public  String getXPathForAttributeIdentifiedByAttribute(Element el, Attribute t
 	}
 
 	return out.toString();
+	
+}
+// generates attname with or without a prefix depending on if it has a namespace
+String getAttStrForAtt(Attribute att ){
+	if(!att.getNamespace().equals(Namespace.NO_NAMESPACE)){
+		return att.getNamespacePrefix() + ":"+att.getName();
+	}else {
+		return att.getName();
+	}
 	
 }
 
@@ -177,7 +208,7 @@ private Stack<Element> buildElementStack(Element el) {
 }
 
 /**
- * Gets concatenated list of name=vale pairs of attributes.
+ * Gets concatenated list of name=value pairs of attributes.
  * @param element
  * @return
  */

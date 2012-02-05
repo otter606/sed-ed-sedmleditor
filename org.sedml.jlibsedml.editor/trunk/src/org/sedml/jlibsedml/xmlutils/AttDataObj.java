@@ -1,13 +1,20 @@
 package org.sedml.jlibsedml.xmlutils;
 
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.jdom.Namespace;
 
-
+/*
+ * Similar to the org.jdom.Attribute but with equals/hashcode reimplemented
+ * to use the data as a test for equlaity, not reference based equality. 
+ */
 class AttDataObj implements Comparable<AttDataObj> {
 	
 	String name;
 	Namespace ns;
 	String val;
+	Element el;
+	Attribute att;
 	@Override
 	public int hashCode() {
 		final int prime = 31;

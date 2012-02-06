@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="help/Tutorial.html" label="Tutorial">
+	<topic href="help/Tutorial.html" label="SED-ED tutorial">
+		<topic href="help/Tutorial.html#Installationandgettingstarted." label="Installation and getting started.">
+			<topic href="help/Tutorial.html#Installingthestandaloneapplication" label="Installing the standalone application"></topic>
+			<topic href="help/Tutorial.html#InstallingasanSBSIVisualplugin" label="Installing as an SBSIVisual plugin">
+				<topic href="help/Tutorial.html#InstallingSBSIVisual" label="Installing SBSIVisual"></topic>
+				<topic href="help/Tutorial.html#InstallingtheSEDEDpluginforSBSIVisual" label="Installing the SED-ED plugin for SBSIVisual"></topic>
+			</topic>
+			<topic href="help/Tutorial.html#InstallationasanEclipseplugin" label="Installation as an Eclipse plugin"></topic>
+		</topic>
+		<topic href="help/Tutorial.html#CreatingSEDMLfilesdenovo" label="Creating SED-ML files de novo">
+			<topic href="help/Tutorial.html#CreatinganewSEDMLfile" label="Creating a new SED-ML file"></topic>
+			<topic href="help/Tutorial.html#BuildingtheSEDMLdocument" label="Building the SED-ML document">
+				<topic href="help/Tutorial.html#CreatingaModel" label="Creating a Model"></topic>
+				<topic href="help/Tutorial.html#Simulations" label="Simulations"></topic>
+				<topic href="help/Tutorial.html#Task" label="Task"></topic>
+				<topic href="help/Tutorial.html#DataGenerators" label="DataGenerators"></topic>
+				<topic href="help/Tutorial.html#Theoutputs" label="The outputs"></topic>
+			</topic>
+		</topic>
+		<topic href="help/Tutorial.html#WorkingwithyourSEDMLfile" label="Working with your SED-ML file">
+			<topic href="help/Tutorial.html#ExecutionoftheSEDMLfile" label="Execution of the SED-ML file"></topic>
+			<topic href="help/Tutorial.html#Improvingtheview" label="Improving the view"></topic>
+			<topic href="help/Tutorial.html#Navigation" label="Navigation"></topic>
+		</topic>
+		<topic href="help/Tutorial.html#Morecomplexediting" label="More complex editing"></topic>
+		<topic href="help/Tutorial.html#Summary" label="Summary"></topic>
+	</topic>
+</toc>

@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/" xmlns:math="http://www.w3.org/1998/Math/MathML" version="1" level="1">
+  <listOfSimulations>
+    <uniformTimeCourse id="simulation1" initialTime="0.0" outputStartTime="0.0" outputEndTime="1000.0" numberOfPoints="1000">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="573" y="543" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <algorithm kisaoID="KISAO:0000088" />
+    </uniformTimeCourse>
+    <uniformTimeCourse id="simulation2" initialTime="0.0" outputStartTime="0.0" outputEndTime="1000.0" numberOfPoints="1000">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="0" y="0" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <algorithm kisaoID="KISAO:0000027" />
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfModels>
+    <model id="model1" name="Repressilator-  regular oscillations" language="urn:sedml:language:sbml.level-2.version-1" source="Elowitz2000_Repressilator.xml">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="710" y="968" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+    </model>
+    <model id="model2" name="Damped oscillations" language="urn:sedml:language:sbml.level-2.version-1" source="model1">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="172" y="547" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfChanges>
+        <changeAttribute newValue="1.3e-5" target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@name='tps_repr']/@value">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="38" y="478" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </changeAttribute>
+        <changeAttribute newValue="0.013" target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@name='tps_active']/@value">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="30" y="782" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </changeAttribute>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfTasks>
+    <task id="task1" name="Oscillation using a deterministic simulator" modelReference="model1" simulationReference="simulation1">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="761" y="813" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+    </task>
+    <task id="task2" name="Oscillation using a stochastic simulator" modelReference="model2" simulationReference="simulation1">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="380" y="258" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+    </task>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="timeDG" name="Time">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="851" y="974" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="Time" taskReference="task1" symbol="urn:sedml:symbol:time">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="900" y="979" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:ci>Time</math:ci>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="LaCI" name="LaCI repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="965" y="652" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v1" taskReference="task1" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PX']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="977" y="730" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:ci>v1</math:ci>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="TetR" name="TetR repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="957" y="955" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v2" taskReference="task1" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PY']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="975" y="886" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:ci>v2</math:ci>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="CI" name="CI repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="450" y="962" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v3" taskReference="task1" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PZ']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="556" y="966" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:ci>v3</math:ci>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="timeDG2" name="Time">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="20" y="280" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="time" taskReference="task2" symbol="urn:sedml:symbol:time">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="186" y="230" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:ci>time</math:ci>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="LaCIb" name="LaCI repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="20" y="30" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v1b" taskReference="task2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PX']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="200" y="40" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:ci>v1b</math:ci>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="LaCIbNormalized" name=" NormalizedLaCI repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="891" y="157" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v1c" taskReference="task2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PX']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="651" y="213" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:apply>
+          <math:divide />
+          <math:ci>v1c</math:ci>
+          <math:apply>
+            <math:csymbol definitionURL="http://sed-ml.org/#max" encoding="text">max</math:csymbol>
+            <math:ci>v1c</math:ci>
+          </math:apply>
+        </math:apply>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="TetRb" name="TetR repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="45" y="636" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v2b" taskReference="task2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PY']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="211" y="460" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:ci>v2b</math:ci>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="TetRNormalized" name=" Normalized TetR repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="731" y="22" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v2c" taskReference="task2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PY']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="512" y="33" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:apply>
+          <math:divide />
+          <math:ci>v2c</math:ci>
+          <math:apply>
+            <math:csymbol definitionURL="http://sed-ml.org/#max" encoding="text">max</math:csymbol>
+            <math:ci>v2c</math:ci>
+          </math:apply>
+        </math:apply>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="CIb" name="CI repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="90" y="34" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v3b" taskReference="task2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PZ']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="279" y="25" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:ci>v3b</math:ci>
+      </math:math>
+    </dataGenerator>
+    <dataGenerator id="CIb_normalized" name=" Normalized CI repressor">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="799" y="34" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfVariables>
+        <variable id="v3c" taskReference="task2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PZ']">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="584" y="83" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </variable>
+      </listOfVariables>
+      <math:math>
+        <math:apply>
+          <math:divide />
+          <math:ci>v3c</math:ci>
+          <math:apply>
+            <math:csymbol definitionURL="http://sed-ml.org/#max" encoding="text">max</math:csymbol>
+            <math:ci>v3c</math:ci>
+          </math:apply>
+        </math:apply>
+      </math:math>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <plot2D id="plot1" name="protein numbers per time point">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="808" y="948" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfCurves>
+        <curve id="c1" logX="false" logY="false" xDataReference="timeDG" yDataReference="LaCI">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="965" y="828" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+        <curve id="c2" logX="false" logY="false" xDataReference="timeDG" yDataReference="TetR">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="955" y="960" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+        <curve id="c3" logX="false" logY="false" xDataReference="timeDG" yDataReference="CI">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="645" y="970" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+      </listOfCurves>
+    </plot2D>
+    <plot2D id="plot2" name="protein numbers per time point - damped oscillations">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="34" y="333" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfCurves>
+        <curve id="c4" logX="false" logY="false" xDataReference="timeDG2" yDataReference="LaCIb">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="25" y="185" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+        <curve id="c5" logX="false" logY="false" xDataReference="timeDG2" yDataReference="TetRb">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="20" y="512" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+        <curve id="c6" logX="false" logY="false" xDataReference="timeDG2" yDataReference="CIb">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="31" y="133" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+      </listOfCurves>
+    </plot2D>
+    <plot2D id="plot3" name="Normalized Plot">
+      <annotation>
+        <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+          <location x="947" y="94" />
+          <size width="80" height="45" />
+        </sbsi-editor>
+      </annotation>
+      <listOfCurves>
+        <curve id="c7" logX="false" logY="false" xDataReference="LaCIbNormalized" yDataReference="TetRNormalized">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="929" y="33" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+        <curve id="c8" logX="false" logY="false" xDataReference="TetRNormalized" yDataReference="CIb_normalized">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="875" y="49" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+        <curve id="c9" logX="false" logY="false" xDataReference="CIb_normalized" yDataReference="LaCIbNormalized">
+          <annotation>
+            <sbsi-editor xmlns="http://www.sedml.sbsi.editor/level1">
+              <location x="950" y="33" />
+              <size width="80" height="45" />
+            </sbsi-editor>
+          </annotation>
+        </curve>
+      </listOfCurves>
+    </plot2D>
+  </listOfOutputs>
+</sedML>
+

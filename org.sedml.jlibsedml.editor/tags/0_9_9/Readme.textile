@@ -1,0 +1,21 @@
+h1. Supplementary Materials S2: How to use these SEDML archives
+
+This supplementary material contains a number of SED-ML archives 
+ that contain models and experimental descriptions to reproduce
+  the   Figures from the paper. More information about SED-ML can be found at "http://sed-ml.org":http://sed-ml.org
+
+h2. Online using SED-ML Web tools
+
+* Go to  the "SED-ML web tools site":http://sysbioapps.dyndns.org/SED-ML%20Web%20Tools/
+* Browse to these files and click 'Upload SED-ML'.
+* Once the model is uploaded, you can simulate it and view the results.
+
+
+h2. Via SBSI
+
+* Download SBSI from "http://sourceforge.net/projects/sbsi/":http://sourceforge.net/projects/sbsi/ and unpack.
+* Launch the application as described in the 'README' file in the installation folder.
+* When SBSI opens, create a new SBSI project ( via File->New menu).
+* Copy the SEDX files into your new project.
+* If you now select a SEDX file, and then right-click (or Ctrl-click) to get the context menu, there will be menu items to  either *execute* the simulation, *expand the archive*, or *view the SED-ML in a browser*.
+* Optionally, you can also install the SED-ED SEDML editor to edit the files, via *Help->Install New Software* , choosing the  *SBSI Public* updated sight, and following the installation prompts. Once installed, you can can open SED-ML or SEDX archive files by selecting them and clicking Open With->SED-ED editor.

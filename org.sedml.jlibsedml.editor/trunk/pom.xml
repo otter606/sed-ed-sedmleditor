@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.seded</groupId>
+	<artifactId>org.seded</artifactId>
+	<version>0.9.9</version>
+	<name>SED-ED editor</name>
+	<url>http://jlibsedml.sf.net/sed-ed</url>
+	<description>SED-ED workflow editor for SED-ML descriptions of computational 
+	 systems biology simulation experiments.</description>
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>http://www.opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<parent>
+		<groupId>org.sedmlweb</groupId>
+		<artifactId>org.sedmlweb</artifactId>
+		<version>1.0.0</version>
+	</parent>
+	<developers>
+		<developer>
+			<id>Richard Adams</id>
+			<name>Richard Adams</name>
+			<email>ra22597@gmail.com</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Dagmar Waltemath</name>
+			<organization>University of Rostock, Germany</organization>
+		</contributor>
+	</contributors>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<configuration>
+					<siteDirectory>${project.basedir}/site</siteDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pdf-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>pdf</id>
+						<phase>site</phase>
+						<goals>
+							<goal>pdf</goal>
+						</goals>
+						<configuration>
+							<siteDirectory>${project.basedir}/site</siteDirectory>
+							<outputDirectory>${project.reporting.outputDirectory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+	<distributionManagement>
+		<site>
+			<id>jlibsedml.sf.net</id>
+			<url>scp://shell.sourceforge.net/home/project-web/jlibsedml/htdocs/sed-ed</url>
+		</site>
+	</distributionManagement>
+
+
+</project>

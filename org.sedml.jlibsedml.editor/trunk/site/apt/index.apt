@@ -1,0 +1,32 @@
+The SED-ED editor application
+
+* Introduction
+
+	Welcome to the SED-ED SED-ML editor homepage. SED-ED is a cross-platform Java
+	application to view and edit SED-ML files. It is available in three forms:
+	
+		[[1]] As a stand-alone application. [ 
+		           {{{http://sourceforge.net/projects/jlibsedml/files/SED-ED/}Download}} ]
+		
+		[[2]] As a plugin for the Systems Biology software  suite {{{http://www.sbsi.ed.ac.uk}SBSI}}.
+		
+		[[3]] As an Eclipse plugin.
+		
+	More detailed instructions are available in the {{{./tutorial.html}tutorial}}.
+	There is also a {{{./seded-pdf.pdf} PDF download }} of the tutorial.
+	
+* Minimum requirements
+
+ To run SED-ED, you'll need a Java runtime on your computer, 1.5 or later. To see if you have
+  Java installed, open a Terminal window and type 
+  
+  <<<java -version>>> 
+	
+	If you have Java installed, you'll see a version number. If not, {{{http://www.java.com/en/download/}download Java}}.
+
+* More information
+
+	The source code for the SED-ED editor is hosted at {{{http://code.google.com/p/sed-ed-sedmleditor/}GoogleCode}}.
+	
+	To report bugs and problems, please use this {{{http://code.google.com/p/sed-ed-sedmleditor/issues/entry} issue tracker}}.
+	 

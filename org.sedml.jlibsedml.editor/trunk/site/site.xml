@@ -1,7 +1,7 @@
 <project name="Jlibsedml">
 	<version position="left"/>
     <bannerLeft>
-        <name>Sonatype</name>
+        <name>SED-ML image</name>
         <src>images/logoSedml.png</src>
         <href>http://sed-ml.org</href>
     </bannerLeft>
@@ -9,6 +9,7 @@
         <menu name="SED-ED editor">
             <item name="Overview" href="index.html"/>
             <item name="Tutorial" href="tutorial.html"/>
+            <item name="User help" href="SEDML_editor.html"/>
         </menu>
         <menu ref="reports"/>
     </body>

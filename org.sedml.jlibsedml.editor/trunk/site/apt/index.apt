@@ -12,8 +12,10 @@ The SED-ED editor application
 		
 		[[3]] As an Eclipse plugin.
 		
-	More detailed instructions are available in the {{{./tutorial.html}tutorial}}.
+	More detailed installation instructions are available in the {{{./tutorial.html}tutorial}}.
 	There is also a {{{./seded-pdf.pdf} PDF download }} of the tutorial.
+	
+	There is extensive user help embedded in the application - this is also available {{{./SEDML_editor.html}online}}.
 	
 * Minimum requirements
 

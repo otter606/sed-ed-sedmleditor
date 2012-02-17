@@ -1,6 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!--  This pom is just used too build the website, the app is built by 
+	 an eclipse p2 build -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.seded</groupId>
 	<artifactId>org.seded</artifactId>
@@ -16,6 +18,14 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	<scm>
+	  <connection>scm:http://code.google.com/p/sed-ed-sedmleditor/</connection>
+	  <url>http://code.google.com/p/sed-ed-sedmleditor/</url>
+	</scm>
+	<issueManagement>
+	 <url>http://code.google.com/p/sed-ed-sedmleditor/issues/entry</url>
+	</issueManagement>
+	<inceptionYear>2011</inceptionYear>
 	<parent>
 		<groupId>org.sedmlweb</groupId>
 		<artifactId>org.sedmlweb</artifactId>

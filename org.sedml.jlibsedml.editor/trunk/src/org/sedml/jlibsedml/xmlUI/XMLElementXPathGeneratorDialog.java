@@ -11,8 +11,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.jdom.Document;
-import org.sedml.jlibsedml.xmlutils.ElementIdentifiedBySelectedAttributePolicy;
-import org.sedml.jlibsedml.xmlutils.ISelectionChangedPolicy;
+import org.jlibsedml.extensions.ElementIdentifiedBySelectedAttributePolicy;
+import org.jlibsedml.extensions.ISelectionChangedPolicy;
 
 public class XMLElementXPathGeneratorDialog extends BaseXMLDialog {
 

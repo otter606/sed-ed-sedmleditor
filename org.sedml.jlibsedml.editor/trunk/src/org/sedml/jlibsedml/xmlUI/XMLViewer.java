@@ -23,7 +23,7 @@ import org.jdom.Element;
 import org.jdom.Text;
 import org.jdom.filter.ElementFilter;
 import org.jlibsedml.extensions.XMLCompare;
-import org.sedml.jlibsedml.xmlutils.XMLUtils;
+import org.jlibsedml.extensions.XMLUtils;
 
 public class XMLViewer {
 	

@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.sedml.jlibsedml.xmlutils.ISelectionChangedPolicy;
+import org.jlibsedml.extensions.ISelectionChangedPolicy;
 
 class GetElementFromAttributeListListener implements  ISelectionChangedListener {
 

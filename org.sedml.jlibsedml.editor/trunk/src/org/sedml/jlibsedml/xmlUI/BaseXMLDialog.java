@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.jdom.Document;
-import org.sedml.jlibsedml.xmlutils.ISelectionChangedPolicy;
+import org.jlibsedml.extensions.ISelectionChangedPolicy;
 
 public abstract class BaseXMLDialog extends TrayDialog {
 	

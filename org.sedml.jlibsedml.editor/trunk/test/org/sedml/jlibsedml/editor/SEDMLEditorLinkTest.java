@@ -1,6 +1,6 @@
 package org.sedml.jlibsedml.editor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -13,6 +13,11 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.Model;
+import org.jlibsedml.SEDBase;
+import org.jlibsedml.SedML;
+import org.jlibsedml.XMLException;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
@@ -21,12 +26,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.jvnet.fastinfoset.FastInfosetSource;
-import org.sedml.Libsedml;
-import org.sedml.Model;
-import org.sedml.SEDBase;
-import org.sedml.SedML;
-import org.sedml.XMLException;
 
 @RunWith(JMock.class)
 

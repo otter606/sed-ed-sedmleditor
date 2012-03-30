@@ -1,6 +1,6 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import org.sedml.SEDBase;
+import org.jlibsedml.SEDBase;
 
 public class ElementStub extends GElement {
 

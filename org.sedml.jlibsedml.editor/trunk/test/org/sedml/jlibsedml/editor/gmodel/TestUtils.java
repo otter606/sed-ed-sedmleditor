@@ -2,7 +2,6 @@ package org.sedml.jlibsedml.editor.gmodel;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.Collections;
 
 import javax.xml.bind.JAXBContext;
@@ -12,15 +11,15 @@ import javax.xml.bind.Unmarshaller;
 
 import org.jdom.Document;
 import org.jdom.JDOMException;
-import org.sedml.Algorithm;
-import org.sedml.Libsedml;
-import org.sedml.NewXML;
-import org.sedml.Notes;
-import org.sedml.SEDMLTags;
-import org.sedml.XPathTarget;
+import org.jlibsedml.Algorithm;
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.NewXML;
+import org.jlibsedml.Notes;
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.XPathTarget;
+import org.jlibsedml.modelsupport.KisaoOntology;
+import org.jlibsedml.modelsupport.SUPPORTED_LANGUAGE;
 import org.sedml.jlibsedml.xmlutils.XMLUtils;
-import org.sedml.modelsupport.KisaoOntology;
-import org.sedml.modelsupport.SUPPORTED_LANGUAGE;
 
 public class TestUtils {
 	

@@ -8,12 +8,12 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.SEDMLDocument;
+import org.jlibsedml.SedML;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.Libsedml;
-import org.sedml.SEDMLDocument;
-import org.sedml.SedML;
 import org.sedml.jlibsedml.editor.gmodel.Connection;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
 import org.sedml.jlibsedml.editor.gmodel.GElementBuilder;
@@ -21,7 +21,6 @@ import org.sedml.jlibsedml.editor.gmodel.GSedML;
 import org.sedml.jlibsedml.editor.gmodel.Location;
 import org.sedml.jlibsedml.editor.gmodel.SEDMLBuilder;
 
-import edu.uci.ics.jung.algorithms.layout.AbstractLayout;
 import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.algorithms.layout.KKLayout;
 import edu.uci.ics.jung.algorithms.layout.SpringLayout;

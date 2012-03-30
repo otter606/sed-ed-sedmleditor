@@ -3,15 +3,15 @@ package org.sedml.jlibsedml.editor.gmodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sedml.DataGenerator;
-import org.sedml.DataSet;
-import org.sedml.Model;
-import org.sedml.Plot2D;
-import org.sedml.Report;
-import org.sedml.SEDMLDocument;
-import org.sedml.SedML;
-import org.sedml.Simulation;
-import org.sedml.Task;
+import org.jlibsedml.DataGenerator;
+import org.jlibsedml.DataSet;
+import org.jlibsedml.Model;
+import org.jlibsedml.Plot2D;
+import org.jlibsedml.Report;
+import org.jlibsedml.SEDMLDocument;
+import org.jlibsedml.SedML;
+import org.jlibsedml.Simulation;
+import org.jlibsedml.Task;
 
 /**
  * Generates a SEDML object model from a GSEDML representation if there are no

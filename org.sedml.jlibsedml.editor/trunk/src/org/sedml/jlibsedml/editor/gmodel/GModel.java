@@ -11,13 +11,13 @@ import java.util.regex.Pattern;
 import org.jdom.Document;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import org.sedml.Model;
-import org.sedml.SEDMLTags;
-import org.sedml.execution.ArchiveModelResolver;
-import org.sedml.execution.FileModelResolver;
-import org.sedml.execution.ModelResolver;
-import org.sedml.modelsupport.BioModelsModelsRetriever;
-import org.sedml.modelsupport.URLResourceRetriever;
+import org.jlibsedml.Model;
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.execution.ArchiveModelResolver;
+import org.jlibsedml.execution.FileModelResolver;
+import org.jlibsedml.execution.ModelResolver;
+import org.jlibsedml.modelsupport.BioModelsModelsRetriever;
+import org.jlibsedml.modelsupport.URLResourceRetriever;
 
 public class GModel extends GElement {
 	

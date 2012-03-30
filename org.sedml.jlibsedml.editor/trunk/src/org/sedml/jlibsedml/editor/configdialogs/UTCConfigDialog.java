@@ -22,11 +22,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
-import org.sedml.Algorithm;
-import org.sedml.UniformTimeCourse;
+import org.jlibsedml.Algorithm;
+import org.jlibsedml.UniformTimeCourse;
+import org.jlibsedml.modelsupport.KisaoOntology;
+import org.jlibsedml.modelsupport.KisaoTerm;
 import org.sedml.jlibsedml.editor.gmodel.GSimulation;
-import org.sedml.modelsupport.KisaoOntology;
-import org.sedml.modelsupport.KisaoTerm;
 /**
  * Simulation config dialog.
  * @author radams

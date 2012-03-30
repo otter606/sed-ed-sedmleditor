@@ -16,7 +16,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
-import org.sedml.VariableSymbol;
+import org.jlibsedml.VariableSymbol;
 import org.sedml.jlibsedml.editor.gmodel.GVariable;
 import org.sedml.jlibsedml.xmlUI.ViewModelButton;
 import org.sedml.jlibsedml.xmlUI.XMLElementXPathGeneratorDialog;

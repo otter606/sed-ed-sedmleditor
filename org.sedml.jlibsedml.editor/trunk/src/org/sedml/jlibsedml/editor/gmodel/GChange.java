@@ -6,18 +6,18 @@ import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jlibsedml.AddXML;
+import org.jlibsedml.Change;
+import org.jlibsedml.ChangeAttribute;
+import org.jlibsedml.ChangeXML;
+import org.jlibsedml.ComputeChange;
+import org.jlibsedml.NewXML;
+import org.jlibsedml.RemoveXML;
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.XPathTarget;
 import org.jmathml.ASTNode;
 import org.jmathml.ASTToXMLElementVisitor;
 import org.jmathml.MathMLReader;
-import org.sedml.AddXML;
-import org.sedml.Change;
-import org.sedml.ChangeAttribute;
-import org.sedml.ChangeXML;
-import org.sedml.ComputeChange;
-import org.sedml.NewXML;
-import org.sedml.RemoveXML;
-import org.sedml.SEDMLTags;
-import org.sedml.XPathTarget;
 
 public  class GChange extends GElement {
 	public static final String CHANGE = "Change";

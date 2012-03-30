@@ -1,6 +1,6 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import org.sedml.modelsupport.SUPPORTED_LANGUAGE;
+import org.jlibsedml.modelsupport.SUPPORTED_LANGUAGE;
 
 public class LanguageHelper {
 	

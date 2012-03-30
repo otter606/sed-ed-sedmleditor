@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.SelectionEvent;
@@ -21,10 +19,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.jdom.Document;
+import org.jlibsedml.modelsupport.SUPPORTED_LANGUAGE;
 import org.sedml.jlibsedml.editor.gmodel.GModel;
 import org.sedml.jlibsedml.editor.gmodel.LanguageHelper;
 import org.sedml.jlibsedml.xmlUI.XMLPreviewer;
-import org.sedml.modelsupport.SUPPORTED_LANGUAGE;
 
 /**
  * Dialog for editing properties of a SEDML model element.

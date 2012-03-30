@@ -14,13 +14,13 @@ import javax.xml.bind.Unmarshaller;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.jlibsedml.Annotation;
+import org.jlibsedml.SEDBase;
+import org.jlibsedml.SEDMLDocument;
+import org.jlibsedml.SedML;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.Annotation;
-import org.sedml.SEDBase;
-import org.sedml.SEDMLDocument;
-import org.sedml.SedML;
 
 public class LocationTest {
 	

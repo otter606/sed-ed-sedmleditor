@@ -11,7 +11,6 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TreeEvent;
 import org.eclipse.swt.events.TreeListener;
@@ -23,7 +22,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.Text;
 import org.jdom.filter.ElementFilter;
-import org.sedml.extensions.XMLCompare;
+import org.jlibsedml.extensions.XMLCompare;
 import org.sedml.jlibsedml.xmlutils.XMLUtils;
 
 public class XMLViewer {

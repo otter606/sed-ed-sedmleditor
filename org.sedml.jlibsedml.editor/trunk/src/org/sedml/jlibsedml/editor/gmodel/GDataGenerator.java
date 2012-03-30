@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jdom.Element;
+import org.jlibsedml.DataGenerator;
+import org.jlibsedml.SEDMLTags;
 import org.jmathml.ASTNode;
 import org.jmathml.ASTToXMLElementVisitor;
 import org.jmathml.MathMLReader;
-import org.sedml.DataGenerator;
-import org.sedml.SEDMLTags;
 
 public class GDataGenerator extends GElement {
 

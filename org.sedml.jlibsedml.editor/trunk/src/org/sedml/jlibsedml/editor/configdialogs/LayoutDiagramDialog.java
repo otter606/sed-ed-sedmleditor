@@ -13,7 +13,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.sedml.jlibsedml.editor.gmodel.GSedML;
 
 /**
  * Dialog for user to choose layout options when laying out a diagram for the first time.

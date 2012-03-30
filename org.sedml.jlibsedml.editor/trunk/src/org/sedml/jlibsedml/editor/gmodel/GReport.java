@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.sedml.Report;
-import org.sedml.SEDMLTags;
+import org.jlibsedml.Report;
+import org.jlibsedml.SEDMLTags;
 
 public class GReport extends GOutput {
 	

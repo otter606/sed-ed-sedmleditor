@@ -1,10 +1,10 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import org.sedml.Algorithm;
-import org.sedml.SEDMLTags;
-import org.sedml.Simulation;
-import org.sedml.UniformTimeCourse;
-import org.sedml.modelsupport.KisaoOntology;
+import org.jlibsedml.Algorithm;
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.Simulation;
+import org.jlibsedml.UniformTimeCourse;
+import org.jlibsedml.modelsupport.KisaoOntology;
 
 public class GSimulation extends GElement {
 	

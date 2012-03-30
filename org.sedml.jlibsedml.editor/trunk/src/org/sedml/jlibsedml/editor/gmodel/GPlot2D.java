@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.sedml.Plot2D;
-import org.sedml.SEDMLTags;
+import org.jlibsedml.Plot2D;
+import org.jlibsedml.SEDMLTags;
 
 public class GPlot2D extends GOutput {
 	

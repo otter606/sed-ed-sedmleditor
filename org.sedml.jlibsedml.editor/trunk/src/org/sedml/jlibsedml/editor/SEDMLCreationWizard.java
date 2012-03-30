@@ -24,8 +24,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.ide.IDE;
-import org.sedml.Libsedml;
-import org.sedml.SedML;
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.SedML;
 
 /**
  * Create new new .shape-file. Those files can be used with the ShapesEditor

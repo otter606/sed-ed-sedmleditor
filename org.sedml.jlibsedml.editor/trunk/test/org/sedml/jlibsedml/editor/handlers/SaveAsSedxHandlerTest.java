@@ -1,12 +1,17 @@
 package org.sedml.jlibsedml.editor.handlers;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.jlibsedml.ArchiveComponents;
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.Model;
+import org.jlibsedml.SedML;
+import org.jlibsedml.XMLException;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
@@ -15,11 +20,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.sedml.ArchiveComponents;
-import org.sedml.Libsedml;
-import org.sedml.Model;
-import org.sedml.SedML;
-import org.sedml.XMLException;
 import org.sedml.jlibsedml.editor.gmodel.GElementBuilder;
 import org.sedml.jlibsedml.editor.gmodel.GSedML;
 

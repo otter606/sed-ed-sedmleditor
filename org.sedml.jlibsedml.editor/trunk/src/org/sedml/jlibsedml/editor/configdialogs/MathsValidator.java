@@ -1,7 +1,7 @@
 package org.sedml.jlibsedml.editor.configdialogs;
 
+import org.jlibsedml.Libsedml;
 import org.jmathml.ASTNode;
-import org.sedml.Libsedml;
 
 /**
  * Validates a String a Math expression

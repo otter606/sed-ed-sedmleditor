@@ -32,7 +32,12 @@ public Document readDoc(InputStream is) throws JDOMException, IOException {
 }
 
 
-
+/**
+ * Finds all namespaces, and returns a hashmap where keys are namespaces,
+ *  and values are the elements where the namespace first appears in the document
+ * @param doc
+ * @return poss empty but non-null hash.q
+ */
 public Map<Namespace,Element>  getElementNamespaces(Document doc) {
 	
 	Iterator it = doc.getDescendants(new ElementFilter());

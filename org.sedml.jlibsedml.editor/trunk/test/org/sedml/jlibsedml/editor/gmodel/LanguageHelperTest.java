@@ -1,11 +1,12 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import org.jlibsedml.modelsupport.SUPPORTED_LANGUAGE;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.modelsupport.SUPPORTED_LANGUAGE;
 
 public class LanguageHelperTest {
 	LanguageHelper helper;

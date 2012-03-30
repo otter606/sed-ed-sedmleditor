@@ -3,21 +3,21 @@ package org.sedml.jlibsedml.editor.gmodel;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.sedml.Change;
-import org.sedml.ComputeChange;
-import org.sedml.Curve;
-import org.sedml.DataGenerator;
-import org.sedml.DataSet;
-import org.sedml.Model;
-import org.sedml.Output;
-import org.sedml.Parameter;
-import org.sedml.Plot2D;
-import org.sedml.Report;
-import org.sedml.SedML;
-import org.sedml.Simulation;
-import org.sedml.Task;
-import org.sedml.UniformTimeCourse;
-import org.sedml.Variable;
+import org.jlibsedml.Change;
+import org.jlibsedml.ComputeChange;
+import org.jlibsedml.Curve;
+import org.jlibsedml.DataGenerator;
+import org.jlibsedml.DataSet;
+import org.jlibsedml.Model;
+import org.jlibsedml.Output;
+import org.jlibsedml.Parameter;
+import org.jlibsedml.Plot2D;
+import org.jlibsedml.Report;
+import org.jlibsedml.SedML;
+import org.jlibsedml.Simulation;
+import org.jlibsedml.Task;
+import org.jlibsedml.UniformTimeCourse;
+import org.jlibsedml.Variable;
 
 /**
  * Generates the graphical hierarchy from a persisted SEDML file.

@@ -1,7 +1,7 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import org.sedml.Parameter;
-import org.sedml.SEDMLTags;
+import org.jlibsedml.Parameter;
+import org.jlibsedml.SEDMLTags;
 
 public class GParameter  extends GElement{
 	

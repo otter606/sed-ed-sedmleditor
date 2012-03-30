@@ -13,12 +13,12 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.part.FileEditorInput;
-import org.sedml.AbstractIdentifiableElement;
-import org.sedml.Libsedml;
-import org.sedml.SEDBase;
-import org.sedml.SEDMLDocument;
-import org.sedml.SedML;
-import org.sedml.extensions.ElementSearchVisitor;
+import org.jlibsedml.AbstractIdentifiableElement;
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.SEDBase;
+import org.jlibsedml.SEDMLDocument;
+import org.jlibsedml.SedML;
+import org.jlibsedml.extensions.ElementSearchVisitor;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
 import org.sedml.jlibsedml.editor.gmodel.GSedML;
 

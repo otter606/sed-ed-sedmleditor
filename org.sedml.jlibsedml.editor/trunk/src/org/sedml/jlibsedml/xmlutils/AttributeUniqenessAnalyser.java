@@ -15,10 +15,9 @@ public class AttributeUniqenessAnalyser {
 	/**
 	 * Attempts to find an attribute name/value pair that will uniquely identify 
 	 * an element amongst its siblings. If there is more than 1 such attribute found,
-	 * preference will be given to an attribue with name 'id' ( case insensitive) else
-	 *  the attribute else the first suitable attribute will be returned.
+	 * preference will be given to an attribue with name 'id' ( case insensitive)  else the first suitable attribute will be returned.
 	 * @param el 
-	 * @return Ann {@link AttDataObj}, or  <code>null</code> if no such attribute could
+	 * @return An {@link AttDataObj}, or  <code>null</code> if no such attribute could
 	 *  be found.
 	 */
 	public AttDataObj getUniqueAttributeForElement(Element el) {

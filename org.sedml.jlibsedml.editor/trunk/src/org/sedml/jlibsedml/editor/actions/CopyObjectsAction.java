@@ -1,10 +1,7 @@
 package org.sedml.jlibsedml.editor.actions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.gef.ui.actions.Clipboard;
 import org.eclipse.gef.ui.actions.SelectionAction;
@@ -13,7 +10,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 import org.sedml.jlibsedml.editor.GElementEditPart;
-import org.sedml.jlibsedml.editor.gmodel.Connection;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
 
 public class CopyObjectsAction extends SelectionAction {

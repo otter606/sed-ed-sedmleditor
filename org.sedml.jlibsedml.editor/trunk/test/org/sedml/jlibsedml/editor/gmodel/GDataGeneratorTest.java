@@ -1,12 +1,14 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import org.jlibsedml.DataGenerator;
+import org.jlibsedml.Libsedml;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.DataGenerator;
-import org.sedml.Libsedml;
 
 public class GDataGeneratorTest {
  GDataGenerator gdg;

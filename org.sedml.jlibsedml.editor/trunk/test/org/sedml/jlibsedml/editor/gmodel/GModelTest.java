@@ -1,19 +1,20 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import org.jlibsedml.ArchiveComponents;
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.SEDMLDocument;
+import org.jlibsedml.XMLException;
+import org.jlibsedml.modelsupport.SUPPORTED_LANGUAGE;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.ArchiveComponents;
-import org.sedml.Libsedml;
-import org.sedml.SEDMLDocument;
-import org.sedml.XMLException;
-import org.sedml.modelsupport.SUPPORTED_LANGUAGE;
 
 public class GModelTest {
 

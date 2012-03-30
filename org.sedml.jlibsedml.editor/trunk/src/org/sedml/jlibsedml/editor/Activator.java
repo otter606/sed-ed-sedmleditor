@@ -1,14 +1,7 @@
 package org.sedml.jlibsedml.editor;
 
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import org.sedml.AbstractIdentifiableElement;
 import org.sedml.jlibsedml.editor.configdialogs.ExecutorServiceFactory;
 
 /**

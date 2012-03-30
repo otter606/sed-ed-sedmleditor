@@ -1,6 +1,7 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import org.sedml.Output;
+import org.jlibsedml.Output;
+
 
 public abstract class GOutput extends GElement {
 	public GOutput(Output o) {

@@ -1,9 +1,9 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
 import org.jdom.Document;
-import org.sedml.SEDMLTags;
-import org.sedml.Variable;
-import org.sedml.VariableSymbol;
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.Variable;
+import org.jlibsedml.VariableSymbol;
 
 public class GVariable  extends GElement{
 	

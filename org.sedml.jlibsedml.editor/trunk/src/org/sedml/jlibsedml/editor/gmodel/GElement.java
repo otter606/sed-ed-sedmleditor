@@ -17,11 +17,11 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
-import org.sedml.Annotation;
-import org.sedml.Notes;
-import org.sedml.SEDBase;
-import org.sedml.SEDMLTags;
-import org.sedml.XMLException;
+import org.jlibsedml.Annotation;
+import org.jlibsedml.Notes;
+import org.jlibsedml.SEDBase;
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.XMLException;
 import org.sedml.jlibsedml.xmlutils.XMLHandler;
 
 public abstract class GElement implements IPropertyChangeSupport {

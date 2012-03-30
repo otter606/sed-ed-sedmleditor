@@ -3,11 +3,11 @@ package org.sedml.jlibsedml.editor.gmodel;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.SedML;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.SEDMLTags;
-import org.sedml.SedML;
 
 public class SedMLBuilderTest {
 

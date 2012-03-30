@@ -12,12 +12,12 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.Notes;
+import org.jlibsedml.SedML;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.Libsedml;
-import org.sedml.Notes;
-import org.sedml.SedML;
 
 public class GElementBuilderTest {
 

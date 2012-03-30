@@ -1,7 +1,7 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import org.sedml.Curve;
-import org.sedml.SEDMLTags;
+import org.jlibsedml.Curve;
+import org.jlibsedml.SEDMLTags;
 
 public class GCurve extends GElement {
 	

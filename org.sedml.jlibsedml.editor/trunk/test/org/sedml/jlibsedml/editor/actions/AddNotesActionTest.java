@@ -1,8 +1,7 @@
 package org.sedml.jlibsedml.editor.actions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.sedml.jlibsedml.editor.GElementEditPart;
 import org.sedml.jlibsedml.editor.MapEditPart;
 import org.sedml.jlibsedml.editor.gmodel.ElementStub;
-import org.sedml.jlibsedml.editor.gmodel.GElement;
 
 @RunWith(JMock.class)
 public class AddNotesActionTest {

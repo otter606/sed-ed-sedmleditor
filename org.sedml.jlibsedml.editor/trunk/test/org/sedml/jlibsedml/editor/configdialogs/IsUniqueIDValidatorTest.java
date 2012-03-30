@@ -1,11 +1,11 @@
 package org.sedml.jlibsedml.editor.configdialogs;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.jlibsedml.editor.configdialogs.IsUniqueIDValidator;
 import org.sedml.jlibsedml.editor.gmodel.ElementStub;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
 import org.sedml.jlibsedml.editor.gmodel.GSedML;

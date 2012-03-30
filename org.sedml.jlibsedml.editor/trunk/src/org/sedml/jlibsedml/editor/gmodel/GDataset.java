@@ -1,7 +1,7 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import org.sedml.DataSet;
-import org.sedml.SEDMLTags;
+import org.jlibsedml.DataSet;
+import org.jlibsedml.SEDMLTags;
 
 public class GDataset extends GElement {
 	private GDataGenerator dg;

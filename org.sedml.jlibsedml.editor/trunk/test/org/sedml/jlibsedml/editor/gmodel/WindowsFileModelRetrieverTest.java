@@ -1,15 +1,15 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.jlibsedml.execution.IModelResolver;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.execution.IModelResolver;
 
 public class WindowsFileModelRetrieverTest {
 	private static final String TEST_DATA_SED_MLBIOM12_XML = "TestData/sedMLBIOM12.xml";

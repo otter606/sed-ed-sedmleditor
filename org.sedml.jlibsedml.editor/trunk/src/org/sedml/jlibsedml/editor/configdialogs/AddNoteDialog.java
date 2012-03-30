@@ -18,10 +18,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.jdom.Element;
-import org.sedml.Notes;
+import org.jlibsedml.Notes;
 import org.sedml.jlibsedml.editor.gmodel.GElement;
 import org.sedml.jlibsedml.xmlutils.XMLHandler;
 

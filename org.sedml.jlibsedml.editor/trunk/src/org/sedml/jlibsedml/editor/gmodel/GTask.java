@@ -1,7 +1,7 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import org.sedml.SEDMLTags;
-import org.sedml.Task;
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.Task;
 
 public class GTask extends GElement{
 	

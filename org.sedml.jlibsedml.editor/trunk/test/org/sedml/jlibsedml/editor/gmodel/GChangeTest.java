@@ -1,18 +1,21 @@
 package org.sedml.jlibsedml.editor.gmodel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 import org.jdom.Element;
 import org.jdom.JDOMException;
+import org.jlibsedml.NewXML;
+import org.jlibsedml.SEDMLTags;
+import org.jlibsedml.XPathTarget;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.sedml.NewXML;
-import org.sedml.SEDMLTags;
-import org.sedml.XPathTarget;
 
 public class GChangeTest {
 

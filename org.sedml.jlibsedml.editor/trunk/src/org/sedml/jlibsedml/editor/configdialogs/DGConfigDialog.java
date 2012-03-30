@@ -20,9 +20,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+import org.jlibsedml.Libsedml;
 import org.jmathml.ASTNode;
 import org.jmathml.FormulaFormatter;
-import org.sedml.Libsedml;
 import org.sedml.jlibsedml.editor.gmodel.GDataGenerator;
 import org.sedml.jlibsedml.editor.gmodel.GVariable;
 

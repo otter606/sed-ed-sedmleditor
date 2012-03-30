@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.sedml.ArchiveComponents;
-import org.sedml.SedML;
+import org.jlibsedml.ArchiveComponents;
+import org.jlibsedml.SedML;
 
 /**
  * Top-level graphical element, corresponds to SedML element.

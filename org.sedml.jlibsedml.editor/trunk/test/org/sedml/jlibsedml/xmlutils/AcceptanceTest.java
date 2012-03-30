@@ -27,12 +27,13 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.filter.ElementFilter;
 import org.jdom.output.XMLOutputter;
+import org.jlibsedml.NamespaceContextHelper;
+import org.jlibsedml.XPathEvaluationException;
+import org.jlibsedml.XPathTarget;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.sedml.XPathEvaluationException;
-import org.sedml.XPathTarget;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 

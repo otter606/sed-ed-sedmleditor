@@ -25,21 +25,20 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.sedml.ArchiveComponents;
-import org.sedml.FileModelContent;
-import org.sedml.IModelContent;
-import org.sedml.Libsedml;
-import org.sedml.Model;
-import org.sedml.SEDMLDocument;
-import org.sedml.SedML;
-import org.sedml.XMLException;
-import org.sedml.execution.FileModelResolver;
-import org.sedml.execution.ModelResolver;
-import org.sedml.jlibsedml.editor.MapEditor;
+import org.jlibsedml.ArchiveComponents;
+import org.jlibsedml.FileModelContent;
+import org.jlibsedml.IModelContent;
+import org.jlibsedml.Libsedml;
+import org.jlibsedml.Model;
+import org.jlibsedml.SEDMLDocument;
+import org.jlibsedml.SedML;
+import org.jlibsedml.XMLException;
+import org.jlibsedml.execution.FileModelResolver;
+import org.jlibsedml.execution.ModelResolver;
+import org.jlibsedml.modelsupport.BioModelsModelsRetriever;
 import org.sedml.jlibsedml.editor.gmodel.GSedML;
 import org.sedml.jlibsedml.editor.gmodel.SEDMLBuilder;
 import org.sedml.jlibsedml.editor.gmodel.WindowsFileRetriever;
-import org.sedml.modelsupport.BioModelsModelsRetriever;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.

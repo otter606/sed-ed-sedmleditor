@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.jdom.Attribute;
 import org.jdom.Document;
-import org.sedml.jlibsedml.xmlutils.AttributeIdentifiedBySelectedAttributePolicy;
+import org.jlibsedml.extensions.AttributeIdentifiedBySelectedAttributePolicy;
 
 public class XMLAttributeXPathGeneratorDialog extends BaseXMLDialog {
 

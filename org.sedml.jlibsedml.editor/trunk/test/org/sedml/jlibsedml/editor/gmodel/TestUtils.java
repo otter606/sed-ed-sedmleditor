@@ -17,9 +17,9 @@ import org.jlibsedml.NewXML;
 import org.jlibsedml.Notes;
 import org.jlibsedml.SEDMLTags;
 import org.jlibsedml.XPathTarget;
+import org.jlibsedml.extensions.XMLUtils;
 import org.jlibsedml.modelsupport.KisaoOntology;
 import org.jlibsedml.modelsupport.SUPPORTED_LANGUAGE;
-import org.sedml.jlibsedml.xmlutils.XMLUtils;
 
 public class TestUtils {
 	

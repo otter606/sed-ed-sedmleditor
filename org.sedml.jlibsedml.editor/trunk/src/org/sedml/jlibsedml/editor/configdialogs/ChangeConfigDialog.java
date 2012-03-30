@@ -31,6 +31,7 @@ import org.jdom.Namespace;
 import org.jlibsedml.NewXML;
 import org.jlibsedml.SEDMLTags;
 import org.jlibsedml.XPathTarget;
+import org.jlibsedml.extensions.XMLUtils;
 import org.sedml.jlibsedml.editor.gmodel.GChange;
 import org.sedml.jlibsedml.xmlUI.BaseXMLDialog;
 import org.sedml.jlibsedml.xmlUI.ViewModelButton;
@@ -38,7 +39,6 @@ import org.sedml.jlibsedml.xmlUI.XMLAttributeXPathGeneratorDialog;
 import org.sedml.jlibsedml.xmlUI.XMLElementXPathGeneratorDialog;
 import org.sedml.jlibsedml.xmlUI.XMLPreviewer;
 import org.sedml.jlibsedml.xmlutils.XMLHandler;
-import org.sedml.jlibsedml.xmlutils.XMLUtils;
 
 public class ChangeConfigDialog extends BaseConfigDialog {
 

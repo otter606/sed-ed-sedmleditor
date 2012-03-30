@@ -30,6 +30,7 @@ import org.jdom.output.XMLOutputter;
 import org.jlibsedml.NamespaceContextHelper;
 import org.jlibsedml.XPathEvaluationException;
 import org.jlibsedml.XPathTarget;
+import org.jlibsedml.extensions.XMLUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

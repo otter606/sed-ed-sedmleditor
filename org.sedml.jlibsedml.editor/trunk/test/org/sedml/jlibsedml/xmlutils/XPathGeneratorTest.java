@@ -15,6 +15,7 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.Namespace;
 import org.jdom.filter.ElementFilter;
+import org.jlibsedml.extensions.XMLUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +36,7 @@ public class XPathGeneratorTest {
 	public void testMakePrefixes() throws JDOMException, IOException{
 		XMLUtils utils= new XMLUtils();
 		Document  doc = utils.readDoc(new FileInputStream(SBMLFileWithNoPrefixes));
-		Map<Namespace,String>ns2Prefix = utils.getNamespacesWithPRefixes(doc);
+		Map<Namespace,String>ns2Prefix = utils.getNamespacesWithPrefixes(doc);
 		for (Namespace ns:ns2Prefix.keySet()){
 			assertTrue(ns2Prefix.get(ns).length()>0);
 		}

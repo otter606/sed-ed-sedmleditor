@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.sedml.jlibsedml.editor.feature_0.9.10.jar" id="org.sedml.jlibsedml.editor.feature" version="0.9.10">
+      <category name="SupportedPlugins"/>
+   </feature>
+   <feature url="features/uk.ac.ed.csbe.plasmo.feature_1.0.0.0.jar" id="uk.ac.ed.csbe.plasmo.feature" version="1.0.0.0">
+      <category name="SupportedPlugins"/>
+   </feature>
+   <feature url="features/uk.ac.ed.csbe.sbsivisual.stepfunction.feature_1.0.17.jar" id="uk.ac.ed.csbe.sbsivisual.stepfunction.feature" version="1.0.17" os="linux,macosx,win32" ws="cocoa,gtk,win32" arch="x86">
+      <category name="SupportedPlugins"/>
+   </feature>
+   <category-def name="SupportedPlugins" label="Supported Plugins"/>
+</site>

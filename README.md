@@ -16,6 +16,6 @@ The features of the editor are:
 
 = Availability
 
-Binaries are available from Sourceforge http://sourceforge.net/projects/jlbsedml/files/SED-ED.
+Binaries are available from Sourceforge http://sourceforge.net/projects/jlibsedml/files/SED-ED/
 
 A paper describing the application was published in 2012 in Bioinformatics 28 8, 1180-81.
